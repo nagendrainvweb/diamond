@@ -1,0 +1,4 @@
+#Mon Sep 06 11:18:10 IST 2021
+base.0=/opt/flutter_projects/diamond/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

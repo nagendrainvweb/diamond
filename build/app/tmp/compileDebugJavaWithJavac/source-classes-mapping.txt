@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/diamon_assorter/MainActivity.java
+ com.example.diamon_assorter.MainActivity
+com/example/diamon_assorter/BuildConfig.java
+ com.example.diamon_assorter.BuildConfig
