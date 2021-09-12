@@ -1,6 +1,8 @@
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
+import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/app_textfield.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
+import 'package:diamon_assorter/register/register_page.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/app_image.dart';
 import 'package:diamon_assorter/util/utility.dart';
@@ -14,38 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  _buildTop() {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        color: AppColors.mainColor,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(35),
-          bottomRight: Radius.circular(35),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            AppImages.logo,
-            height: 150,
-            // width: 150,
-            fit: BoxFit.contain,
-          )
-        ],
-      ),
-    );
-  }
-
   _loginView() {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -95,7 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                 ButtonView(
                   buttonText: "NEW USER",
                   color: AppColors.buttonColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    Utility.pushToNext(context, RegistrationPage());
+                  },
                 ),
                 ButtonView(
                   buttonText: "LOGIN",
@@ -141,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildTop(),
+                AppAppBar(),
                 SizedBox(
                   height: 50,
                 ),
@@ -152,21 +124,21 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.buttonColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _builBottom(Icons.person_outline_outlined),
-                  _builBottom(Icons.call),
-                ],
-              ),
-            ),
-          )
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Container(
+          //     decoration: BoxDecoration(
+          //       color: AppColors.buttonColor,
+          //     ),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: [
+          //         _builBottom(Icons.person_outline_outlined),
+          //         _builBottom(Icons.call),
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
