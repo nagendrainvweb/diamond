@@ -14,7 +14,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _buildTop() {
     return Container(
-      height: 150,
       
        
       
@@ -54,7 +53,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
           AppTextfield(hint: "USERNAME",icon: Icons.person_outline_outlined, obsecure: false,color: AppColors.whiteColor,),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           AppTextfield(hint: "Mobile no./Email id",icon: Icons.mail_outline_outlined, obsecure: false,color: AppColors.whiteColor,),
           SizedBox(
@@ -80,15 +79,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ),
     );
   }
-  _builBottom(IconData icon) {
-    return Container(
-      height: 30,
-      child: Icon(
-        icon,
-        color: Colors.white,
-      ),
-    );
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +90,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 30,),
                 _buildTop(),
                 SizedBox(
                   height: 50,
@@ -111,21 +103,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child:  Container(
-                  decoration:BoxDecoration(
-                    color: AppColors.buttonColor,
-                  ) ,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _builBottom(Icons.person_outline_outlined),
-                      _builBottom(Icons.call),
-                    ],
-                  ),
-                ),
-          )
+
         ],
       ),
     );

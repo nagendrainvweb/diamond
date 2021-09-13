@@ -65,56 +65,60 @@ class _HomeWidgetState extends State<HomeWidget> {
       padding: EdgeInsets.symmetric(
         horizontal: 40,
       ),
-      child: Column(
-        children: [
-          SizedBox(height: 60,),
-          Row(
-            children: [
-              Expanded(child: _buttonTiles(
-                "Upcoming\nOrders",
-                Icons.shopping_cart_rounded,
-              ),),
-              SizedBox(width: 20,),
-              Expanded(child: _buttonTiles(
-                "Pending\nOrders",
-                Icons.shopping_cart_rounded,
-              ),),
-              
-            ],
-          ),
-          SizedBox(height: 20,),
-          Row(
-            children: [
-              Expanded(
-                child: 
-                _buttonTiles(
-                "Ongoing\nOrders",
-                Icons.shopping_cart_rounded,
-              ),
+      child: MediaQuery.removeViewPadding(
+        removeTop: true,
+        context: context,
+        child: ListView(
+          children: [
+            SizedBox(height: 30,),
+            Row(
+              children: [
+                Expanded(child: _buttonTiles(
+                  "Upcoming\nOrders",
+                  Icons.shopping_cart_rounded,
+                ),),
+                SizedBox(width: 20,),
+                Expanded(child: _buttonTiles(
+                  "Pending\nOrders",
+                  Icons.shopping_cart_rounded,
+                ),),
+                
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                  child: 
+                  _buttonTiles(
+                  "Ongoing\nOrders",
+                  Icons.shopping_cart_rounded,
+                ),
+                  ),
+                  SizedBox(width: 20,),
+                Expanded(child:_buttonTiles(
+                  "New\nOrders",
+                  Icons.shopping_cart_rounded,
+                ), ),
+                
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                  child: _buttonTiles(
+                  "Completed\nOrders",
+                  Icons.shopping_cart_rounded,
+                ),
                 ),
                 SizedBox(width: 20,),
-              Expanded(child:_buttonTiles(
-                "New\nOrders",
-                Icons.shopping_cart_rounded,
-              ), ),
-              
-            ],
-          ),
-          SizedBox(height: 20,),
-          Row(
-            children: [
-              Expanded(
-                child: _buttonTiles(
-                "Completed\nOrders",
-                Icons.shopping_cart_rounded,
-              ),
-              ),
-              SizedBox(width: 20,),
-              Expanded(child: Container(),),
-              
-            ],
-          ),
-        ],
+                Expanded(child: Container(),),
+                
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
