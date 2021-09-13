@@ -8,6 +8,9 @@ import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'assorterRegister_widget.dart';
+import 'companyRegistration.dart';
+
 class RegistrationPage extends StatefulWidget {
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
@@ -15,11 +18,11 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   String _chosenValue = "Company";
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -40,21 +43,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                     border: Border.all(color: AppColors.greyColor) ,
-                     borderRadius: BorderRadius.circular(12),
-                     color: AppColors.mainLightColor
-                    ),
+                        border: Border.all(color: AppColors.greyColor),
+                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.mainLightColor),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: DropdownButton<String>(
                       underline: Container(),
                       value: _chosenValue,
                       isExpanded: true,
                       //elevation: 5,
-                      style: TextStyle(color: Colors.black,fontSize: 18),
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                       items: <String>[
                         'Company',
                         'Agent',
@@ -65,7 +69,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           child: Text(value),
                         );
                       }).toList(),
-                      
+
                       onChanged: (String value) {
                         setState(() {
                           _chosenValue = value;
@@ -89,123 +93,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 context: context,
                 removeTop: true,
                 //child: AgentRegistrationWidget(),
-                child: ListView(
-                  children: [
-                    RegisterTextfield(
-          text: "Name*",
-          textInputType: TextInputType.name,
-          formatter: FilteringTextInputFormatter.allow(RegExp(CommonPattern.name_regex))
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        RegisterTextfield(
-          text: "Company Name",
-          textInputType: TextInputType.name,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: RegisterTextfield(
-                text: "Tel",
-                textInputType: TextInputType.number,
-              ),
-            ),
-            SizedBox(width: 20,),
-            Expanded(
-              child: RegisterTextfield(
-                text: "Intercom",
-                textInputType: TextInputType.text,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        RegisterTextfield(
-          text: "Email*",
-          textInputType: TextInputType.emailAddress,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: RegisterTextfield(
-                text: "Flat/Gala No",
-                textInputType: TextInputType.name,
-              ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: RegisterTextfield(
-                text: "Blg Name",
-                textInputType: TextInputType.name,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        RegisterTextfield(
-          text: "Address",
-          textInputType: TextInputType.name,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: RegisterTextfield(
-                text: "Area",
-                textInputType: TextInputType.name,
-              ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: RegisterTextfield(
-                text: "City",
-                textInputType: TextInputType.name,
-              ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: RegisterTextfield(
-                text: "Pincode",
-                textInputType: TextInputType.name,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        RegisterTextfield(
-          text: "Office Address",
-          textInputType: TextInputType.name,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        RegisterTextfield(
-          text: "Commission Per asorter",
-          textInputType: TextInputType.number,
-        ),
-                  ],
-                ),
+                // child: CompanyRegisterWidget(),
+                child: AssorterRegisterWidget(),
               ),
             ),
           ),
@@ -214,6 +103,4 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
-
-
 

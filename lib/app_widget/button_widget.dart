@@ -15,6 +15,7 @@ class ButtonView extends StatelessWidget {
       minWidth: 120,
       padding: EdgeInsets.symmetric(
         horizontal: 30,
+        vertical: 15,
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       color: color,
