@@ -7,7 +7,7 @@ class AppAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+     // height: 150,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: BorderRadius.only(
@@ -26,9 +26,10 @@ class AppAppBar extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: 20,),
           Image.asset(
             AppImages.logo,
-            height: 150,
+            height: 130,
             // width: 150,
             fit: BoxFit.contain,
           )

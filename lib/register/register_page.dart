@@ -2,9 +2,10 @@ import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/app_textfield.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
 import 'package:diamon_assorter/register/agentRegistration.dart';
-import 'package:diamon_assorter/register/register_textfield.dart';
+import 'package:diamon_assorter/app_widget/register_textfield.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
+import 'package:diamon_assorter/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,7 +18,20 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  String _chosenValue = "Company";
+  String _chosenValue = Constants.COMPANY;
+
+  _getRegisterWidget() {
+    if (_chosenValue == Constants.COMPANY) {
+      return CompanyRegisterWidget();
+    }
+    if (_chosenValue == Constants.AGENT) {
+      return AgentRegistrationWidget();
+    }
+    if (_chosenValue == Constants.ASSERTER) {
+      return AssorterRegisterWidget();
+    }
+    return CompanyRegisterWidget();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +74,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       //elevation: 5,
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       items: <String>[
-                        'Company',
-                        'Agent',
-                        'Asserter',
+                        Constants.COMPANY,
+                        Constants.AGENT,
+                        Constants.ASSERTER,
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -94,7 +108,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 removeTop: true,
                 //child: AgentRegistrationWidget(),
                 // child: CompanyRegisterWidget(),
-                child: AssorterRegisterWidget(),
+                child: _getRegisterWidget(),
               ),
             ),
           ),
@@ -103,4 +117,3 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
-

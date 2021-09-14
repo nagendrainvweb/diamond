@@ -1,24 +1,34 @@
+import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
-import 'package:diamon_assorter/register/register_textfield.dart';
+import 'package:diamon_assorter/app_widget/register_textfield.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
+import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AgentRegistrationWidget extends StatelessWidget {
+class AgentRegistrationWidget extends StatefulWidget {
   const AgentRegistrationWidget({
     Key key,
   }) : super(key: key);
 
+  @override
+  _AgentRegistrationWidgetState createState() => _AgentRegistrationWidgetState();
+}
+
+class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
   _showBottomDialog(BuildContext context) {
     final _nameController = TextEditingController();
     final _mobileController = TextEditingController();
     final _emailController = TextEditingController();
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
-          return Container(
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
             child: ListView(
+              shrinkWrap: true,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -244,6 +254,17 @@ class AgentRegistrationWidget extends StatelessWidget {
             ],
           ),
         ),
+         SizedBox(
+          height: 20,
+        ),
+        ButtonView(
+          buttonText: "Submit",
+          onPressed: () {
+            Utility.pushToNext(context, DashBoardPage());
+          },
+          color: AppColors.mainColor,
+        ),
+        SizedBox(height: 20,)
       ],
     );
   }

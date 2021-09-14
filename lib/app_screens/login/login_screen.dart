@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  _loginView() {
+  _loginView(LoginViewModel model) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 40,
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             color: AppColors.mainColor,
           ),
           SizedBox(
-            height: 10,
+            height: 15,
           ),
           AppTextfield(
             hint: "PASSWORD",
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             color: AppColors.mainColor,
           ),
           SizedBox(
-            height: 40,
+            height: 30,
           ),
           Container(
             padding: EdgeInsets.symmetric(
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           ButtonView(
             buttonText: "FORGOT PASSWORD",
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  _loginView(),
+                  _loginView(model),
                   SizedBox(
                     height: 20,
                   ),

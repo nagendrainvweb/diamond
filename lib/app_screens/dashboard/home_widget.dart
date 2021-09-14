@@ -63,7 +63,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     return Container(
 
       padding: EdgeInsets.symmetric(
-        horizontal: 40,
+        horizontal: 30,
       ),
       child: MediaQuery.removeViewPadding(
         removeTop: true,
@@ -117,6 +117,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                 
               ],
             ),
+            SizedBox(height: 20,),
+
           ],
         ),
       ),

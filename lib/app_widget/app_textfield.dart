@@ -20,6 +20,7 @@ class AppTextfield extends StatelessWidget {
             obscureText: obsecure,
             style: TextStyle(
               color: textColor,
+              fontSize: 18
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(
@@ -27,7 +28,8 @@ class AppTextfield extends StatelessWidget {
                 color: color,
               ),
               contentPadding: EdgeInsets.symmetric(
-                vertical: 0,
+                vertical: 18,
+                horizontal: 20
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
