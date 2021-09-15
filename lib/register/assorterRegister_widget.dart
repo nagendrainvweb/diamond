@@ -191,7 +191,7 @@ class _AssorterRegisterWidgetState extends State<AssorterRegisterWidget> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Attach Adhar Card",
+                              "Attach Aadhar Card",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,

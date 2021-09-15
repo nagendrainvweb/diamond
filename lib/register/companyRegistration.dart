@@ -30,6 +30,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
         children: [
           RegisterTextfield(
             text: "Name*",
+            controller: model.nameController,
             textInputType: TextInputType.name,
             onChanged: (String value){
                model.nameError = !RegExp(CommonPattern.name_regex).hasMatch(value);
@@ -42,9 +43,10 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           ),
           RegisterTextfield(
             text: "Company Name",
+            controller: model.companyNameController,
             textInputType: TextInputType.name,
              onChanged:(String value){
-               model.companyNameError = (value.isNotEmpty)? !RegExp(CommonPattern.name_regex).hasMatch(value):false;
+               model.companyNameError = (value.isNotEmpty)? !RegExp(CommonPattern.addressRegex).hasMatch(value):false;
                model.notifyListeners();
             },
             errorText: model.companyNameError ? "Please Enter Valid Company Name":null,
@@ -57,6 +59,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               Expanded(
                 child: RegisterTextfield(
                   text: "Mobile No*",
+                  controller: model.mobileController,
                   textInputType: TextInputType.number,
                    onChanged: (String value){
                model.mobileError = !RegExp(CommonPattern.mobile_regex).hasMatch(value);
@@ -71,6 +74,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               Expanded(
                 child: RegisterTextfield(
                   text: "Intercom",
+                  controller: model.interComController,
                   textInputType: TextInputType.text,
                    onChanged: (String value){
                model.intercomError = (value.isNotEmpty)? !RegExp(CommonPattern.addressRegex).hasMatch(value):false;
@@ -86,6 +90,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           ),
           RegisterTextfield(
             text: "Email*",
+            controller: model.emailController,
             textInputType: TextInputType.emailAddress,
              onChanged: (String value){
                model.emailError = !RegExp(CommonPattern.email_regex).hasMatch(value);
@@ -93,33 +98,13 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
             },
             errorText: model.emailError ? "Please Enter Valid Email Id":null,
           ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "Flat/Gala No",
-          //         textInputType: TextInputType.name,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: 20,
-          //     ),
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "Blg Name",
-          //         textInputType: TextInputType.name,
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          
           SizedBox(
             height: 20,
           ),
           RegisterTextfield(
             text: "Address",
+            controller: model.addressController,
             textInputType: TextInputType.name,
              onChanged: (String value){
                model.addreessError = (value.isNotEmpty)?!RegExp(CommonPattern.addressRegex).hasMatch(value):false;
@@ -135,6 +120,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               Expanded(
                 child: RegisterTextfield(
                   text: "Area",
+                  controller: model.areaController,
                   textInputType: TextInputType.name,
                    onChanged: (String value){
                model.areaError = (value.isNotEmpty)? !RegExp(CommonPattern.name_regex).hasMatch(value):false;
@@ -149,6 +135,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               Expanded(
                 child: RegisterTextfield(
                   text: "City",
+                  controller: model.cityController,
                   textInputType: TextInputType.name,
                    onChanged: (String value)=>(String value){
                model.cityError = (value.isNotEmpty)? !RegExp(CommonPattern.name_regex).hasMatch(value):false;
@@ -163,6 +150,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               Expanded(
                 child: RegisterTextfield(
                   text: "Pincode",
+                  controller: model.pincodeController,
                   textInputType: TextInputType.number,
                    onChanged: (String value){
                model.pincodeError = (value.isNotEmpty)? !RegExp(CommonPattern.pincodeRegex).hasMatch(value):false;
@@ -178,6 +166,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           ),
           RegisterTextfield(
             text: "Add work address*",
+            controller: model.workAddressController,
             textInputType: TextInputType.text,
              onChanged:(String value){
                model.workAddressError = !RegExp(CommonPattern.addressRegex).hasMatch(value);
@@ -209,6 +198,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                   children: [
                     RegisterTextfield(
                       text: "Name",
+                      controller: model.contactNameController,
                       textInputType: TextInputType.name,
                        onChanged: (String value){
                model.contactNameError = (value.isEmpty)?false: !RegExp(CommonPattern.name_regex).hasMatch(value);
@@ -221,6 +211,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                     ),
                     RegisterTextfield(
                       text: "Mobile",
+                      controller: model.contactMobileController,
                       textInputType: TextInputType.number,
                        onChanged: (String value){
                model.contactMobileError = (value.isEmpty)?false:!RegExp(CommonPattern.mobile_regex).hasMatch(value);
@@ -233,6 +224,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                     ),
                     RegisterTextfield(
                       text: "Email",
+                      controller: model.contactEmailController,
                       textInputType: TextInputType.emailAddress,
                        onChanged: (String value)=>(String value){
                model.contactEmailError = (value.isEmpty)?false:!RegExp(CommonPattern.email_regex).hasMatch(value);
