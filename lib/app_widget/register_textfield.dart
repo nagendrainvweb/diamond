@@ -9,6 +9,9 @@ class RegisterTextfield extends StatelessWidget {
   final Function onChanged;
   final String errorText;
   final bool enable;
+  final bool showIcon;
+  final bool obsecure;
+  final Function onIconClicked;
 
   const RegisterTextfield(
       {Key key,
@@ -16,8 +19,12 @@ class RegisterTextfield extends StatelessWidget {
       this.textInputType,
       this.controller,
       this.formatter,
+      this.obsecure = false,
+      this.showIcon = false,
       this.onChanged,
-      this.errorText, this.enable = true})
+      this.errorText,
+      this.enable = true,
+      this.onIconClicked})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,7 @@ class RegisterTextfield extends StatelessWidget {
           fontSize: 18,
         ),
         keyboardType: textInputType,
+        obscureText: obsecure,
         onChanged: onChanged,
         // inputFormatters: [
         //   formatter
@@ -36,12 +44,20 @@ class RegisterTextfield extends StatelessWidget {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
               horizontal: 15,
-              vertical: 20,
+              vertical: 15,
             ),
             labelText: text,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
+            suffixIcon: (showIcon)
+                ? InkWell(
+                    onTap: () {
+                      onIconClicked();
+                    },
+                    child: Icon(
+                        obsecure ? Icons.visibility : Icons.visibility_off))
+                : Container(width: 1,height: 1,),
             hintStyle: TextStyle(),
             errorText: errorText),
       ),

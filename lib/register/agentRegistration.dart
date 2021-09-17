@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
+import 'package:diamon_assorter/app_widget/add_assorter_widget.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
+import 'package:diamon_assorter/app_widget/doc_view_widget.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
 import 'package:diamon_assorter/register/registerViewModel/agentRegisterViewModel.dart';
@@ -23,100 +27,22 @@ class AgentRegistrationWidget extends StatefulWidget {
 class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
   _showBottomDialog(
       BuildContext context, AgentRegisterViewModel model, AssorterModal data) {
-    final _nameController =
-        TextEditingController(text: data != null ? data.name : "");
-    final _mobileController =
-        TextEditingController(text: data != null ? data.mobile : "");
-    final _emailController =
-        TextEditingController(text: data != null ? data.email : "");
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         builder: (context) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    // vertical: 5,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add Assorter",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    children: [
-                      RegisterTextfield(
-                        text: "Name",
-                        controller: _nameController,
-                        textInputType: TextInputType.name,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      RegisterTextfield(
-                        text: "Mobile",
-                        controller: _mobileController,
-                        textInputType: TextInputType.number,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      RegisterTextfield(
-                        text: "Email",
-                        controller: _emailController,
-                        textInputType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ButtonView(
-                        buttonText: "SUBMIT",
-                        color: AppColors.mainLightColor,
-                        onPressed: () {
-                          Navigator.pop(context);
-                          if (data == null) {
-                            model.onAseerterAddedClicked(_nameController.text,
-                                _mobileController.text, _emailController.text);
-                          } else {
-                            data.name = _nameController.text;
-                            data.mobile = _mobileController.text;
-                            data.email = _emailController.text;
-                            model.onEditAseertor(data);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          return AddAssorterWidget(
+            data: data,
+            onSubmitClicked: (name, mobile, email) {
+              if (data == null) {
+                model.onAseerterAddedClicked(name, mobile, email);
+              } else {
+                data.name = name;
+                data.mobile = mobile;
+                data.email = email;
+                model.onEditAseertor(data);
+              }
+            },
           );
         });
   }
@@ -125,6 +51,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AgentRegisterViewModel>.reactive(
       viewModelBuilder: () => AgentRegisterViewModel(),
+      onModelReady: (AgentRegisterViewModel model) => model.initData("Agent"),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(
@@ -132,6 +59,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             controller: model.nameController,
             textInputType: TextInputType.name,
             onChanged: (String value) {
+              model.userData.name = value;
               model.nameError =
                   !RegExp(CommonPattern.name_regex).hasMatch(value);
               model.notifyListeners();
@@ -146,8 +74,10 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             controller: model.companyNameController,
             textInputType: TextInputType.name,
             onChanged: (String value) {
-              model.companyNameError =
-                  !RegExp(CommonPattern.name_regex).hasMatch(value);
+              model.userData.companyName= value;
+              model.companyNameError = (value.isEmpty)
+                  ? false
+                  : !RegExp(CommonPattern.name_regex).hasMatch(value);
               model.notifyListeners();
             },
             errorText:
@@ -161,6 +91,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             controller: model.mobileController,
             textInputType: TextInputType.number,
             onChanged: (String value) {
+              model.userData.mobile = value;
               model.mobileError =
                   !RegExp(CommonPattern.mobile_regex).hasMatch(value);
               model.notifyListeners();
@@ -175,6 +106,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             textInputType: TextInputType.emailAddress,
             controller: model.emailController,
             onChanged: (String value) {
+              model.userData.email = value;
               model.emailError =
                   !RegExp(CommonPattern.email_regex).hasMatch(value);
               model.notifyListeners();
@@ -184,11 +116,30 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
+         RegisterTextfield(
+            text: "Password*",
+            controller: model.passwordController,
+            showIcon: true,
+            textInputType: TextInputType.name,
+            onIconClicked: model.onPasswordVisibleclicked,
+            obsecure: model.obsecureText,
+            onChanged: (String value) {
+               model.userData.password = value;
+              model.passwordError=
+                  !RegExp(CommonPattern.passwordRegex).hasMatch(value);
+              model.notifyListeners();
+            },
+            errorText: model.passwordError ? "Password must have minimum 5 alphanumeric characters" : null,
+          ),
+          SizedBox(
+            height: 20,
+          ),
           RegisterTextfield(
-            text: "Address",
+            text: "Address*",
             textInputType: TextInputType.name,
             controller: model.addressController,
             onChanged: (String value) {
+              model.userData.address = value;
               model.addreessError =
                   !RegExp(CommonPattern.addressRegex).hasMatch(value);
               model.notifyListeners();
@@ -199,32 +150,33 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: RegisterTextfield(
-                  text: "Area",
-                  textInputType: TextInputType.name,
-                  controller: model.areaController,
-                  onChanged: (String value) {
-                    model.areaError =
-                        !RegExp(CommonPattern.name_regex).hasMatch(value);
-                    model.notifyListeners();
-                  },
-                  errorText: model.areaError ? "Please Enter Valid Area" : null,
-                ),
+              RegisterTextfield(
+                text: "Area*",
+                textInputType: TextInputType.name,
+                controller: model.areaController,
+                onChanged: (String value) {
+                  model.userData.area = value;
+                  model.areaError =
+                      !RegExp(CommonPattern.name_regex).hasMatch(value);
+                  model.notifyListeners();
+                },
+                errorText: model.areaError ? "Please Enter Valid Area" : null,
               ),
               SizedBox(
-                width: 20,
+                height: 20,
               ),
+          Row(
+            children: [
+          
               Expanded(
                 child: RegisterTextfield(
-                  text: "City",
+                  text: "City*",
                   textInputType: TextInputType.name,
                   controller: model.cityController,
                   onChanged: (String value) {
+                    model.userData.city = value;
                     model.cityError =
-                        !RegExp(CommonPattern.email_regex).hasMatch(value);
+                        !RegExp(CommonPattern.name_regex).hasMatch(value);
                     model.notifyListeners();
                   },
                   errorText: model.cityError ? "Please Enter Valid City" : null,
@@ -235,10 +187,11 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
               ),
               Expanded(
                 child: RegisterTextfield(
-                  text: "Pincode",
+                  text: "Pincode*",
                   textInputType: TextInputType.number,
                   controller: model.pincodeController,
                   onChanged: (String value) {
+                    model.userData.pincode = value;
                     model.pincodeError =
                         !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
                     model.notifyListeners();
@@ -257,8 +210,10 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             textInputType: TextInputType.name,
             controller: model.officeAddressController,
             onChanged: (String value) {
-              model.officeAddressError =
-                  !RegExp(CommonPattern.addressRegex).hasMatch(value);
+              model.userData.officeAddress =  value;
+              model.officeAddressError = (value.isEmpty)
+                  ? false
+                  : !RegExp(CommonPattern.addressRegex).hasMatch(value);
               model.notifyListeners();
             },
             errorText:
@@ -268,12 +223,12 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             height: 20,
           ),
           RegisterTextfield(
-            text: "Commission Per asorter",
+            text: "Commission Per assorter*",
             textInputType: TextInputType.number,
             controller: model.commissionController,
             onChanged: (String value) {
-              // model.commissionError =
-              //     !RegExp(CommonPattern.n).hasMatch(value);
+              model.userData.commissionPerAssorter= value;
+              model.commissionError = value.isEmpty;
               model.notifyListeners();
             },
             errorText:
@@ -302,33 +257,16 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: InkWell(
-                        onTap: () {
+                      child: DocViewWidget(
+                        title: "Attch BOB id Card",
+                        height: (MediaQuery.of(context).size.width - 100) / 2,
+                        file: model.idCard,
+                        onSelectImage: () {
                           model.selectImage(context);
                         },
-                        child: Container(
-                          height: (MediaQuery.of(context).size.width - 100) / 2,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2,
-                              color: Colors.grey.shade300,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Attach BDB Id Card",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        onDeleteImage: () {
+                          model.removeImage();
+                        },
                       ),
                     ),
                     Expanded(
@@ -391,7 +329,12 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           ButtonView(
             buttonText: "Submit",
             onPressed: () {
-              Utility.pushToNext(context, DashBoardPage());
+              model.submitClicked(context,onError: (String value) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(value),
+                  behavior: SnackBarBehavior.floating,
+                ));
+              });
             },
             color: AppColors.mainColor,
           ),

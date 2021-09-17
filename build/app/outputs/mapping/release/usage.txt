@@ -108,6 +108,7 @@ com.google.common.collect.CompactHashMap$KeySetView
 androidx.customview.R$color
 com.google.common.collect.FilteredEntrySetMultimap
 com.google.common.util.concurrent.ForwardingFluentFuture
+io.flutter.plugins.flutter_plugin_android_lifecycle.BuildConfig
 com.google.common.collect.ImmutableSortedMap$1EntrySet
 com.google.common.hash.Funnel
 com.google.common.reflect.ImmutableTypeToInstanceMap
@@ -117,8 +118,6 @@ com.google.common.collect.ImmutableMapValues$SerializedForm
 androidx.activity.ComponentActivity$1
 com.google.common.collect.AbstractBiMap$BiMapEntry
 androidx.core.view.animation.PathInterpolatorCompat
-androidx.lifecycle.CompositeGeneratedAdaptersObserver:
-    void <init>(androidx.lifecycle.GeneratedAdapter[])
 com.google.common.base.Predicates$1
 com.google.common.util.concurrent.ImmediateFuture$ImmediateSuccessfulFuture
 androidx.core.hardware.fingerprint.FingerprintManagerCompat$AuthenticationCallback
@@ -189,6 +188,7 @@ androidx.core.view.accessibility.AccessibilityNodeInfoCompat$RangeInfoCompat
 androidx.core.widget.TextViewCompat$OreoCallback
 com.google.common.cache.RemovalCause$2
 com.google.common.collect.TreeMultiset$Reference
+io.flutter.plugins.imagepicker.BuildConfig
 androidx.core.net.DatagramSocketWrapper
 com.google.common.cache.LocalCache$EntryFactory$7
 com.google.common.hash.LittleEndianByteArray$1
@@ -209,8 +209,6 @@ androidx.core.R$layout
 com.google.common.util.concurrent.AbstractScheduledService$Scheduler
 com.google.common.collect.RegularContiguousSet$1
 androidx.lifecycle.Transformations$2
-androidx.lifecycle.ReflectiveGenericLifecycleObserver:
-    void <init>(java.lang.Object)
 com.google.common.collect.Sets$1$1
 com.google.common.collect.Multisets$UnmodifiableMultiset
 androidx.core.os.EnvironmentCompat
@@ -254,6 +252,7 @@ com.google.common.collect.CompactHashMap$ValuesView
 androidx.core.view.accessibility.AccessibilityManagerCompat$TouchExplorationStateChangeListener
 com.google.common.io.CharStreams
 com.google.common.collect.Multimaps$Keys$1
+io.flutter.plugins.imagepicker.R$dimen
 androidx.collection.SparseArrayCompat
 com.google.common.collect.LinkedHashMultiset
 androidx.core.view.accessibility.AccessibilityViewCommand$SetProgressArguments
@@ -306,8 +305,8 @@ javax.annotation.RegEx
 com.google.common.collect.RegularImmutableMultiset$1
 com.google.common.graph.PredecessorsFunction
 com.google.common.cache.CacheLoader$SupplierToCacheLoader
-com.google.common.reflect.TypeToken$TypeFilter$1
 com.google.common.reflect.TypeToken$SimpleTypeToken
+com.google.common.reflect.TypeToken$TypeFilter$1
 io.flutter.plugin.common.EventChannel$IncomingStreamRequestHandler
 com.google.common.collect.Sets$SubSet
 com.google.common.hash.HashFunction
@@ -346,8 +345,13 @@ io.flutter.plugins.pathprovider.R$color
 androidx.fragment.R$dimen
 androidx.annotation.VisibleForTesting
 com.google.common.io.CharSource$EmptyCharSource
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$layout
 androidx.core.util.Consumer
-androidx.lifecycle.Lifecycling
+androidx.lifecycle.Lifecycling:
+    static androidx.lifecycle.GenericLifecycleObserver getCallback(java.lang.Object)
+    private void <init>()
+    private static final int REFLECTIVE_CALLBACK
+    private static final int GENERATED_CALLBACK
 com.google.common.util.concurrent.SimpleTimeLimiter
 com.google.common.collect.FilteredEntryMultimap$AsMap
 com.google.common.collect.ImmutableSortedSet$SerializedForm
@@ -365,14 +369,14 @@ com.google.common.collect.TreeTraverser$BreadthFirstIterator
 com.google.common.graph.AbstractBaseGraph$IncidentEdgeSet$Directed$2
 androidx.core.app.NotificationCompat$BigTextStyle
 com.example.diamon_assorter.R$styleable
-androidx.core.app.ActivityCompat$PermissionCompatDelegate
+androidx.core.app.ActivityCompat$PermissionCompatDelegate:
+    public abstract boolean onActivityResult(android.app.Activity,int,int,android.content.Intent)
 androidx.core.view.inputmethod.InputContentInfoCompat$InputContentInfoCompatBaseImpl
 com.google.common.hash.ChecksumHashFunction$ChecksumHasher
 com.google.common.collect.ImmutableMap$Builder
 com.google.common.reflect.TypeToken$2
 com.google.common.util.concurrent.InterruptibleTask$DoNothingRunnable
 androidx.annotation.AnyThread
-androidx.core.content.FileProvider$PathStrategy
 androidx.core.widget.ImageViewCompat
 com.google.common.collect.ImmutableRangeSet
 com.google.common.util.concurrent.ServiceManager$EmptyServiceManagerWarning
@@ -587,6 +591,7 @@ androidx.activity.ComponentActivity$NonConfigurationInstances
 androidx.annotation.InspectableProperty
 com.google.common.util.concurrent.TimeoutFuture$Fire
 com.google.common.graph.Traverser$TreeTraverser$DepthFirstPreOrderIterator
+io.flutter.plugins.imagepicker.R$attr
 com.google.common.util.concurrent.Futures$3
 com.google.common.base.CharMatcher$AnyOf
 com.google.common.collect.SortedMapDifference
@@ -721,11 +726,6 @@ com.google.common.base.StandardSystemProperty
 com.google.common.collect.ImmutableRangeSet$AsSet
 com.google.common.collect.MutableClassToInstanceMap
 com.google.common.io.BaseEncoding$StandardBaseEncoding$2
-androidx.lifecycle.ClassesInfoCache$CallbackInfo:
-    void <init>(java.util.Map)
-    private static void invokeMethodsForEvent(java.util.List,androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event,java.lang.Object)
-    final java.util.Map mEventToHandlers
-    final java.util.Map mHandlerToEvent
 com.google.common.collect.DenseImmutableTable$1
 com.google.common.reflect.ImmutableTypeToInstanceMap$Builder
 com.google.common.collect.CompactLinkedHashMap
@@ -835,10 +835,8 @@ androidx.arch.core.R
 androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 com.google.common.collect.AbstractMapBasedMultimap$WrappedList$WrappedListIterator
 androidx.lifecycle.LifecycleRegistry:
-    private androidx.lifecycle.Lifecycle$State calculateTargetState(androidx.lifecycle.LifecycleObserver)
     public void markState(androidx.lifecycle.Lifecycle$State)
     public void setCurrentState(androidx.lifecycle.Lifecycle$State)
-    public void addObserver(androidx.lifecycle.LifecycleObserver)
     public int getObserverCount()
 com.google.common.collect.ImmutableBiMap
 com.google.common.util.concurrent.Uninterruptibles:
@@ -871,12 +869,6 @@ androidx.core.content.res.GrowingArrayUtils
 com.google.common.reflect.TypeToken$1
 com.google.common.util.concurrent.Service$State$1
 io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineActivityPluginBinding:
-    public android.app.Activity getActivity()
-    public java.lang.Object getLifecycle()
-    public void addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener)
-    public void removeRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener)
-    public void addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener)
-    public void removeActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener)
     public void addOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener)
     public void removeOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener)
     public void addOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener)
@@ -898,6 +890,7 @@ com.google.common.collect.CompactHashMap
 androidx.core.os.ParcelableCompatCreatorCallbacks
 com.google.common.collect.TreeTraverser$1
 androidx.core.util.Pair
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$styleable
 javax.annotation.Untainted
 com.google.common.collect.MultimapBuilder$LinkedListSupplier
 androidx.collection.CircularIntArray
@@ -932,6 +925,18 @@ com.google.common.collect.StandardTable$Row
 com.google.common.collect.ImmutableRangeSet$AsSetSerializedForm
 com.google.common.base.CaseFormat$StringConverter
 com.google.common.escape.package-info
+io.flutter.plugins.imagepicker.ImagePickerPlugin:
+    public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
+    void <init>(io.flutter.plugins.imagepicker.ImagePickerDelegate,android.app.Activity)
+    static final java.lang.String METHOD_CALL_IMAGE
+    static final java.lang.String METHOD_CALL_MULTI_IMAGE
+    static final java.lang.String METHOD_CALL_VIDEO
+    private static final java.lang.String METHOD_CALL_RETRIEVE
+    private static final int CAMERA_DEVICE_FRONT
+    private static final int CAMERA_DEVICE_REAR
+    private static final java.lang.String CHANNEL
+    private static final int SOURCE_CAMERA
+    private static final int SOURCE_GALLERY
 com.google.common.cache.LocalCache$EntryFactory$5
 com.google.common.cache.CacheLoader$InvalidCacheLoadException
 com.google.common.io.CharSource$StringCharSource
@@ -949,8 +954,8 @@ io.flutter.embedding.engine.FlutterEngineConnectionRegistry$DefaultFlutterAssets
 androidx.core.os.BuildCompat
 com.google.common.collect.EnumHashBiMap
 com.google.common.collect.DiscreteDomain$BigIntegerDomain
+io.flutter.plugins.imagepicker.R$layout
 com.google.common.graph.Traverser$TreeTraverser$BreadthFirstIterator
-androidx.core.app.ActivityCompat$OnRequestPermissionsResultCallback
 androidx.viewpager.R
 androidx.core.widget.NestedScrollView$OnScrollChangeListener
 com.google.common.collect.MutableClassToInstanceMap$1
@@ -989,7 +994,24 @@ com.google.common.hash.LongAddable
 com.google.common.collect.MapDifference
 com.google.common.reflect.ClassPath
 io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
-androidx.core.app.ActivityCompat
+androidx.core.app.ActivityCompat:
+    protected void <init>()
+    public static void setPermissionCompatDelegate(androidx.core.app.ActivityCompat$PermissionCompatDelegate)
+    public static androidx.core.app.ActivityCompat$PermissionCompatDelegate getPermissionCompatDelegate()
+    public static boolean invalidateOptionsMenu(android.app.Activity)
+    public static void startActivityForResult(android.app.Activity,android.content.Intent,int,android.os.Bundle)
+    public static void startIntentSenderForResult(android.app.Activity,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)
+    public static void finishAffinity(android.app.Activity)
+    public static void finishAfterTransition(android.app.Activity)
+    public static android.net.Uri getReferrer(android.app.Activity)
+    public static android.view.View requireViewById(android.app.Activity,int)
+    public static void setEnterSharedElementCallback(android.app.Activity,androidx.core.app.SharedElementCallback)
+    public static void setExitSharedElementCallback(android.app.Activity,androidx.core.app.SharedElementCallback)
+    public static void postponeEnterTransition(android.app.Activity)
+    public static void startPostponedEnterTransition(android.app.Activity)
+    public static boolean shouldShowRequestPermissionRationale(android.app.Activity,java.lang.String)
+    public static androidx.core.view.DragAndDropPermissionsCompat requestDragAndDropPermissions(android.app.Activity,android.view.DragEvent)
+    public static void recreate(android.app.Activity)
 com.google.common.primitives.Longs$LongArrayAsList
 com.google.common.collect.Maps$UnmodifiableEntries
 androidx.viewpager.widget.PagerTitleStrip$SingleLineAllCapsTransform
@@ -1070,6 +1092,7 @@ com.google.common.util.concurrent.CycleDetectingLockFactory$CycleDetectingReentr
 io.flutter.plugins.sharedpreferences.R$string
 com.google.common.base.Objects
 com.google.common.collect.Tables$TransformedTable
+io.flutter.plugins.imagepicker.R$string
 com.google.common.base.JdkPattern
 com.google.common.collect.Multimaps$UnmodifiableSetMultimap
 com.google.common.primitives.Floats$LexicographicalComparator
@@ -1078,6 +1101,7 @@ com.google.common.reflect.Types$WildcardTypeImpl
 androidx.lifecycle.ViewModelStoreOwner
 androidx.core.content.SharedPreferencesCompat
 com.google.common.base.CommonPattern
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$color
 com.google.common.collect.Maps$13
 com.google.common.util.concurrent.CollectionFuture
 com.google.common.collect.StandardRowSortedTable$1
@@ -1196,10 +1220,10 @@ com.google.common.primitives.Ints
 com.google.common.collect.Tables$AbstractCell
 com.google.common.cache.ReferenceEntry
 androidx.versionedparcelable.VersionedParcel$ParcelException
+io.flutter.plugins.imagepicker.R$color
 com.google.common.util.concurrent.AbstractScheduledService$CustomScheduler$Schedule
 com.google.common.primitives.UnsignedLongs$LexicographicalComparator
 com.google.common.io.CharSource
-androidx.core.app.ActivityCompat$1
 com.google.common.cache.LocalCache$WeakAccessWriteEntry
 com.google.common.collect.Tables$1
 com.google.common.base.Stopwatch
@@ -1477,7 +1501,6 @@ com.google.common.util.concurrent.MoreExecutors$2
 androidx.fragment.app.FragmentManagerState$1
 androidx.arch.core.internal.SafeIterableMap:
     public java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)
-    protected androidx.arch.core.internal.SafeIterableMap$Entry put(java.lang.Object,java.lang.Object)
 com.google.common.util.concurrent.TimeoutFuture$TimeoutFutureException
 androidx.core.content.res.ConfigurationHelper
 com.google.common.cache.CacheBuilderSpec$MaximumSizeParser
@@ -1490,6 +1513,24 @@ com.google.common.hash.Hashing$Sha384Holder
 androidx.core.app.TaskStackBuilder$SupportParentable
 androidx.viewpager.widget.ViewPager
 com.google.common.hash.MessageDigestHashFunction
+io.flutter.plugins.imagepicker.ImagePickerCache:
+    static final java.lang.String MAP_KEY_PATH
+    static final java.lang.String MAP_KEY_PATH_LIST
+    static final java.lang.String MAP_KEY_MAX_WIDTH
+    static final java.lang.String MAP_KEY_MAX_HEIGHT
+    static final java.lang.String MAP_KEY_IMAGE_QUALITY
+    private static final java.lang.String MAP_KEY_TYPE
+    private static final java.lang.String MAP_KEY_ERROR_CODE
+    private static final java.lang.String MAP_KEY_ERROR_MESSAGE
+    private static final java.lang.String FLUTTER_IMAGE_PICKER_IMAGE_PATH_KEY
+    private static final java.lang.String SHARED_PREFERENCE_ERROR_CODE_KEY
+    private static final java.lang.String SHARED_PREFERENCE_ERROR_MESSAGE_KEY
+    private static final java.lang.String SHARED_PREFERENCE_MAX_WIDTH_KEY
+    private static final java.lang.String SHARED_PREFERENCE_MAX_HEIGHT_KEY
+    private static final java.lang.String SHARED_PREFERENCE_IMAGE_QUALITY_KEY
+    private static final java.lang.String SHARED_PREFERENCE_TYPE_KEY
+    private static final java.lang.String SHARED_PREFERENCE_PENDING_IMAGE_URI_PATH_KEY
+    static final java.lang.String SHARED_PREFERENCES_NAME
 com.google.common.collect.FluentIterable$3
 com.google.common.collect.ImmutableMultimap$EntryCollection
 com.google.common.base.Ticker$1
@@ -1641,7 +1682,6 @@ com.google.common.primitives.Bytes
 com.google.common.cache.LocalCache$1
 androidx.core.provider.FontsContractCompat
 com.google.common.collect.DescendingMultiset
-androidx.core.content.FileProvider$SimplePathStrategy
 com.google.common.collect.MapMakerInternalMap$Strength$1
 javax.annotation.MatchesPattern$Checker
 androidx.core.app.AppOpsManagerCompat
@@ -1654,6 +1694,7 @@ com.google.common.io.Files
 com.google.common.collect.Synchronized$SynchronizedMultimap
 com.google.common.hash.Crc32cHashFunction
 androidx.core.text.util.FindAddress$ZipRange
+io.flutter.plugins.imagepicker.R$integer
 com.google.common.util.concurrent.ExecutionSequencer$4
 com.google.common.util.concurrent.AbstractCatchingFuture$AsyncCatchingFuture
 com.google.common.collect.LinkedListMultimap$KeyList
@@ -1662,12 +1703,6 @@ io.flutter.util.PathUtils:
     public void <init>()
 com.google.common.graph.AbstractValueGraph
 io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding:
-    public abstract android.app.Activity getActivity()
-    public abstract java.lang.Object getLifecycle()
-    public abstract void addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener)
-    public abstract void removeRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener)
-    public abstract void addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener)
-    public abstract void removeActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener)
     public abstract void addOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener)
     public abstract void removeOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener)
     public abstract void addOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener)
@@ -1738,6 +1773,7 @@ androidx.core.graphics.TypefaceCompatApi28Impl
 com.google.common.cache.RemovalCause$3
 com.google.common.graph.Traverser$TreeTraverser$3
 io.flutter.plugins.sharedpreferences.R
+io.flutter.plugins.imagepicker.R$styleable
 javax.annotation.meta.TypeQualifierNickname
 com.google.common.util.concurrent.Striped$SmallLazyStriped
 com.google.common.collect.AbstractMapBasedMultimap$AsMap$AsMapIterator
@@ -1760,7 +1796,6 @@ com.google.common.io.BaseEncoding$SeparatedBaseEncoding
 com.google.common.primitives.SignedBytes$LexicographicalComparator
 androidx.versionedparcelable.VersionedParcelize
 androidx.fragment.app.FragmentTransitionCompat21$3
-androidx.lifecycle.DefaultLifecycleObserver
 com.google.common.collect.AbstractRangeSet
 com.google.common.xml.XmlEscapers
 com.google.common.collect.RegularImmutableTable$CellSet
@@ -2035,6 +2070,7 @@ com.google.common.hash.LittleEndianByteArray$UnsafeByteArray
 androidx.core.app.SharedElementCallback
 androidx.core.graphics.drawable.IconCompat$IconType
 android.support.v4.os.IResultReceiver
+io.flutter.plugins.imagepicker.R$xml
 com.google.common.math.Quantiles$1
 com.google.common.hash.LittleEndianByteArray$LittleEndianBytes
 io.flutter.embedding.android.FlutterFragmentActivity
@@ -2117,6 +2153,7 @@ com.google.errorprone.annotations.CompatibleWith
 com.google.common.io.FileBackedOutputStream$1
 com.google.common.io.BaseEncoding$StandardBaseEncoding
 com.google.common.io.Closer$LoggingSuppressor
+io.flutter.plugins.imagepicker.R$drawable
 androidx.activity.R$attr
 com.google.common.io.BaseEncoding$Base64Encoding
 com.google.common.util.concurrent.ForwardingFuture$SimpleForwardingFuture
@@ -2214,8 +2251,6 @@ androidx.loader.content.ModernAsyncTask$InternalHandler
 com.google.common.cache.LocalCache$StrongWriteEntry
 com.google.common.collect.TreeRangeSet
 com.google.common.collect.Lists$TransformingRandomAccessList
-androidx.lifecycle.Lifecycle:
-    public abstract void addObserver(androidx.lifecycle.LifecycleObserver)
 com.google.common.collect.DiscreteDomain$1
 com.google.common.collect.Sets$3$1
 com.google.common.util.concurrent.FluentFuture
@@ -2330,6 +2365,7 @@ androidx.core.text.util.LinkifyCompat
 androidx.lifecycle.livedata.core.R
 androidx.savedstate.Recreator$SavedStateProvider
 com.google.common.collect.ImmutableSortedMapFauxverideShim
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$integer
 com.google.common.collect.AbstractMapBasedMultiset
 com.google.common.util.concurrent.SequentialExecutor$WorkerRunningState
 androidx.core.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityActionCompat
@@ -2337,6 +2373,7 @@ androidx.core.content.pm.PermissionInfoCompat$Protection
 com.google.common.math.IntMath
 com.google.common.eventbus.SubscriberExceptionHandler
 androidx.core.util.Pools$Pool
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$dimen
 com.google.common.collect.Sets$4
 androidx.annotation.RequiresPermission
 com.google.common.math.Quantiles$Scale
@@ -2584,14 +2621,21 @@ com.google.common.collect.MapMakerInternalMap$WriteThroughEntry
 androidx.collection.LruCache
 androidx.customview.R$attr
 com.google.common.util.concurrent.ServiceManager$2
-androidx.lifecycle.FullLifecycleObserverAdapter:
-    void <init>(androidx.lifecycle.FullLifecycleObserver,androidx.lifecycle.LifecycleEventObserver)
 androidx.core.content.ContentResolverCompat
 androidx.lifecycle.viewmodel.R
 androidx.lifecycle.ReportFragment
 com.google.common.collect.Multimaps$MapMultimap$1$1
 com.google.common.collect.MultimapBuilder$MultimapBuilderWithKeys$5
 com.google.common.collect.MapMakerInternalMap$Segment
+io.flutter.plugins.imagepicker.ImagePickerDelegate:
+    io.flutter.plugins.imagepicker.CameraDevice getCameraDevice()
+    static final int REQUEST_CODE_CHOOSE_IMAGE_FROM_GALLERY
+    static final int REQUEST_CODE_TAKE_IMAGE_WITH_CAMERA
+    static final int REQUEST_CAMERA_IMAGE_PERMISSION
+    static final int REQUEST_CODE_CHOOSE_MULTI_IMAGE_FROM_GALLERY
+    static final int REQUEST_CODE_CHOOSE_VIDEO_FROM_GALLERY
+    static final int REQUEST_CODE_TAKE_VIDEO_WITH_CAMERA
+    static final int REQUEST_CAMERA_VIDEO_PERMISSION
 com.google.common.base.Utf8
 com.google.common.graph.AbstractNetwork$1$1
 com.google.common.reflect.Types$1
@@ -2628,6 +2672,7 @@ com.google.common.collect.StandardTable$RowMap$EntrySet
 io.flutter.embedding.engine.FlutterEngineCache:
     public boolean contains(java.lang.String)
     public void clear()
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$string
 androidx.core.view.ViewParentCompat
 com.google.common.collect.Synchronized$SynchronizedAsMapEntries$1$1
 androidx.activity.R$styleable
@@ -2636,8 +2681,8 @@ androidx.core.widget.PopupWindowCompat
 androidx.fragment.app.FragmentTransitionImpl$1
 io.flutter.app.FlutterActivityDelegate
 androidx.core.content.pm.PermissionInfoCompat
-com.google.common.graph.Graphs$NodeVisitState
 com.google.common.graph.AbstractGraph
+com.google.common.graph.Graphs$NodeVisitState
 androidx.core.view.ViewCompat$ScrollIndicators
 io.flutter.embedding.android.SplashScreenProvider
 androidx.core.view.NestedScrollingParentHelper
@@ -2803,6 +2848,8 @@ com.google.common.collect.Synchronized$SynchronizedSortedSetMultimap
 com.google.common.primitives.UnsignedBytes$LexicographicalComparatorHolder$UnsafeComparator$1
 com.google.common.util.concurrent.ForwardingBlockingQueue
 com.google.common.collect.ArrayTable$Column
+io.flutter.plugins.imagepicker.ImagePickerUtils:
+    void <init>()
 com.google.common.cache.LocalCache$KeyIterator
 com.google.common.collect.HashBiMap$Inverse
 com.google.common.collect.ImmutableRangeSet$1
@@ -2817,8 +2864,8 @@ io.flutter.plugins.sharedpreferences.BuildConfig
 androidx.core.util.Pools$SynchronizedPool
 com.google.common.collect.StandardTable$Column$EntrySetIterator
 com.google.common.util.concurrent.AggregateFutureState$SafeAtomicHelper
-androidx.core.app.ShareCompat
 androidx.core.content.SharedPreferencesCompat$EditorCompat
+androidx.core.app.ShareCompat
 com.google.common.escape.UnicodeEscaper
 com.google.common.collect.ForwardingNavigableMap
 com.google.common.io.FileWriteMode
@@ -3021,6 +3068,433 @@ com.google.common.reflect.Types$2
 com.google.common.collect.ImmutableMap$SerializedForm
 com.google.common.collect.Multimaps$UnmodifiableSortedSetMultimap
 com.google.common.graph.AbstractBaseGraph$IncidentEdgeSet
+androidx.exifinterface.media.ExifInterface:
+    public void <init>(java.io.File)
+    public void <init>(java.io.FileDescriptor)
+    public void <init>(java.io.InputStream)
+    public void <init>(java.io.InputStream,int)
+    public static boolean isSupportedMimeType(java.lang.String)
+    private static java.lang.Long parseDateTime(java.lang.String,java.lang.String,java.lang.String)
+    private static double convertRationalLatLonToDouble(java.lang.String,java.lang.String)
+    private java.lang.String convertDecimalDegree(double)
+    private static boolean isExifDataOnly(java.io.BufferedInputStream)
+    public int getAttributeInt(java.lang.String,int)
+    public double getAttributeDouble(java.lang.String,double)
+    public void resetOrientation()
+    public void rotate(int)
+    public void flipVertically()
+    public void flipHorizontally()
+    public boolean isFlipped()
+    public int getRotationDegrees()
+    public boolean hasThumbnail()
+    public boolean hasAttribute(java.lang.String)
+    public android.graphics.Bitmap getThumbnailBitmap()
+    public boolean isThumbnailCompressed()
+    public long[] getThumbnailRange()
+    public long[] getAttributeRange(java.lang.String)
+    public byte[] getAttributeBytes(java.lang.String)
+    public boolean getLatLong(float[])
+    public double[] getLatLong()
+    public void setGpsInfo(android.location.Location)
+    public void setLatLong(double,double)
+    public double getAltitude(double)
+    public void setAltitude(double)
+    public void setDateTime(java.lang.Long)
+    public java.lang.Long getDateTime()
+    public java.lang.Long getDateTimeDigitized()
+    public java.lang.Long getDateTimeOriginal()
+    public java.lang.Long getGpsDateTime()
+    private static final java.lang.String TAG
+    public static final java.lang.String TAG_IMAGE_WIDTH
+    public static final java.lang.String TAG_IMAGE_LENGTH
+    public static final java.lang.String TAG_BITS_PER_SAMPLE
+    public static final java.lang.String TAG_COMPRESSION
+    public static final java.lang.String TAG_PHOTOMETRIC_INTERPRETATION
+    public static final java.lang.String TAG_ORIENTATION
+    public static final java.lang.String TAG_SAMPLES_PER_PIXEL
+    public static final java.lang.String TAG_PLANAR_CONFIGURATION
+    public static final java.lang.String TAG_Y_CB_CR_SUB_SAMPLING
+    public static final java.lang.String TAG_Y_CB_CR_POSITIONING
+    public static final java.lang.String TAG_X_RESOLUTION
+    public static final java.lang.String TAG_Y_RESOLUTION
+    public static final java.lang.String TAG_RESOLUTION_UNIT
+    public static final java.lang.String TAG_STRIP_OFFSETS
+    public static final java.lang.String TAG_ROWS_PER_STRIP
+    public static final java.lang.String TAG_STRIP_BYTE_COUNTS
+    public static final java.lang.String TAG_JPEG_INTERCHANGE_FORMAT
+    public static final java.lang.String TAG_JPEG_INTERCHANGE_FORMAT_LENGTH
+    public static final java.lang.String TAG_TRANSFER_FUNCTION
+    public static final java.lang.String TAG_WHITE_POINT
+    public static final java.lang.String TAG_PRIMARY_CHROMATICITIES
+    public static final java.lang.String TAG_Y_CB_CR_COEFFICIENTS
+    public static final java.lang.String TAG_REFERENCE_BLACK_WHITE
+    public static final java.lang.String TAG_DATETIME
+    public static final java.lang.String TAG_IMAGE_DESCRIPTION
+    public static final java.lang.String TAG_MAKE
+    public static final java.lang.String TAG_MODEL
+    public static final java.lang.String TAG_SOFTWARE
+    public static final java.lang.String TAG_ARTIST
+    public static final java.lang.String TAG_COPYRIGHT
+    public static final java.lang.String TAG_EXIF_VERSION
+    public static final java.lang.String TAG_FLASHPIX_VERSION
+    public static final java.lang.String TAG_COLOR_SPACE
+    public static final java.lang.String TAG_GAMMA
+    public static final java.lang.String TAG_PIXEL_X_DIMENSION
+    public static final java.lang.String TAG_PIXEL_Y_DIMENSION
+    public static final java.lang.String TAG_COMPONENTS_CONFIGURATION
+    public static final java.lang.String TAG_COMPRESSED_BITS_PER_PIXEL
+    public static final java.lang.String TAG_MAKER_NOTE
+    public static final java.lang.String TAG_USER_COMMENT
+    public static final java.lang.String TAG_RELATED_SOUND_FILE
+    public static final java.lang.String TAG_DATETIME_ORIGINAL
+    public static final java.lang.String TAG_DATETIME_DIGITIZED
+    public static final java.lang.String TAG_OFFSET_TIME
+    public static final java.lang.String TAG_OFFSET_TIME_ORIGINAL
+    public static final java.lang.String TAG_OFFSET_TIME_DIGITIZED
+    public static final java.lang.String TAG_SUBSEC_TIME
+    public static final java.lang.String TAG_SUBSEC_TIME_ORIGINAL
+    public static final java.lang.String TAG_SUBSEC_TIME_DIGITIZED
+    public static final java.lang.String TAG_EXPOSURE_TIME
+    public static final java.lang.String TAG_F_NUMBER
+    public static final java.lang.String TAG_EXPOSURE_PROGRAM
+    public static final java.lang.String TAG_SPECTRAL_SENSITIVITY
+    public static final java.lang.String TAG_ISO_SPEED_RATINGS
+    public static final java.lang.String TAG_PHOTOGRAPHIC_SENSITIVITY
+    public static final java.lang.String TAG_OECF
+    public static final java.lang.String TAG_SENSITIVITY_TYPE
+    public static final java.lang.String TAG_STANDARD_OUTPUT_SENSITIVITY
+    public static final java.lang.String TAG_RECOMMENDED_EXPOSURE_INDEX
+    public static final java.lang.String TAG_ISO_SPEED
+    public static final java.lang.String TAG_ISO_SPEED_LATITUDE_YYY
+    public static final java.lang.String TAG_ISO_SPEED_LATITUDE_ZZZ
+    public static final java.lang.String TAG_SHUTTER_SPEED_VALUE
+    public static final java.lang.String TAG_APERTURE_VALUE
+    public static final java.lang.String TAG_BRIGHTNESS_VALUE
+    public static final java.lang.String TAG_EXPOSURE_BIAS_VALUE
+    public static final java.lang.String TAG_MAX_APERTURE_VALUE
+    public static final java.lang.String TAG_SUBJECT_DISTANCE
+    public static final java.lang.String TAG_METERING_MODE
+    public static final java.lang.String TAG_LIGHT_SOURCE
+    public static final java.lang.String TAG_FLASH
+    public static final java.lang.String TAG_SUBJECT_AREA
+    public static final java.lang.String TAG_FOCAL_LENGTH
+    public static final java.lang.String TAG_FLASH_ENERGY
+    public static final java.lang.String TAG_SPATIAL_FREQUENCY_RESPONSE
+    public static final java.lang.String TAG_FOCAL_PLANE_X_RESOLUTION
+    public static final java.lang.String TAG_FOCAL_PLANE_Y_RESOLUTION
+    public static final java.lang.String TAG_FOCAL_PLANE_RESOLUTION_UNIT
+    public static final java.lang.String TAG_SUBJECT_LOCATION
+    public static final java.lang.String TAG_EXPOSURE_INDEX
+    public static final java.lang.String TAG_SENSING_METHOD
+    public static final java.lang.String TAG_FILE_SOURCE
+    public static final java.lang.String TAG_SCENE_TYPE
+    public static final java.lang.String TAG_CFA_PATTERN
+    public static final java.lang.String TAG_CUSTOM_RENDERED
+    public static final java.lang.String TAG_EXPOSURE_MODE
+    public static final java.lang.String TAG_WHITE_BALANCE
+    public static final java.lang.String TAG_DIGITAL_ZOOM_RATIO
+    public static final java.lang.String TAG_FOCAL_LENGTH_IN_35MM_FILM
+    public static final java.lang.String TAG_SCENE_CAPTURE_TYPE
+    public static final java.lang.String TAG_GAIN_CONTROL
+    public static final java.lang.String TAG_CONTRAST
+    public static final java.lang.String TAG_SATURATION
+    public static final java.lang.String TAG_SHARPNESS
+    public static final java.lang.String TAG_DEVICE_SETTING_DESCRIPTION
+    public static final java.lang.String TAG_SUBJECT_DISTANCE_RANGE
+    public static final java.lang.String TAG_IMAGE_UNIQUE_ID
+    public static final java.lang.String TAG_CAMARA_OWNER_NAME
+    public static final java.lang.String TAG_CAMERA_OWNER_NAME
+    public static final java.lang.String TAG_BODY_SERIAL_NUMBER
+    public static final java.lang.String TAG_LENS_SPECIFICATION
+    public static final java.lang.String TAG_LENS_MAKE
+    public static final java.lang.String TAG_LENS_MODEL
+    public static final java.lang.String TAG_LENS_SERIAL_NUMBER
+    public static final java.lang.String TAG_GPS_VERSION_ID
+    public static final java.lang.String TAG_GPS_LATITUDE_REF
+    public static final java.lang.String TAG_GPS_LATITUDE
+    public static final java.lang.String TAG_GPS_LONGITUDE_REF
+    public static final java.lang.String TAG_GPS_LONGITUDE
+    public static final java.lang.String TAG_GPS_ALTITUDE_REF
+    public static final java.lang.String TAG_GPS_ALTITUDE
+    public static final java.lang.String TAG_GPS_TIMESTAMP
+    public static final java.lang.String TAG_GPS_SATELLITES
+    public static final java.lang.String TAG_GPS_STATUS
+    public static final java.lang.String TAG_GPS_MEASURE_MODE
+    public static final java.lang.String TAG_GPS_DOP
+    public static final java.lang.String TAG_GPS_SPEED_REF
+    public static final java.lang.String TAG_GPS_SPEED
+    public static final java.lang.String TAG_GPS_TRACK_REF
+    public static final java.lang.String TAG_GPS_TRACK
+    public static final java.lang.String TAG_GPS_IMG_DIRECTION_REF
+    public static final java.lang.String TAG_GPS_IMG_DIRECTION
+    public static final java.lang.String TAG_GPS_MAP_DATUM
+    public static final java.lang.String TAG_GPS_DEST_LATITUDE_REF
+    public static final java.lang.String TAG_GPS_DEST_LATITUDE
+    public static final java.lang.String TAG_GPS_DEST_LONGITUDE_REF
+    public static final java.lang.String TAG_GPS_DEST_LONGITUDE
+    public static final java.lang.String TAG_GPS_DEST_BEARING_REF
+    public static final java.lang.String TAG_GPS_DEST_BEARING
+    public static final java.lang.String TAG_GPS_DEST_DISTANCE_REF
+    public static final java.lang.String TAG_GPS_DEST_DISTANCE
+    public static final java.lang.String TAG_GPS_PROCESSING_METHOD
+    public static final java.lang.String TAG_GPS_AREA_INFORMATION
+    public static final java.lang.String TAG_GPS_DATESTAMP
+    public static final java.lang.String TAG_GPS_DIFFERENTIAL
+    public static final java.lang.String TAG_GPS_H_POSITIONING_ERROR
+    public static final java.lang.String TAG_INTEROPERABILITY_INDEX
+    public static final java.lang.String TAG_THUMBNAIL_IMAGE_LENGTH
+    public static final java.lang.String TAG_THUMBNAIL_IMAGE_WIDTH
+    public static final java.lang.String TAG_THUMBNAIL_ORIENTATION
+    public static final java.lang.String TAG_DNG_VERSION
+    public static final java.lang.String TAG_DEFAULT_CROP_SIZE
+    public static final java.lang.String TAG_ORF_THUMBNAIL_IMAGE
+    public static final java.lang.String TAG_ORF_PREVIEW_IMAGE_START
+    public static final java.lang.String TAG_ORF_PREVIEW_IMAGE_LENGTH
+    public static final java.lang.String TAG_ORF_ASPECT_FRAME
+    public static final java.lang.String TAG_RW2_SENSOR_BOTTOM_BORDER
+    public static final java.lang.String TAG_RW2_SENSOR_LEFT_BORDER
+    public static final java.lang.String TAG_RW2_SENSOR_RIGHT_BORDER
+    public static final java.lang.String TAG_RW2_SENSOR_TOP_BORDER
+    public static final java.lang.String TAG_RW2_ISO
+    public static final java.lang.String TAG_RW2_JPG_FROM_RAW
+    public static final java.lang.String TAG_XMP
+    public static final java.lang.String TAG_NEW_SUBFILE_TYPE
+    public static final java.lang.String TAG_SUBFILE_TYPE
+    private static final java.lang.String TAG_EXIF_IFD_POINTER
+    private static final java.lang.String TAG_GPS_INFO_IFD_POINTER
+    private static final java.lang.String TAG_INTEROPERABILITY_IFD_POINTER
+    private static final java.lang.String TAG_SUB_IFD_POINTER
+    private static final java.lang.String TAG_ORF_CAMERA_SETTINGS_IFD_POINTER
+    private static final java.lang.String TAG_ORF_IMAGE_PROCESSING_IFD_POINTER
+    private static final int MAX_THUMBNAIL_SIZE
+    public static final int ORIENTATION_UNDEFINED
+    public static final int ORIENTATION_NORMAL
+    public static final int ORIENTATION_FLIP_HORIZONTAL
+    public static final int ORIENTATION_ROTATE_180
+    public static final int ORIENTATION_FLIP_VERTICAL
+    public static final int ORIENTATION_TRANSPOSE
+    public static final int ORIENTATION_ROTATE_90
+    public static final int ORIENTATION_TRANSVERSE
+    public static final int ORIENTATION_ROTATE_270
+    public static final short FORMAT_CHUNKY
+    public static final short FORMAT_PLANAR
+    public static final short Y_CB_CR_POSITIONING_CENTERED
+    public static final short Y_CB_CR_POSITIONING_CO_SITED
+    public static final short RESOLUTION_UNIT_INCHES
+    public static final short RESOLUTION_UNIT_CENTIMETERS
+    public static final int COLOR_SPACE_S_RGB
+    public static final int COLOR_SPACE_UNCALIBRATED
+    public static final short EXPOSURE_PROGRAM_NOT_DEFINED
+    public static final short EXPOSURE_PROGRAM_MANUAL
+    public static final short EXPOSURE_PROGRAM_NORMAL
+    public static final short EXPOSURE_PROGRAM_APERTURE_PRIORITY
+    public static final short EXPOSURE_PROGRAM_SHUTTER_PRIORITY
+    public static final short EXPOSURE_PROGRAM_CREATIVE
+    public static final short EXPOSURE_PROGRAM_ACTION
+    public static final short EXPOSURE_PROGRAM_PORTRAIT_MODE
+    public static final short EXPOSURE_PROGRAM_LANDSCAPE_MODE
+    public static final short SENSITIVITY_TYPE_UNKNOWN
+    public static final short SENSITIVITY_TYPE_SOS
+    public static final short SENSITIVITY_TYPE_REI
+    public static final short SENSITIVITY_TYPE_ISO_SPEED
+    public static final short SENSITIVITY_TYPE_SOS_AND_REI
+    public static final short SENSITIVITY_TYPE_SOS_AND_ISO
+    public static final short SENSITIVITY_TYPE_REI_AND_ISO
+    public static final short SENSITIVITY_TYPE_SOS_AND_REI_AND_ISO
+    public static final short METERING_MODE_UNKNOWN
+    public static final short METERING_MODE_AVERAGE
+    public static final short METERING_MODE_CENTER_WEIGHT_AVERAGE
+    public static final short METERING_MODE_SPOT
+    public static final short METERING_MODE_MULTI_SPOT
+    public static final short METERING_MODE_PATTERN
+    public static final short METERING_MODE_PARTIAL
+    public static final short METERING_MODE_OTHER
+    public static final short LIGHT_SOURCE_UNKNOWN
+    public static final short LIGHT_SOURCE_DAYLIGHT
+    public static final short LIGHT_SOURCE_FLUORESCENT
+    public static final short LIGHT_SOURCE_TUNGSTEN
+    public static final short LIGHT_SOURCE_FLASH
+    public static final short LIGHT_SOURCE_FINE_WEATHER
+    public static final short LIGHT_SOURCE_CLOUDY_WEATHER
+    public static final short LIGHT_SOURCE_SHADE
+    public static final short LIGHT_SOURCE_DAYLIGHT_FLUORESCENT
+    public static final short LIGHT_SOURCE_DAY_WHITE_FLUORESCENT
+    public static final short LIGHT_SOURCE_COOL_WHITE_FLUORESCENT
+    public static final short LIGHT_SOURCE_WHITE_FLUORESCENT
+    public static final short LIGHT_SOURCE_WARM_WHITE_FLUORESCENT
+    public static final short LIGHT_SOURCE_STANDARD_LIGHT_A
+    public static final short LIGHT_SOURCE_STANDARD_LIGHT_B
+    public static final short LIGHT_SOURCE_STANDARD_LIGHT_C
+    public static final short LIGHT_SOURCE_D55
+    public static final short LIGHT_SOURCE_D65
+    public static final short LIGHT_SOURCE_D75
+    public static final short LIGHT_SOURCE_D50
+    public static final short LIGHT_SOURCE_ISO_STUDIO_TUNGSTEN
+    public static final short LIGHT_SOURCE_OTHER
+    public static final short FLAG_FLASH_FIRED
+    public static final short FLAG_FLASH_RETURN_LIGHT_NOT_DETECTED
+    public static final short FLAG_FLASH_RETURN_LIGHT_DETECTED
+    public static final short FLAG_FLASH_MODE_COMPULSORY_FIRING
+    public static final short FLAG_FLASH_MODE_COMPULSORY_SUPPRESSION
+    public static final short FLAG_FLASH_MODE_AUTO
+    public static final short FLAG_FLASH_NO_FLASH_FUNCTION
+    public static final short FLAG_FLASH_RED_EYE_SUPPORTED
+    public static final short SENSOR_TYPE_NOT_DEFINED
+    public static final short SENSOR_TYPE_ONE_CHIP
+    public static final short SENSOR_TYPE_TWO_CHIP
+    public static final short SENSOR_TYPE_THREE_CHIP
+    public static final short SENSOR_TYPE_COLOR_SEQUENTIAL
+    public static final short SENSOR_TYPE_TRILINEAR
+    public static final short SENSOR_TYPE_COLOR_SEQUENTIAL_LINEAR
+    public static final short FILE_SOURCE_OTHER
+    public static final short FILE_SOURCE_TRANSPARENT_SCANNER
+    public static final short FILE_SOURCE_REFLEX_SCANNER
+    public static final short FILE_SOURCE_DSC
+    public static final short SCENE_TYPE_DIRECTLY_PHOTOGRAPHED
+    public static final short RENDERED_PROCESS_NORMAL
+    public static final short RENDERED_PROCESS_CUSTOM
+    public static final short EXPOSURE_MODE_AUTO
+    public static final short EXPOSURE_MODE_MANUAL
+    public static final short EXPOSURE_MODE_AUTO_BRACKET
+    public static final int WHITEBALANCE_AUTO
+    public static final int WHITEBALANCE_MANUAL
+    public static final short WHITE_BALANCE_AUTO
+    public static final short WHITE_BALANCE_MANUAL
+    public static final short SCENE_CAPTURE_TYPE_STANDARD
+    public static final short SCENE_CAPTURE_TYPE_LANDSCAPE
+    public static final short SCENE_CAPTURE_TYPE_PORTRAIT
+    public static final short SCENE_CAPTURE_TYPE_NIGHT
+    public static final short GAIN_CONTROL_NONE
+    public static final short GAIN_CONTROL_LOW_GAIN_UP
+    public static final short GAIN_CONTROL_HIGH_GAIN_UP
+    public static final short GAIN_CONTROL_LOW_GAIN_DOWN
+    public static final short GAIN_CONTROL_HIGH_GAIN_DOWN
+    public static final short CONTRAST_NORMAL
+    public static final short CONTRAST_SOFT
+    public static final short CONTRAST_HARD
+    public static final short SATURATION_NORMAL
+    public static final short SATURATION_LOW
+    public static final short SATURATION_HIGH
+    public static final short SHARPNESS_NORMAL
+    public static final short SHARPNESS_SOFT
+    public static final short SHARPNESS_HARD
+    public static final short SUBJECT_DISTANCE_RANGE_UNKNOWN
+    public static final short SUBJECT_DISTANCE_RANGE_MACRO
+    public static final short SUBJECT_DISTANCE_RANGE_CLOSE_VIEW
+    public static final short SUBJECT_DISTANCE_RANGE_DISTANT_VIEW
+    public static final java.lang.String LATITUDE_NORTH
+    public static final java.lang.String LATITUDE_SOUTH
+    public static final java.lang.String LONGITUDE_EAST
+    public static final java.lang.String LONGITUDE_WEST
+    public static final short ALTITUDE_ABOVE_SEA_LEVEL
+    public static final short ALTITUDE_BELOW_SEA_LEVEL
+    public static final java.lang.String GPS_MEASUREMENT_IN_PROGRESS
+    public static final java.lang.String GPS_MEASUREMENT_INTERRUPTED
+    public static final java.lang.String GPS_MEASUREMENT_2D
+    public static final java.lang.String GPS_MEASUREMENT_3D
+    public static final java.lang.String GPS_SPEED_KILOMETERS_PER_HOUR
+    public static final java.lang.String GPS_SPEED_MILES_PER_HOUR
+    public static final java.lang.String GPS_SPEED_KNOTS
+    public static final java.lang.String GPS_DIRECTION_TRUE
+    public static final java.lang.String GPS_DIRECTION_MAGNETIC
+    public static final java.lang.String GPS_DISTANCE_KILOMETERS
+    public static final java.lang.String GPS_DISTANCE_MILES
+    public static final java.lang.String GPS_DISTANCE_NAUTICAL_MILES
+    public static final short GPS_MEASUREMENT_NO_DIFFERENTIAL
+    public static final short GPS_MEASUREMENT_DIFFERENTIAL_CORRECTED
+    public static final int DATA_UNCOMPRESSED
+    public static final int DATA_HUFFMAN_COMPRESSED
+    public static final int DATA_JPEG
+    public static final int DATA_JPEG_COMPRESSED
+    public static final int DATA_DEFLATE_ZIP
+    public static final int DATA_PACK_BITS_COMPRESSED
+    public static final int DATA_LOSSY_JPEG
+    public static final int PHOTOMETRIC_INTERPRETATION_WHITE_IS_ZERO
+    public static final int PHOTOMETRIC_INTERPRETATION_BLACK_IS_ZERO
+    public static final int PHOTOMETRIC_INTERPRETATION_RGB
+    public static final int PHOTOMETRIC_INTERPRETATION_YCBCR
+    public static final int ORIGINAL_RESOLUTION_IMAGE
+    public static final int REDUCED_RESOLUTION_IMAGE
+    public static final int STREAM_TYPE_FULL_IMAGE_DATA
+    public static final int STREAM_TYPE_EXIF_DATA_ONLY
+    private static final int SIGNATURE_CHECK_SIZE
+    private static final java.lang.String RAF_SIGNATURE
+    private static final int RAF_OFFSET_TO_JPEG_IMAGE_OFFSET
+    private static final short ORF_SIGNATURE_1
+    private static final short ORF_SIGNATURE_2
+    private static final int ORF_MAKER_NOTE_HEADER_1_SIZE
+    private static final int ORF_MAKER_NOTE_HEADER_2_SIZE
+    private static final short RW2_SIGNATURE
+    private static final java.lang.String PEF_SIGNATURE
+    private static final int PEF_MAKER_NOTE_SKIP_SIZE
+    private static final int PNG_CHUNK_TYPE_BYTE_LENGTH
+    private static final int PNG_CHUNK_CRC_BYTE_LENGTH
+    private static final int WEBP_FILE_SIZE_BYTE_LENGTH
+    private static final byte WEBP_VP8L_SIGNATURE
+    private static final int WEBP_CHUNK_TYPE_VP8X_DEFAULT_LENGTH
+    private static final int WEBP_CHUNK_TYPE_BYTE_LENGTH
+    private static final int WEBP_CHUNK_SIZE_BYTE_LENGTH
+    static final short BYTE_ALIGN_II
+    static final short BYTE_ALIGN_MM
+    static final byte START_CODE
+    private static final int IFD_OFFSET
+    private static final int IFD_FORMAT_BYTE
+    private static final int IFD_FORMAT_STRING
+    private static final int IFD_FORMAT_USHORT
+    private static final int IFD_FORMAT_ULONG
+    private static final int IFD_FORMAT_URATIONAL
+    private static final int IFD_FORMAT_SBYTE
+    private static final int IFD_FORMAT_UNDEFINED
+    private static final int IFD_FORMAT_SSHORT
+    private static final int IFD_FORMAT_SLONG
+    private static final int IFD_FORMAT_SRATIONAL
+    private static final int IFD_FORMAT_SINGLE
+    private static final int IFD_FORMAT_DOUBLE
+    private static final int IFD_FORMAT_IFD
+    static final int IFD_TYPE_PRIMARY
+    private static final int IFD_TYPE_EXIF
+    private static final int IFD_TYPE_GPS
+    private static final int IFD_TYPE_INTEROPERABILITY
+    static final int IFD_TYPE_THUMBNAIL
+    static final int IFD_TYPE_PREVIEW
+    private static final int IFD_TYPE_ORF_MAKER_NOTE
+    private static final int IFD_TYPE_ORF_CAMERA_SETTINGS
+    private static final int IFD_TYPE_ORF_IMAGE_PROCESSING
+    private static final int IFD_TYPE_PEF
+    static final byte MARKER
+    private static final byte MARKER_SOI
+    private static final byte MARKER_SOF0
+    private static final byte MARKER_SOF1
+    private static final byte MARKER_SOF2
+    private static final byte MARKER_SOF3
+    private static final byte MARKER_SOF5
+    private static final byte MARKER_SOF6
+    private static final byte MARKER_SOF7
+    private static final byte MARKER_SOF9
+    private static final byte MARKER_SOF10
+    private static final byte MARKER_SOF11
+    private static final byte MARKER_SOF13
+    private static final byte MARKER_SOF14
+    private static final byte MARKER_SOF15
+    private static final byte MARKER_SOS
+    static final byte MARKER_APP1
+    private static final byte MARKER_COM
+    static final byte MARKER_EOI
+    private static final int IMAGE_TYPE_UNKNOWN
+    private static final int IMAGE_TYPE_ARW
+    private static final int IMAGE_TYPE_CR2
+    private static final int IMAGE_TYPE_DNG
+    private static final int IMAGE_TYPE_JPEG
+    private static final int IMAGE_TYPE_NEF
+    private static final int IMAGE_TYPE_NRW
+    private static final int IMAGE_TYPE_ORF
+    private static final int IMAGE_TYPE_PEF
+    private static final int IMAGE_TYPE_RAF
+    private static final int IMAGE_TYPE_RW2
+    private static final int IMAGE_TYPE_SRW
+    private static final int IMAGE_TYPE_HEIF
+    private static final int IMAGE_TYPE_PNG
+    private static final int IMAGE_TYPE_WEBP
 com.google.common.util.concurrent.SmoothRateLimiter$SmoothBursty
 androidx.core.text.PrecomputedTextCompat$Params
 com.google.common.collect.ForwardingBlockingDeque
@@ -3035,6 +3509,7 @@ com.google.common.collect.MapMakerInternalMap$CleanupMapTask
 androidx.activity.R$style
 com.google.common.collect.TreeRangeSet$ComplementRangesByLowerBound$1
 com.google.common.reflect.Invokable
+androidx.exifinterface.media.ExifInterface$IfdType
 com.google.common.collect.FilteredEntryMultimap$Keys$1$1
 com.google.j2objc.annotations.RetainedLocalRef
 com.google.common.collect.Maps$TransformedEntriesSortedMap
@@ -3075,8 +3550,6 @@ com.google.common.collect.Maps$FilteredMapValues
 com.google.common.util.concurrent.CycleDetectingLockFactory$CycleDetectingReentrantWriteLock
 com.google.common.collect.MultimapBuilder
 com.google.common.util.concurrent.ServiceManager$ServiceManagerState
-androidx.lifecycle.LifecycleRegistry$ObserverWithState:
-    void <init>(androidx.lifecycle.LifecycleObserver,androidx.lifecycle.Lifecycle$State)
 com.google.common.collect.Sets$5$1$1$1
 com.google.common.base.Functions$1
 com.google.common.base.CharMatcher$1
@@ -3121,8 +3594,8 @@ androidx.annotation.IntDef
 androidx.core.os.CancellationSignal$OnCancelListener
 com.google.common.collect.Sets$SetView
 com.google.common.math.MathPreconditions
-com.google.common.collect.MultimapBuilder$SetMultimapBuilder
 com.google.common.collect.AbstractMapBasedMultimap$1
+com.google.common.collect.MultimapBuilder$SetMultimapBuilder
 io.flutter.plugins.pathprovider.R$id
 androidx.core.view.KeyEventDispatcher
 io.flutter.BuildConfig
@@ -3154,10 +3627,10 @@ androidx.core.provider.FontsContractCompat$4$7
 com.google.common.util.concurrent.WrappingScheduledExecutorService
 com.google.common.cache.ForwardingLoadingCache
 androidx.core.view.TintableBackgroundView
-androidx.core.app.ActivityCompat$RequestPermissionsRequestCodeValidator
 com.google.common.collect.ForwardingCollection
 com.google.common.util.concurrent.CycleDetectingLockFactory$CycleDetectingReentrantLock
 com.google.common.base.Functions$FunctionForMapNoDefault
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$id
 com.google.common.eventbus.package-info
 com.google.common.collect.MapMakerInternalMap$StrongKeyWeakValueEntry$Helper
 com.google.common.cache.LocalCache$AccessQueue$2
@@ -3197,6 +3670,7 @@ io.flutter.embedding.engine.loader.FlutterApplicationInfo:
     private static final java.lang.String DEFAULT_FLUTTER_ASSETS_DIR
 com.google.common.collect.EnumBiMap
 com.google.common.collect.AbstractIterator
+io.flutter.plugins.flutter_plugin_android_lifecycle.R
 io.flutter.plugins.sharedpreferences.R$styleable
 com.google.common.util.concurrent.AbstractScheduledService$CustomScheduler$ReschedulableCallable
 androidx.fragment.app.Fragment$1
@@ -3213,7 +3687,10 @@ com.google.common.util.concurrent.CombinedFuture$CombinedFutureRunningState
 io.flutter.view.FlutterNativeView$EngineLifecycleListenerImpl
 com.google.common.math.DoubleUtils
 com.google.common.cache.CacheBuilderSpec
-androidx.lifecycle.ClassesInfoCache
+androidx.lifecycle.ClassesInfoCache:
+    private static final int CALL_TYPE_NO_ARG
+    private static final int CALL_TYPE_PROVIDER
+    private static final int CALL_TYPE_PROVIDER_WITH_EVENT
 com.google.j2objc.annotations.ReflectionSupport$Level
 com.google.common.cache.LocalCache$EntryIterator
 com.google.common.collect.ExplicitOrdering
@@ -3241,6 +3718,7 @@ com.google.common.collect.Maps$EntryFunction$1
 com.google.common.collect.ImmutableSortedMultiset$SerializedForm
 com.google.common.util.concurrent.ListenableScheduledFuture
 com.google.errorprone.annotations.RequiredModifiers
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$drawable
 androidx.annotation.IntRange
 com.google.common.hash.Murmur3_32HashFunction
 com.google.common.cache.CacheStats
@@ -3269,6 +3747,7 @@ com.google.common.collect.SortedLists$KeyPresentBehavior$5
 com.google.common.collect.LinkedHashMultimap$ValueSetLink
 androidx.core.provider.SelfDestructiveThread$2$1
 com.google.common.collect.TreeMultiset$2
+androidx.exifinterface.media.ExifInterface$ExifStreamType
 com.google.j2objc.annotations.WeakOuter
 com.google.common.collect.StandardTable$ColumnKeySet
 androidx.customview.widget.FocusStrategy$CollectionAdapter
@@ -3280,7 +3759,20 @@ com.google.common.collect.MapMakerInternalMap$HashIterator
 com.google.common.collect.RegularImmutableMultiset$ElementSet
 com.google.common.reflect.TypeToInstanceMap
 com.google.common.util.concurrent.CycleDetectingLockFactory$Policy
-io.flutter.plugin.common.PluginRegistry$Registrar
+io.flutter.plugin.common.PluginRegistry$Registrar:
+    public abstract android.app.Activity activity()
+    public abstract android.content.Context context()
+    public abstract android.content.Context activeContext()
+    public abstract io.flutter.plugin.common.BinaryMessenger messenger()
+    public abstract io.flutter.view.TextureRegistry textures()
+    public abstract io.flutter.plugin.platform.PlatformViewRegistry platformViewRegistry()
+    public abstract io.flutter.view.FlutterView view()
+    public abstract java.lang.String lookupKeyForAsset(java.lang.String)
+    public abstract java.lang.String lookupKeyForAsset(java.lang.String,java.lang.String)
+    public abstract io.flutter.plugin.common.PluginRegistry$Registrar publish(java.lang.Object)
+    public abstract io.flutter.plugin.common.PluginRegistry$Registrar addNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener)
+    public abstract io.flutter.plugin.common.PluginRegistry$Registrar addUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener)
+    public abstract io.flutter.plugin.common.PluginRegistry$Registrar addViewDestroyListener(io.flutter.plugin.common.PluginRegistry$ViewDestroyListener)
 com.google.common.collect.CompactHashMap$EntrySetView
 com.google.errorprone.annotations.Var
 com.google.common.util.concurrent.ServiceManager$ServiceManagerState$StoppedGuard
@@ -3299,6 +3791,7 @@ com.google.common.util.concurrent.GwtFuturesCatchingSpecialization:
 com.google.common.collect.ArrayTable$Row
 com.google.common.collect.HashBiMap$EntryForKey
 com.google.common.collect.LinkedListMultimap$1KeySetImpl
+io.flutter.plugins.imagepicker.R
 com.google.common.collect.Interners$InternerFunction
 com.google.common.hash.Funnels$IntegerFunnel
 com.google.common.graph.Traverser$GraphTraverser$DepthFirstIterator
@@ -3324,6 +3817,7 @@ com.google.common.collect.ForwardingQueue
 com.google.common.collect.ImmutableRangeSet$AsSet$1
 com.google.common.graph.GraphConstants$Presence
 com.google.common.cache.LocalCache$ManualSerializationProxy
+androidx.exifinterface.R
 androidx.core.app.ServiceCompat
 io.flutter.embedding.engine.dart.DartExecutor$DefaultBinaryMessenger:
     public void send(java.lang.String,java.nio.ByteBuffer)
@@ -3341,7 +3835,17 @@ com.google.common.util.concurrent.DirectExecutor
 com.google.common.collect.ListMultimap
 com.google.common.reflect.Types$JavaVersion$3
 androidx.loader.content.ModernAsyncTask$WorkerRunnable
-androidx.core.content.FileProvider
+androidx.core.content.FileProvider:
+    private static final java.lang.String META_DATA_FILE_PROVIDER_PATHS
+    private static final java.lang.String TAG_ROOT_PATH
+    private static final java.lang.String TAG_FILES_PATH
+    private static final java.lang.String TAG_CACHE_PATH
+    private static final java.lang.String TAG_EXTERNAL
+    private static final java.lang.String TAG_EXTERNAL_FILES
+    private static final java.lang.String TAG_EXTERNAL_CACHE
+    private static final java.lang.String TAG_EXTERNAL_MEDIA
+    private static final java.lang.String ATTR_NAME
+    private static final java.lang.String ATTR_PATH
 com.google.common.cache.LongAdder
 androidx.core.app.FrameMetricsAggregator$FrameMetricsApi24Impl$1
 io.flutter.plugin.common.JSONUtil:
@@ -3351,7 +3855,27 @@ com.google.common.hash.LongAddables
 androidx.core.widget.NestedScrollView$AccessibilityDelegate
 com.google.common.util.concurrent.AbstractIdleService$ThreadNameSupplier
 com.google.common.collect.TreeRangeMap$AsMapOfRanges
-androidx.core.content.ContextCompat
+androidx.core.content.ContextCompat:
+    protected void <init>()
+    public static boolean startActivities(android.content.Context,android.content.Intent[])
+    public static boolean startActivities(android.content.Context,android.content.Intent[],android.os.Bundle)
+    public static void startActivity(android.content.Context,android.content.Intent,android.os.Bundle)
+    public static java.io.File getDataDir(android.content.Context)
+    public static java.io.File[] getObbDirs(android.content.Context)
+    public static android.graphics.drawable.Drawable getDrawable(android.content.Context,int)
+    public static android.content.res.ColorStateList getColorStateList(android.content.Context,int)
+    public static int getColor(android.content.Context,int)
+    public static java.io.File getNoBackupFilesDir(android.content.Context)
+    public static java.io.File getCodeCacheDir(android.content.Context)
+    private static synchronized java.io.File createFilesDir(java.io.File)
+    public static android.content.Context createDeviceProtectedStorageContext(android.content.Context)
+    public static boolean isDeviceProtectedStorage(android.content.Context)
+    public static java.util.concurrent.Executor getMainExecutor(android.content.Context)
+    public static void startForegroundService(android.content.Context,android.content.Intent)
+    public static java.lang.Object getSystemService(android.content.Context,java.lang.Class)
+    public static java.lang.String getSystemServiceName(android.content.Context,java.lang.Class)
+    private static final java.lang.String TAG
+    private static android.util.TypedValue sTempValue
 androidx.annotation.Dimension
 com.google.common.base.Splitter$3
 com.google.common.primitives.Booleans$BooleanComparator
@@ -3486,7 +4010,6 @@ com.google.common.base.JdkPattern$JdkMatcher
 com.google.errorprone.annotations.CheckReturnValue
 com.google.common.util.concurrent.Futures$FutureCombiner
 androidx.annotation.StringRes
-androidx.lifecycle.OnLifecycleEvent
 androidx.core.app.NotificationManagerCompat$ServiceConnectedEvent
 com.google.common.cache.AbstractLoadingCache
 com.google.common.collect.TreeTraverser
@@ -3559,6 +4082,11 @@ com.google.common.cache.ForwardingCache$SimpleForwardingCache
 androidx.core.view.animation.PathInterpolatorApi14
 com.google.common.collect.ArrayTable$ArrayMap$2
 com.google.common.hash.LittleEndianByteArray$UnsafeByteArray$2
+androidx.exifinterface.media.ExifInterface$ExifAttribute:
+    public static androidx.exifinterface.media.ExifInterface$ExifAttribute createSLong(int,java.nio.ByteOrder)
+    public static androidx.exifinterface.media.ExifInterface$ExifAttribute createSRational(androidx.exifinterface.media.ExifInterface$Rational,java.nio.ByteOrder)
+    public static androidx.exifinterface.media.ExifInterface$ExifAttribute createDouble(double,java.nio.ByteOrder)
+    public static final long BYTES_OFFSET_UNKNOWN
 com.google.common.collect.LinkedListMultimap$Node
 io.flutter.embedding.engine.plugins.activity.ActivityControlSurface:
     public abstract void attachToActivity(android.app.Activity,androidx.lifecycle.Lifecycle)
@@ -3593,9 +4121,6 @@ io.flutter.embedding.engine.plugins.broadcastreceiver.BroadcastReceiverControlSu
 androidx.core.view.ViewCompat$4
 com.google.common.collect.Sets$FilteredSortedSet
 com.google.common.graph.Graph
-androidx.arch.core.internal.FastSafeIterableMap:
-    public java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)
-    public java.util.Map$Entry ceil(java.lang.Object)
 com.google.common.cache.LocalCache
 com.google.common.io.LineReader$1
 androidx.fragment.app.FragmentManagerImpl$2
@@ -3615,6 +4140,7 @@ com.google.common.collect.ForwardingTable
 com.google.common.hash.Hashing
 com.google.common.base.Predicates$SubtypeOfPredicate
 com.google.common.hash.ChecksumHashFunction$1
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$style
 io.flutter.plugin.common.MethodCall:
     public boolean hasArgument(java.lang.String)
 androidx.core.text.TextDirectionHeuristicsCompat$TextDirectionHeuristicLocale
@@ -3630,9 +4156,9 @@ com.google.common.collect.SortedLists$KeyAbsentBehavior$1
 com.google.common.base.CharMatcher$JavaDigit
 io.flutter.plugins.sharedpreferences.R$color
 com.google.common.hash.Hashing$Sha1Holder
-com.google.common.collect.ImmutableEntry
 io.flutter.embedding.engine.systemchannels.RestorationChannel:
     private static final java.lang.String TAG
+com.google.common.collect.ImmutableEntry
 javax.annotation.Nullable
 com.google.common.util.concurrent.Futures$1
 com.google.common.base.FinalizableWeakReference
@@ -3680,6 +4206,9 @@ androidx.core.provider.FontsContractCompat$4$1
 com.google.common.collect.DenseImmutableTable$Column
 com.google.common.graph.ConfigurableMutableValueGraph
 org.checkerframework.checker.nullness.compatqual.NonNullType
+io.flutter.embedding.engine.plugins.lifecycle.FlutterLifecycleAdapter:
+    public void <init>()
+    private static final java.lang.String TAG
 androidx.viewpager.R$dimen
 com.google.common.util.concurrent.Callables$3
 io.flutter.app.FlutterApplication
@@ -3698,8 +4227,6 @@ com.google.common.collect.UnmodifiableIterator
 com.google.common.cache.LocalCache$WeakEntry
 com.google.common.collect.StandardTable$Row$1
 com.google.common.collect.AbstractIndexedListIterator
-androidx.arch.core.internal.SafeIterableMap$Entry:
-    void <init>(java.lang.Object,java.lang.Object)
 com.google.common.util.concurrent.Striped$3
 com.google.common.collect.TreeRangeSet$SubRangeSet
 androidx.fragment.R$integer
@@ -3804,8 +4331,6 @@ io.flutter.plugins.pathprovider.R$style
 com.google.common.collect.MultimapBuilder$3
 androidx.fragment.R$id
 androidx.activity.R$string
-androidx.lifecycle.SingleGeneratedAdapterObserver:
-    void <init>(androidx.lifecycle.GeneratedAdapter)
 com.google.common.util.concurrent.ServiceManager$ServiceManagerState$1
 com.google.common.graph.Traverser$GraphTraverser$2
 com.google.common.graph.AbstractNetwork$2
@@ -3866,7 +4391,6 @@ androidx.loader.R$string
 com.google.common.cache.ForwardingLoadingCache$SimpleForwardingLoadingCache
 com.google.common.hash.AbstractCompositeHashFunction
 androidx.core.os.LocaleListCompat
-androidx.lifecycle.ClassesInfoCache$MethodReference
 com.google.common.collect.Multimaps$UnmodifiableMultimap
 com.google.common.collect.AllEqualOrdering
 androidx.core.view.ViewCompat$UnhandledKeyEventManager
@@ -3877,6 +4401,7 @@ com.google.common.collect.LinkedHashMultimap$1
 com.google.common.collect.MapMakerInternalMap$KeySet
 com.google.common.hash.HashCode$IntHashCode
 com.google.common.graph.MultiEdgesConnecting
+io.flutter.plugins.imagepicker.R$id
 android.support.v4.app.INotificationSideChannel$Stub
 androidx.core.app.JobIntentService$JobServiceEngineImpl
 com.google.common.hash.Hashing$Md5Holder
@@ -3885,6 +4410,7 @@ com.google.common.graph.ImmutableNetwork
 com.google.common.hash.AbstractNonStreamingHashFunction$BufferingHasher
 androidx.core.app.NavUtils
 androidx.loader.content.CursorLoader
+com.example.diamon_assorter.R$xml
 com.google.common.collect.Multisets$DecreasingCount
 androidx.core.graphics.ColorUtils
 com.google.common.collect.Maps$2
@@ -3906,12 +4432,15 @@ com.google.common.io.ByteArrayDataOutput
 com.google.common.collect.AbstractMapBasedMultiset$1
 com.google.common.net.MediaType$2
 com.google.common.base.VerifyException
+io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin:
+    public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
 com.google.common.collect.Maps$FilteredEntryMap$EntrySet
 androidx.core.graphics.drawable.RoundedBitmapDrawable
 com.google.common.collect.Synchronized$SynchronizedDeque
 com.google.common.collect.Count
 com.google.common.io.ByteProcessor
 com.google.common.collect.Tables$TransposeTable
+io.flutter.plugins.flutter_plugin_android_lifecycle.R$attr
 com.google.common.collect.Maps$UnmodifiableEntrySet
 com.google.common.collect.Lists$AbstractListWrapper
 com.google.common.collect.FilteredEntryMultimap$AsMap$1EntrySetImpl
@@ -3945,6 +4474,7 @@ com.google.common.collect.ForwardingSet
 com.google.common.collect.ImmutableMultimap$1
 com.google.common.collect.Multisets
 com.google.common.primitives.ImmutableDoubleArray$Builder
+io.flutter.plugins.imagepicker.R$style
 com.google.common.collect.CompoundOrdering
 com.google.j2objc.annotations.Weak
 io.flutter.embedding.engine.plugins.util.GeneratedPluginRegister:
@@ -3984,18 +4514,26 @@ androidx.collection.ContainerHelpers:
     static final long[] EMPTY_LONGS
 io.flutter.embedding.android.DrawableSplashScreen$1:
     final synthetic io.flutter.embedding.android.DrawableSplashScreen this$0
-io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineActivityPluginBinding:
-    private final android.app.Activity activity
-    private final io.flutter.embedding.engine.plugins.lifecycle.HiddenLifecycleReference hiddenLifecycleReference
 io.flutter.embedding.engine.FlutterEngineConnectionRegistry$DefaultFlutterAssets:
     final io.flutter.embedding.engine.loader.FlutterLoader flutterLoader
 com.google.common.base.Throwables:
     private static final java.lang.reflect.Method getStackTraceElementMethod
     private static final java.lang.reflect.Method getStackTraceDepthMethod
+androidx.exifinterface.media.ExifInterface$1:
+    final synthetic androidx.exifinterface.media.ExifInterface this$0
 io.flutter.plugins.pathprovider.PathProviderPlugin$1:
     final synthetic io.flutter.plugins.pathprovider.PathProviderPlugin this$0
 io.flutter.FlutterInjector:
     private static boolean accessed
+io.flutter.plugins.imagepicker.ImagePickerDelegate$2$1:
+    final synthetic io.flutter.plugins.imagepicker.ImagePickerDelegate$2 this$1
+androidx.lifecycle.DefaultLifecycleObserver:
+    public abstract void onCreate(androidx.lifecycle.LifecycleOwner)
+    public abstract void onStart(androidx.lifecycle.LifecycleOwner)
+    public abstract void onResume(androidx.lifecycle.LifecycleOwner)
+    public abstract void onPause(androidx.lifecycle.LifecycleOwner)
+    public abstract void onStop(androidx.lifecycle.LifecycleOwner)
+    public abstract void onDestroy(androidx.lifecycle.LifecycleOwner)
 io.flutter.Log:
     private static int logLevel
     public static int ASSERT
@@ -4021,12 +4559,21 @@ io.flutter.embedding.engine.systemchannels.PlatformViewsChannel$1$1:
     final synthetic io.flutter.embedding.engine.systemchannels.PlatformViewsChannel$1 this$1
 io.flutter.plugin.mouse.MouseCursorPlugin$2:
     final synthetic io.flutter.plugin.mouse.MouseCursorPlugin this$0
+androidx.exifinterface.media.ExifInterface:
+    private boolean mHasThumbnailStrips
+    private boolean mModified
+    private static final java.util.List ROTATION_ORDER
+    private static final java.util.List FLIPPED_ROTATION_ORDER
+    public static final int[] BITS_PER_SAMPLE_GREYSCALE_1
+    private static final java.util.regex.Pattern sNonZeroTimePattern
 io.flutter.plugin.editing.TextInputPlugin$2:
     final synthetic io.flutter.plugin.editing.TextInputPlugin this$0
 io.flutter.embedding.engine.loader.FlutterApplicationInfo:
     public final java.lang.String vmSnapshotData
     public final java.lang.String isolateSnapshotData
     public final boolean clearTextPermitted
+androidx.core.content.ContextCompat:
+    private static final java.lang.Object sLock
 io.flutter.plugin.platform.VirtualDisplayController$1:
     final synthetic io.flutter.plugin.platform.VirtualDisplayController this$0
 io.flutter.view.AccessibilityBridge$SemanticsNode:
@@ -4036,3 +4583,4 @@ io.flutter.view.AccessibilityBridge$SemanticsNode:
 io.flutter.embedding.engine.loader.FlutterLoader$InitResult:
     final java.lang.String dataDirPath
 io.flutter.plugin.platform.PlatformView$-CC
+androidx.lifecycle.DefaultLifecycleObserver$-CC

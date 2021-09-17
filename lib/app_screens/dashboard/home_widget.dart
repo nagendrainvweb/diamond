@@ -1,4 +1,5 @@
 import 'package:diamon_assorter/util/app_color.dart';
+import 'package:diamon_assorter/util/app_image.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -9,7 +10,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  _buttonTiles( String text, IconData icons) {
+  _buttonTiles( String text, String image) {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 30,
@@ -37,11 +38,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         children: [
           Column(
             children: [
-              Icon(
-                icons,
-                size: 45.0,
-                color: AppColors.whiteColor,
-                ),
+              Image.asset(image,height: 50,fit: BoxFit.cover,),
+              // Icon(
+              //   icons,
+              //   size: 45.0,
+              //   color: AppColors.whiteColor,
+              //   ),
               Text(
                 text,
                 textAlign: TextAlign.center,
@@ -75,12 +77,12 @@ class _HomeWidgetState extends State<HomeWidget> {
               children: [
                 Expanded(child: _buttonTiles(
                   "Upcoming\nOrders",
-                  Icons.shopping_cart_rounded,
+                 AppImages.upcomingOrder,
                 ),),
                 SizedBox(width: 20,),
                 Expanded(child: _buttonTiles(
                   "Pending\nOrders",
-                  Icons.shopping_cart_rounded,
+                 AppImages.pendingOrder,
                 ),),
                 
               ],
@@ -92,13 +94,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: 
                   _buttonTiles(
                   "Ongoing\nOrders",
-                  Icons.shopping_cart_rounded,
+                  AppImages.ongoingOrder,
                 ),
                   ),
                   SizedBox(width: 20,),
                 Expanded(child:_buttonTiles(
                   "New\nOrders",
-                  Icons.shopping_cart_rounded,
+                  AppImages.newOrder,
                 ), ),
                 
               ],
@@ -109,7 +111,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Expanded(
                   child: _buttonTiles(
                   "Completed\nOrders",
-                  Icons.shopping_cart_rounded,
+                  AppImages.completeOrder,
                 ),
                 ),
                 SizedBox(width: 20,),

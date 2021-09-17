@@ -116,6 +116,10 @@
         "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout/notification_action.xml"
     },
     {
+        "merged": "/opt/flutter_projects/diamond/build/app/intermediates/res/merged/release/xml_flutter_image_picker_file_paths.xml.flat",
+        "source": "/opt/flutter_projects/diamond/build/image_picker/intermediates/packaged_res/release/xml/flutter_image_picker_file_paths.xml"
+    },
+    {
         "merged": "/opt/flutter_projects/diamond/build/app/intermediates/res/merged/release/drawable-v21_launch_background.xml.flat",
         "source": "/opt/flutter_projects/diamond/android/app/src/main/res/drawable-v21/launch_background.xml"
     },

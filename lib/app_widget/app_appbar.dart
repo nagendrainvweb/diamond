@@ -23,17 +23,20 @@ class AppAppBar extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 20,),
-          Image.asset(
-            AppImages.logo,
-            height: 130,
-            // width: 150,
-            fit: BoxFit.contain,
-          )
-        ],
+      child: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           // SizedBox(height: 30,),
+            Image.asset(
+              AppImages.logo,
+              height: 100,
+              // width: 150,
+              fit: BoxFit.contain,
+            )
+          ],
+        ),
       ),
     );
   }
