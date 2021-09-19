@@ -6,7 +6,7 @@ class CommonPattern {
   static final gst_regex =
       r'^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$';
   static final pincodeRegex = r"^[1-9][0-9]{5}$";
-  static final passwordRegex = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,30}$";
+  static final passwordRegex = r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$";
 
   static final pancardRegex = r"[A-Z]{5}[0-9]{4}[A-Z]{1}$";
   static final drivingLicenceRegex =

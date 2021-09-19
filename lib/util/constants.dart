@@ -37,11 +37,22 @@ class Constants {
 
   static String PROFILE_PIC = "PROFILE_PIC";
 
-  static String CITY = "CITY";
+  static String CITY = "city";
 
-  static String STATE_LIST="STATE_LIST";
+  static String STATE_LIST = "STATE_LIST";
 
-  static String CITY_LIST="CITY_LIST";
+  static String CITY_LIST = "CITY_LIST";
 
-  
+  static String HOME = "HOME";
+  static String OFFICE = "OFFICE";
+  static String WORK = "WORK";
+  static String OTHER = "OTHER";
+  static String STATE = "state";
+
+  static String PASSWORD_MSG = "Password must contain at least 1 alphabet, 1 number, and 1 special character";
+
+  static String SUCCESS = "success";
+
+  static var DATA = "data";
+
 }
