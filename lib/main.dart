@@ -14,7 +14,6 @@ void main()async {
   setupDialogUi();
    final model = AppRepo();
   await model.init();
-
   runApp(MyApp(
     repo: model,
   ));

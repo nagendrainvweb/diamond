@@ -1,16 +1,16 @@
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/app_textfield.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
-import 'package:diamon_assorter/register/agentRegistration.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
+import 'package:diamon_assorter/register/view/agentRegistration.dart';
+import 'package:diamon_assorter/register/view/assorterRegister_widget.dart';
+import 'package:diamon_assorter/register/view/companyRegistration.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'assorterRegister_widget.dart';
-import 'companyRegistration.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -85,6 +85,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       }).toList(),
 
                       onChanged: (String value) {
+                        
                         setState(() {
                           _chosenValue = value;
                         });

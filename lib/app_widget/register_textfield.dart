@@ -57,8 +57,9 @@ class RegisterTextfield extends StatelessWidget {
                     },
                     child: Icon(
                         obsecure ? Icons.visibility : Icons.visibility_off))
-                : Container(width: 1,height: 1,),
+                :null,
             hintStyle: TextStyle(),
+            errorMaxLines: 2,
             errorText: errorText),
       ),
     );

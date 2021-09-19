@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_widget/add_assorter_widget.dart';
+import 'package:diamon_assorter/app_widget/address_form_widget.dart';
+import 'package:diamon_assorter/app_widget/address_row_widget.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
 import 'package:diamon_assorter/app_widget/doc_view_widget.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
+import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
-import 'package:diamon_assorter/register/registerViewModel/agentRegisterViewModel.dart';
+import 'package:diamon_assorter/register/registerViewModel/registerViewModel.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
+import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +30,7 @@ class AgentRegistrationWidget extends StatefulWidget {
 
 class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
   _showBottomDialog(
-      BuildContext context, AgentRegisterViewModel model, AssorterModal data) {
+      BuildContext context, RegistrationViewModel model, AssorterModal data) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -49,9 +53,9 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AgentRegisterViewModel>.reactive(
-      viewModelBuilder: () => AgentRegisterViewModel(),
-      onModelReady: (AgentRegisterViewModel model) => model.initData("Agent"),
+    return ViewModelBuilder<RegistrationViewModel>.reactive(
+      viewModelBuilder: () => RegistrationViewModel(),
+      onModelReady: (RegistrationViewModel model) => model.initData("agent"),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(
@@ -74,7 +78,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             controller: model.companyNameController,
             textInputType: TextInputType.name,
             onChanged: (String value) {
-              model.userData.companyName= value;
+              model.userData.companyName = value;
               model.companyNameError = (value.isEmpty)
                   ? false
                   : !RegExp(CommonPattern.name_regex).hasMatch(value);
@@ -116,7 +120,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
-         RegisterTextfield(
+          RegisterTextfield(
             text: "Password*",
             controller: model.passwordController,
             showIcon: true,
@@ -124,80 +128,144 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             onIconClicked: model.onPasswordVisibleclicked,
             obsecure: model.obsecureText,
             onChanged: (String value) {
-               model.userData.password = value;
-              model.passwordError=
+              model.userData.password = value;
+              model.passwordError =
                   !RegExp(CommonPattern.passwordRegex).hasMatch(value);
               model.notifyListeners();
             },
-            errorText: model.passwordError ? "Password must have minimum 5 alphanumeric characters" : null,
+            errorText: model.passwordError ? Constants.PASSWORD_MSG : null,
           ),
           SizedBox(
             height: 20,
           ),
+          // RegisterTextfield(
+          //   text: "Address*",
+          //   textInputType: TextInputType.name,
+          //   controller: model.addressController,
+          //   onChanged: (String value) {
+          //     model.userData.address = value;
+          //     model.addreessError =
+          //         !RegExp(CommonPattern.addressRegex).hasMatch(value);
+          //     model.notifyListeners();
+          //   },
+          //   errorText:
+          //       model.addreessError ? "Please Enter Valid Address" : null,
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          //     RegisterTextfield(
+          //       text: "Area*",
+          //       textInputType: TextInputType.name,
+          //       controller: model.areaController,
+          //       onChanged: (String value) {
+          //         model.userData.area = value;
+          //         model.areaError =
+          //             !RegExp(CommonPattern.name_regex).hasMatch(value);
+          //         model.notifyListeners();
+          //       },
+          //       errorText: model.areaError ? "Please Enter Valid Area" : null,
+          //     ),
+          //     SizedBox(
+          //       height: 20,
+          //     ),
+          // Row(
+          //   children: [
+
+          //     Expanded(
+          //       child: RegisterTextfield(
+          //         text: "City*",
+          //         textInputType: TextInputType.name,
+          //         controller: model.cityController,
+          //         onChanged: (String value) {
+          //           model.userData.city = value;
+          //           model.cityError =
+          //               !RegExp(CommonPattern.name_regex).hasMatch(value);
+          //           model.notifyListeners();
+          //         },
+          //         errorText: model.cityError ? "Please Enter Valid City" : null,
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: 20,
+          //     ),
+          //     Expanded(
+          //       child: RegisterTextfield(
+          //         text: "Pincode*",
+          //         textInputType: TextInputType.number,
+          //         controller: model.pincodeController,
+          //         onChanged: (String value) {
+          //           model.userData.pincode = value;
+          //           model.pincodeError =
+          //               !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
+          //           model.notifyListeners();
+          //         },
+          //         errorText:
+          //             model.pincodeError ? "Please Enter Valid Pincode" : null,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // RegisterTextfield(
+          //   text: "Office Address",
+          //   textInputType: TextInputType.name,
+          //   controller: model.officeAddressController,
+          //   onChanged: (String value) {
+          //     model.userData.officeAddress =  value;
+          //     model.officeAddressError = (value.isEmpty)
+          //         ? false
+          //         : !RegExp(CommonPattern.addressRegex).hasMatch(value);
+          //     model.notifyListeners();
+          //   },
+          //   errorText:
+          //       model.officeAddressError ? "Please Enter Valid Address" : null,
+          // ),
           RegisterTextfield(
-            text: "Address*",
-            textInputType: TextInputType.name,
-            controller: model.addressController,
+            text: "Commission Per assorter*",
+            textInputType: TextInputType.number,
+            controller: model.commissionController,
             onChanged: (String value) {
-              model.userData.address = value;
-              model.addreessError =
-                  !RegExp(CommonPattern.addressRegex).hasMatch(value);
+              model.userData.commissionPerAssorter = value;
+              model.commissionError = value.isEmpty;
               model.notifyListeners();
             },
             errorText:
-                model.addreessError ? "Please Enter Valid Address" : null,
+                model.commissionError ? "Please Enter Valid Commission" : null,
           ),
           SizedBox(
             height: 20,
           ),
-              RegisterTextfield(
-                text: "Area*",
-                textInputType: TextInputType.name,
-                controller: model.areaController,
-                onChanged: (String value) {
-                  model.userData.area = value;
-                  model.areaError =
-                      !RegExp(CommonPattern.name_regex).hasMatch(value);
-                  model.notifyListeners();
-                },
-                errorText: model.areaError ? "Please Enter Valid Area" : null,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-          Row(
+
+          Stack(
             children: [
-          
-              Expanded(
-                child: RegisterTextfield(
-                  text: "City*",
-                  textInputType: TextInputType.name,
-                  controller: model.cityController,
-                  onChanged: (String value) {
-                    model.userData.city = value;
-                    model.cityError =
-                        !RegExp(CommonPattern.name_regex).hasMatch(value);
-                    model.notifyListeners();
-                  },
-                  errorText: model.cityError ? "Please Enter Valid City" : null,
+              Container(
+                  margin: EdgeInsets.only(top: 13, bottom: 8, right: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                  ),
+                  child: AddressFormWidget(
+                    showTopBar: false,
+                    data: model.agentAddressData,
+                  )),
+              Container(
+                margin: EdgeInsets.only(left: 15),
+                padding: EdgeInsets.all(
+                  5,
                 ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: RegisterTextfield(
-                  text: "Pincode*",
-                  textInputType: TextInputType.number,
-                  controller: model.pincodeController,
-                  onChanged: (String value) {
-                    model.userData.pincode = value;
-                    model.pincodeError =
-                        !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
-                    model.notifyListeners();
-                  },
-                  errorText:
-                      model.pincodeError ? "Please Enter Valid Pincode" : null,
+                color: AppColors.whiteColor,
+                child: Text(
+                  "Address",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
                 ),
               ),
             ],
@@ -205,38 +273,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
-          RegisterTextfield(
-            text: "Office Address",
-            textInputType: TextInputType.name,
-            controller: model.officeAddressController,
-            onChanged: (String value) {
-              model.userData.officeAddress =  value;
-              model.officeAddressError = (value.isEmpty)
-                  ? false
-                  : !RegExp(CommonPattern.addressRegex).hasMatch(value);
-              model.notifyListeners();
-            },
-            errorText:
-                model.officeAddressError ? "Please Enter Valid Address" : null,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          RegisterTextfield(
-            text: "Commission Per assorter*",
-            textInputType: TextInputType.number,
-            controller: model.commissionController,
-            onChanged: (String value) {
-              model.userData.commissionPerAssorter= value;
-              model.commissionError = value.isEmpty;
-              model.notifyListeners();
-            },
-            errorText:
-                model.pincodeError ? "Please Enter Valid Commission" : null,
-          ),
-          SizedBox(
-            height: 20,
-          ),
+
           Stack(
             children: [
               Container(
@@ -262,10 +299,15 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
                         height: (MediaQuery.of(context).size.width - 100) / 2,
                         file: model.idCard,
                         onSelectImage: () {
-                          model.selectImage(context);
+                          model.selectImage(
+                            context,
+                            (source) {
+                              model.pickImage(source, Constants.BOB_ID);
+                            },
+                          );
                         },
                         onDeleteImage: () {
-                          model.removeImage();
+                          model.removeImage(Constants.BOB_ID);
                         },
                       ),
                     ),
@@ -329,7 +371,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           ButtonView(
             buttonText: "Submit",
             onPressed: () {
-              model.submitClicked(context,onError: (String value) {
+              model.agentSubmitClicked(context, onError: (String value) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(value),
                   behavior: SnackBarBehavior.floating,
