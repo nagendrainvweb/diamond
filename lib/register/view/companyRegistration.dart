@@ -1,3 +1,4 @@
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_widget/address_form_widget.dart';
 import 'package:diamon_assorter/app_widget/address_row_widget.dart';
@@ -12,6 +13,7 @@ import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class CompanyRegisterWidget extends StatefulWidget {
@@ -24,8 +26,7 @@ class CompanyRegisterWidget extends StatefulWidget {
 }
 
 class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
-
-    _showBottomDialog(
+  _showBottomDialog(
       BuildContext context, RegistrationViewModel model, AddressData data) {
     showModalBottomSheet(
         context: context,
@@ -37,7 +38,6 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               if (data == null) {
                 model.onAddressAddedClicked(addressData);
               } else {
-
                 model.onEditAddress(addressData);
               }
             },
@@ -47,12 +47,16 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final appRepo = Provider.of<AppRepo>(context, listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model)=> model.initData("company"),
+      onModelReady: (RegistrationViewModel model) =>
+          model.initData("company", appRepo),
       builder: (_, model, child) => ListView(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           RegisterTextfield(
             text: "Name*",
             controller: model.nameController,
@@ -73,7 +77,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
             controller: model.companyNameController,
             textInputType: TextInputType.name,
             onChanged: (String value) {
-               model.userData.companyName = value;
+              model.userData.companyName = value;
               model.companyNameError =
                   !RegExp(CommonPattern.addressRegex).hasMatch(value);
               model.notifyListeners();
@@ -93,7 +97,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                   controller: model.mobileController,
                   textInputType: TextInputType.number,
                   onChanged: (String value) {
-                     model.userData.mobile= value;
+                    model.userData.mobile = value;
                     model.mobileError =
                         !RegExp(CommonPattern.mobile_regex).hasMatch(value);
                     model.notifyListeners();
@@ -112,7 +116,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                   controller: model.interComController,
                   textInputType: TextInputType.text,
                   onChanged: (String value) {
-                     model.userData.intercom = value;
+                    model.userData.intercom = value;
                     model.intercomError = (value.isNotEmpty)
                         ? !RegExp(CommonPattern.addressRegex).hasMatch(value)
                         : false;
@@ -133,7 +137,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
             controller: model.emailController,
             textInputType: TextInputType.emailAddress,
             onChanged: (String value) {
-               model.userData.email = value;
+              model.userData.email = value;
               model.emailError =
                   !RegExp(CommonPattern.email_regex).hasMatch(value);
               model.notifyListeners();
@@ -147,12 +151,12 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
             text: "Password*",
             controller: model.passwordController,
             showIcon: true,
-            textInputType: TextInputType.name,
+            textInputType: TextInputType.text,
             onIconClicked: model.onPasswordVisibleclicked,
             obsecure: model.obsecureText,
             onChanged: (String value) {
-               model.userData.password = value;
-              model.passwordError=
+              model.userData.password = value;
+              model.passwordError =
                   !RegExp(CommonPattern.passwordRegex).hasMatch(value);
               model.notifyListeners();
             },
@@ -161,7 +165,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           SizedBox(
             height: 20,
           ),
-                    Stack(
+          Stack(
             children: [
               Container(
                 margin: EdgeInsets.only(
@@ -186,12 +190,12 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                         height: (MediaQuery.of(context).size.width - 100) / 2,
                         file: model.idCard,
                         onSelectImage: () {
-                           model.selectImage(
-                          context,
-                          (source) {
-                            model.pickImage(source, Constants.BOB_ID);
-                          },
-                        );
+                          model.selectImage(
+                            context,
+                            (source) {
+                              model.pickImage(source, Constants.BOB_ID);
+                            },
+                          );
                         },
                         onDeleteImage: () {
                           model.removeImage(Constants.BOB_ID);
@@ -256,7 +260,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           //     ),
           // Row(
           //   children: [
-              
+
           //     Expanded(
           //       child: RegisterTextfield(
           //         text: "City*",
@@ -335,7 +339,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                       controller: model.contactNameController,
                       textInputType: TextInputType.name,
                       onChanged: (String value) {
-                         model.contactPerson.contactPersonName = value;
+                        model.contactPerson.contactPersonName = value;
                         model.contactNameError = (value.isEmpty)
                             ? false
                             : !RegExp(CommonPattern.name_regex).hasMatch(value);
@@ -353,7 +357,8 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                       controller: model.contactMobileController,
                       textInputType: TextInputType.number,
                       onChanged: (String value) {
-                         model.contactPerson.contactPersonMobile = value;
+                        myPrint("mobile is $value");
+                        model.contactPerson.contactPersonMobile = value;
                         model.contactMobileError = (value.isEmpty)
                             ? false
                             : !RegExp(CommonPattern.mobile_regex)
@@ -368,14 +373,13 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                       height: 20,
                     ),
                     RegisterTextfield(
-                      text: "Email",
+                      text: "Email*",
                       controller: model.contactEmailController,
                       textInputType: TextInputType.emailAddress,
-                      onChanged: (String value) => (String value) {
-                         model.contactPerson.contactPersonEmail = value;
-                        model.contactEmailError = (value.isEmpty)
-                            ? false
-                            : !RegExp(CommonPattern.email_regex)
+                      onChanged: (String value) {
+                        myPrint("emal is $value");
+                        model.contactPerson.contactPersonEmail = value;
+                        model.contactEmailError =!RegExp(CommonPattern.email_regex)
                                 .hasMatch(value);
                         model.notifyListeners();
                       },
@@ -383,7 +387,6 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                           ? "Please Enter Valid Email"
                           : null,
                     ),
-                    
                   ],
                 ),
               ),

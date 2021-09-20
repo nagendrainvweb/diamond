@@ -2,6 +2,7 @@ import 'package:diamon_assorter/app_screens/dashboard/cart_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/contact_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/profile_widget.dart';
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
+import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 
 import 'home_widget.dart';
@@ -63,19 +64,21 @@ class _DashBoardPageState extends State<DashBoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       bottomNavigationBar:_SetBottomNavigationBar(),
-      body:Column(
+      bottomNavigationBar: _SetBottomNavigationBar(),
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AppAppBar(),
+          AppAppBar(
+            showLogout: true,
+            onLogoutClicked: () {
+              Utility.pushToLogin(context);
+            },
+          ),
           Expanded(
             child: _children[_currentIndex],
           ),
-          
         ],
-      ), 
-      
-
+      ),
     );
   }
 }

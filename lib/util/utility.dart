@@ -12,6 +12,14 @@ class Utility {
       CupertinoPageRoute(builder: (context) => page),
     );
   }
+  static pushToDashBoard(BuildContext context) {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        '/HomePage', ModalRoute.withName('/LoginPage'));
+  }
+  static pushToLogin(BuildContext context) {
+    Navigator.of(context)
+    .pushNamedAndRemoveUntil('/LoginPage', (Route<dynamic> route) => false);
+  }
 }
 
 void myPrint(String text) {

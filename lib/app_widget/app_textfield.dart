@@ -2,7 +2,15 @@ import 'package:diamon_assorter/util/app_color.dart';
 import 'package:flutter/material.dart';
 
 class AppTextfield extends StatelessWidget {
-   AppTextfield({Key key, this.hint, this.icon, this.obsecure, this.color, this.textColor=AppColors.blackColor})
+  AppTextfield(
+      {Key key,
+      this.hint,
+      this.icon,
+      this.obsecure,
+      this.color,
+      this.textColor = AppColors.blackColor,
+      this.controller,
+      this.errorText, this.onChanged})
       : super(key: key);
 
   final String hint;
@@ -10,6 +18,9 @@ class AppTextfield extends StatelessWidget {
   final bool obsecure;
   final Color color;
   final Color textColor;
+  final TextEditingController controller;
+  final String errorText;
+  final Function onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +28,18 @@ class AppTextfield extends StatelessWidget {
       child: Column(
         children: [
           TextField(
+            controller: controller,
             obscureText: obsecure,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 18
-            ),
+            style: TextStyle(color: textColor, fontSize: 18),
+            onChanged: onChanged,
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
                 color: color,
               ),
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 18,
-                horizontal: 20
-              ),
+              
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 18, horizontal: 20),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
                 borderSide: BorderSide(
@@ -44,7 +53,6 @@ class AppTextfield extends StatelessWidget {
               hintText: hint,
               hintStyle: TextStyle(
                 color: color,
-                
               ),
             ),
           ),

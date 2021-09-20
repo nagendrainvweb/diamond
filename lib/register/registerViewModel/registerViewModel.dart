@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app/locator.dart';
+import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/modal/UserData.dart';
 import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
+import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/services/api_services.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/app_helper.dart';
@@ -60,10 +63,17 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   ContactPerson _contactPerson;
   AddressData _agentAddressData;
   AddressData _assorterAddressData;
+  String selectedAgent;
+  AppRepo repo;
 
   UserData get userData => _userData;
   void setUserData(UserData data) {
     _userData = data;
+    notifyListeners();
+  }
+
+  setSelectedAgent(String value) {
+    selectedAgent = value;
     notifyListeners();
   }
 
@@ -85,13 +95,14 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     notifyListeners();
   }
 
-  initData(String registerAs) {
+  initData(String registerAs, AppRepo irepo) {
     _userData = UserData(registrationAs: registerAs);
     _contactPerson = ContactPerson();
     _agentAddressData = AddressData();
     _agentAddressData.addressType = Constants.OFFICE;
     _assorterAddressData = AddressData();
     _assorterAddressData.addressType = Constants.HOME;
+    repo = irepo;
   }
 
   void checkCompanyFeilds() {
@@ -113,25 +124,25 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   }
 
   void companySubmitClicked(BuildContext context, {Function onError}) async {
-    // checkCompanyFeilds();
-    // if (addressList.isEmpty) {
-    //   onError("Please Enter at least 1 Address");
-    //   return;
-    // }
-    // if (!nameError &&
-    //     !mobileError &&
-    //     !emailError &&
-    //     !passwordError &&
-    //     !experienceError) {
-    //   _userData.bdbIdCard = idCard.path;
-    //   _userData.address = addressList;aci
-    //   _userData.contactPerson = _contactPerson;
+    checkCompanyFeilds();
+    if (addressList.isEmpty) {
+      onError("Please Enter at least 1 Address");
+      return;
+    }
+    if (!nameError &&
+        !mobileError &&
+        !emailError &&
+        !passwordError &&
+        !experienceError) {
+      _userData.bdbIdCard = idCard.path;
+      _userData.address = addressList;
+      _userData.contactPerson = _contactPerson;
+      _userData.fileList = (idCard != null) ? [idCard] : [];
 
-    //   _registerUser(context);
-    // } else {
-    //   onError("Please Enter Require Details");
-    // }
-    final response = await _apiService.fetchAgentList();
+      _registerUser(context);
+    } else {
+      onError("Please Enter Require Details");
+    }
   }
 
   void checkAgentFeilds() {
@@ -210,8 +221,9 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       _userData.service = service;
       _userData.speed = speed;
       _userData.address = [_assorterAddressData];
-
-      _registerUser(context);
+      final index = repo.agentList
+          .indexWhere((element) => element.agentName == selectedAgent);
+      _userData.agent = index;
     } else {
       onError("Please Enter Require Details");
     }
@@ -220,8 +232,26 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   _registerUser(BuildContext context) async {
     progressDialog("Please wait...", context);
     try {
+      if (_userData.fileList.isNotEmpty) {
+        final imageResponse = await _apiService.fileUpload(_userData.fileList);
+        final list = imageResponse.data;
+        for (int i = 0; i < list.length; i++) {
+          if (i == 0) {
+            _userData.bdbIdCard = list[0];
+          }
+          if (i == 1) {
+            _userData.aadharCard = list[1];
+          }
+          if (i == 2) {
+            _userData.passport = list[2];
+          }
+        }
+      }
       final response = await _apiService.registerUser(_userData);
+      Prefs.setLogin(true);
+      Prefs.setUserId(response.data.id.toString());
       hideProgressDialog(context);
+      Utility.pushToDashBoard(context);
     } catch (e) {
       myPrint(e.toString());
       hideProgressDialog(context);

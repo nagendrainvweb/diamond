@@ -1,3 +1,4 @@
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_widget/address_form_widget.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
@@ -9,6 +10,7 @@ import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class AssorterRegisterWidget extends StatefulWidget {
@@ -21,14 +23,14 @@ class AssorterRegisterWidget extends StatefulWidget {
 }
 
 class _AssorterRegisterWidgetState extends State<AssorterRegisterWidget> {
-  String _chosenValue = "";
+  
   @override
   Widget build(BuildContext context) {
     var attachHeight = (MediaQuery.of(context).size.width - 70) / 3;
-
+final appRepo = Provider.of<AppRepo>(context,listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model) => model.initData("assorter"),
+      onModelReady: (RegistrationViewModel model) => model.initData("assorter",appRepo),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(
@@ -81,7 +83,7 @@ class _AssorterRegisterWidgetState extends State<AssorterRegisterWidget> {
             text: "Password*",
             controller: model.passwordController,
             showIcon: true,
-            textInputType: TextInputType.name,
+            textInputType: TextInputType.text,
             onIconClicked: model.onPasswordVisibleclicked,
             obsecure: model.obsecureText,
             onChanged: (String value) {
@@ -97,41 +99,37 @@ class _AssorterRegisterWidgetState extends State<AssorterRegisterWidget> {
           ),
           Row(
             children: [
-              
-              // Expanded(
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         border: Border.all(color: AppColors.greyColor),
-              //         borderRadius: BorderRadius.circular(12),
-              //         color: AppColors.mainLightColor),
-              //     padding: const EdgeInsets.symmetric(horizontal: 10),
-              //     child: DropdownButton<String>(
-              //       underline: Container(),
-              //       value: _chosenValue,
-              //       isExpanded: true,
-              //       hint: Text("Please Select Agent"),
-              //       //elevation: 5,
-              //       style: TextStyle(color: Colors.black, fontSize: 18),
-              //       items: <String>[
-              //         Constants.COMPANY,
-              //         Constants.AGENT,
-              //         Constants.ASSERTER,
-              //       ].map<DropdownMenuItem<String>>((String value) {
-              //         return DropdownMenuItem<String>(
-              //           value: value,
-              //           child: Text(value),
-              //         );
-              //       }).toList(),
-
-              //       onChanged: (String value) {
-              //         setState(() {
-              //           _chosenValue = value;
-              //         });
-              //       },
-              //     ),
-              //   ),
-              // ),
-              
+              Expanded(
+                child: Consumer<AppRepo>(
+                  builder: (context, repo, child) => Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.greyColor),
+                        borderRadius: BorderRadius.circular(12),
+                     ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: DropdownButton<String>(
+                      underline: Container(),
+                      value: model.selectedAgent,
+                      isExpanded: true,
+                      hint: Text("Please Select Agent"),
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                      items: repo.agentList
+                          .map((e) => e.agentName)
+                          .toList()
+                          .map<DropdownMenuItem<String>>(
+                              (String value) => DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  ))
+                          .toList(),
+                      onChanged: (String value) {
+                       model.setSelectedAgent(value);
+                      },
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           SizedBox(

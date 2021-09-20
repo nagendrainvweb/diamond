@@ -130,7 +130,7 @@ class DialogHelper{
       }
     );
   }
-    static showErrorDialog(BuildContext context,title, content, {bool showTitle, Function onOkClicked}) {
+    static showErrorDialog(BuildContext context,title, content, {bool showTitle=true, Function onOkClicked}) {
     showDialog(
      //   edgeInsets: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         context: context,

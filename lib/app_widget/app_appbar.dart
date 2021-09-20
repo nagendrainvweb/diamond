@@ -1,13 +1,17 @@
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/app_image.dart';
+import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
+
 class AppAppBar extends StatelessWidget {
-  const AppAppBar({ Key key }) : super(key: key);
+  const AppAppBar({Key key, this.showLogout = false, this.onLogoutClicked}) : super(key: key);
+  final bool showLogout;
+  final Function onLogoutClicked;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-     // height: 150,
+      // height: 150,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: BorderRadius.only(
@@ -25,16 +29,34 @@ class AppAppBar extends StatelessWidget {
       ),
       child: SafeArea(
         top: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           // SizedBox(height: 30,),
-            Image.asset(
-              AppImages.logo,
-              height: 100,
-              // width: 150,
-              fit: BoxFit.contain,
-            )
+            // SizedBox(height: 30,),
+            Center(
+              child: Image.asset(
+                AppImages.logo,
+                height: 100,
+                // width: 150,
+                fit: BoxFit.contain,
+              ),
+            ),
+            (showLogout)
+                ? Align(
+                    alignment: Alignment.bottomRight,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        IconButton(
+                            icon:
+                                Icon(Icons.logout, color: AppColors.whiteColor),
+                            onPressed:onLogoutClicked),
+                      ],
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),

@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
   _loginView(LoginViewModel model) {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -40,19 +42,23 @@ class _LoginPageState extends State<LoginPage> {
             height: 50,
           ),
           AppTextfield(
+            controller: model.userNameController,
             hint: "USERNAME",
             icon: Icons.person_outline_outlined,
             obsecure: false,
             color: AppColors.mainColor,
+            onChanged: (String value) {},
           ),
           SizedBox(
             height: 15,
           ),
           AppTextfield(
+            controller: model.passwordController,
             hint: "PASSWORD",
             icon: Icons.lock_open_outlined,
             obsecure: true,
             color: AppColors.mainColor,
+            onChanged: (String value) {},
           ),
           SizedBox(
             height: 30,
@@ -75,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   buttonText: "LOGIN",
                   color: AppColors.buttonColor,
                   onPressed: () {
-                    Utility.pushToNext(context, DashBoardPage());
+                    model.loginClicked(context);
                   },
                 ),
               ],
@@ -99,9 +105,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
-      viewModelBuilder: ()=> LoginViewModel(),
-      builder: (_,model,child)=>
-       Scaffold(
+      viewModelBuilder: () => LoginViewModel(),
+      builder: (_, model, child) => Scaffold(
         body: Stack(
           children: [
             SingleChildScrollView(

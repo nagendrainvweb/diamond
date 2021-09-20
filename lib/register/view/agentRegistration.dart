@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_widget/add_assorter_widget.dart';
 import 'package:diamon_assorter/app_widget/address_form_widget.dart';
@@ -16,6 +17,7 @@ import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class AgentRegistrationWidget extends StatefulWidget {
@@ -53,9 +55,12 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final appRepo = Provider.of<AppRepo>(context,listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model) => model.initData("agent"),
+      onModelReady: (RegistrationViewModel model) => model.initData(
+        "agent",appRepo
+      ),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(
@@ -124,7 +129,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             text: "Password*",
             controller: model.passwordController,
             showIcon: true,
-            textInputType: TextInputType.name,
+            textInputType: TextInputType.text,
             onIconClicked: model.onPasswordVisibleclicked,
             obsecure: model.obsecureText,
             onChanged: (String value) {

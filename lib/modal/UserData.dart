@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
 
@@ -12,7 +14,7 @@ class UserData {
   String password;
   List<AddressData> address;
   ContactPerson contactPerson;
-  String commissionPerAssorter;
+  String commissionPerAssorter = "0";
   String bdbIdCard;
   String aadharCard;
   String passport;
@@ -21,6 +23,7 @@ class UserData {
   String experiance;
   String service;
   String speed;
+  List<File> fileList;
 
   UserData(
       {this.registrationAs,
@@ -41,6 +44,7 @@ class UserData {
       this.agent,
       this.experiance,
       this.service,
+      this.fileList,
       this.speed});
 
   UserData.fromJson(Map<String, dynamic> json) {
@@ -108,46 +112,6 @@ class UserData {
   }
 }
 
-class Address {
-  String flatGalaNumber;
-  String buildingNumber;
-  String address;
-  String addressType;
-  String area;
-  String city;
-  String pincode;
-
-  Address(
-      {this.flatGalaNumber,
-      this.buildingNumber,
-      this.address,
-      this.addressType,
-      this.area,
-      this.city,
-      this.pincode});
-
-  Address.fromJson(Map<String, dynamic> json) {
-    flatGalaNumber = json['flat_gala_number'];
-    buildingNumber = json['building_number'];
-    address = json['address'];
-    addressType = json['address_type'];
-    area = json['area'];
-    city = json['city'];
-    pincode = json['pincode'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['flat_gala_number'] = this.flatGalaNumber;
-    data['building_number'] = this.buildingNumber;
-    data['address'] = this.address;
-    data['address_type'] = this.addressType;
-    data['area'] = this.area;
-    data['city'] = this.city;
-    data['pincode'] = this.pincode;
-    return data;
-  }
-}
 
 class ContactPerson {
   String contactPersonName;
