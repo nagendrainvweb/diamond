@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
+    }
+]

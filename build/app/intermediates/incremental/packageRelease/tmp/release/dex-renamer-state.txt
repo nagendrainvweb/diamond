@@ -1,0 +1,4 @@
+#Mon Sep 20 16:03:03 IST 2021
+base.0=/opt/flutter_projects/diamond-main/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
