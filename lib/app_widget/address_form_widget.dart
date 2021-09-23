@@ -93,11 +93,10 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).viewInsets,
-      child: ListView(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
+    return SingleChildScrollView(
+      child: Column(
+        // physics: ClampingScrollPhysics(),
+        // shrinkWrap: true,
         children: <Widget>[
           (widget.showTopBar)
               ? Column(

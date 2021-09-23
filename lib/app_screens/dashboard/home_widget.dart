@@ -18,7 +18,9 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 30,
+          horizontal: 5
         ),
+        margin: EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           gradient: LinearGradient(
@@ -70,7 +72,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: 30,
+        horizontal: 20,
       ),
       child: MediaQuery.removeViewPadding(
         removeTop: true,
@@ -89,9 +91,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     (){},
                   ),
                 ),
-                SizedBox(
-                  width: 20,
-                ),
+                // SizedBox(
+                //   width: 10,
+                // ),
                 Expanded(
                   child: _buttonTiles(
                     "Pending\nOrders",
@@ -113,9 +115,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     (){},
                   ),
                 ),
-                SizedBox(
-                  width: 20,
-                ),
+                // SizedBox(
+                //   width: 20,
+                // ),
                 Expanded(
                   child: _buttonTiles(
                     "New\nOrders",
@@ -139,9 +141,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     (){},
                   ),
                 ),
-                SizedBox(
-                  width: 20,
-                ),
+                // SizedBox(
+                //   width: 20,
+                // ),
                 Expanded(
                   child: Container(),
                 ),

@@ -3,7 +3,7 @@ import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 
-import '../update_profile/updateCompanyProfile_screen.dart';
+import '../update_profile/updateProfile_screen.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key key}) : super(key: key);

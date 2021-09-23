@@ -18,7 +18,7 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  String _chosenValue = Constants.COMPANY;
+  String _chosenValue ;
 
   _getRegisterWidget() {
     if (_chosenValue == Constants.COMPANY) {
@@ -50,26 +50,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             child: Row(
               children: [
-                Text(
-                  "Register as : ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: AppColors.greyColor),
                         borderRadius: BorderRadius.circular(12),
-                        color: AppColors.mainLightColor),
+                        ),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: DropdownButton<String>(
                       underline: Container(),
                       value: _chosenValue,
+                      hint: Text("Please Select Type"),
                       isExpanded: true,
                       //elevation: 5,
                       style: TextStyle(color: Colors.black, fontSize: 18),
