@@ -2,6 +2,7 @@ import 'package:diamon_assorter/app_screens/dashboard/cart_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/contact_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/profile_widget.dart';
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
+import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
     ContactWidget(),
     ProfileWidget(),
   ];
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void onTabTapped(int index) {
     setState(() {
@@ -65,18 +68,32 @@ class _DashBoardPageState extends State<DashBoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       bottomNavigationBar: _SetBottomNavigationBar(),
+      drawer: Drawer(
+        child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text("index $index"),
+              );
+            }),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppAppBar(
             showLogout: true,
+            showMenuButton: true,
+            onMenuClicked: () {
+              _scaffoldKey.currentState.openDrawer();
+            },
             onLogoutClicked: () {
               DialogHelper.showLogoutDialog(context, () {
                 Navigator.pop(context);
+                Prefs.clear();
                 Utility.pushToLogin(context);
               });
-              
             },
           ),
           Expanded(

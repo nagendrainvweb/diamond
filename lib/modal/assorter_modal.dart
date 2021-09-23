@@ -5,14 +5,17 @@ class AssorterModal {
   String name;
   String mobile;
   String email;
+  bool emailVerified;
 
-  AssorterModal({this.id, this.name, this.mobile, this.email});
+  AssorterModal(
+      {this.id, this.name, this.mobile, this.email, this.emailVerified});
 
   AssorterModal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     mobile = json['mobile'];
     email = json['email'];
+    emailVerified = json["emailVerified"];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,6 +24,7 @@ class AssorterModal {
     data['name'] = this.name;
     data['mobile'] = this.mobile;
     data['email'] = this.email;
+    data["emailVerified"] = this.emailVerified;
     return data;
   }
 }

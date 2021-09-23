@@ -131,21 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       color: AppColors.buttonColor,
-            //     ),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //       children: [
-            //         _builBottom(Icons.person_outline_outlined),
-            //         _builBottom(Icons.call),
-            //       ],
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

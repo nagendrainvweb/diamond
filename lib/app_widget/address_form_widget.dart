@@ -15,12 +15,13 @@ class AddressFormWidget extends StatefulWidget {
     Key key,
     this.data,
     this.onSubmitClicked,
-    this.showTopBar = true,
+    this.showTopBar = true, this.showPadding=true,
   }) : super(key: key);
 
   final AddressData data;
   final Function onSubmitClicked;
   final bool showTopBar;
+    final bool showPadding;
 
   @override
   _AddressFormWidgetState createState() => _AddressFormWidgetState();
@@ -47,6 +48,7 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
   bool stateError = false;
 
   String _selectedType = Constants.WORK;
+
 
   AddressData _addressData;
   final ApiService _apiService = locator<ApiService>();
@@ -133,7 +135,7 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
           ),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 20,
+              horizontal:(widget.showPadding)? 20:0,
             ),
             child: Column(
               children: [
@@ -359,9 +361,7 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
                                   .hasMatch(_pincodeController.text);
                               stateError = _stateController.text.isEmpty;
                               cityError = _cityController.text.isEmpty;
-                              setState(() {
-                                
-                              });
+                              setState(() {});
                               if (!flatGalaErro &&
                                   !buildingError &&
                                   !addressError &&

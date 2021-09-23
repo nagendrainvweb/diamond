@@ -11,7 +11,9 @@ import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
@@ -140,7 +142,13 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                     if (!hasFocus &&
                         !model.emailError &&
                         !model.emailVerified) {
-                      model.checkUser(context);
+                      model.checkUser(context, onSucess: (bool value) {
+                        model.emailVerified = value;
+                        if (!value) {
+                          model.emailController.text = "";
+                        }
+                        model.notifyListeners();
+                      });
                     }
                   },
                   child: RegisterTextfield(
@@ -260,91 +268,6 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
               ),
             ],
           ),
-          // RegisterTextfield(
-          //   text: "Address*",
-          //   controller: model.addressController,
-          //   textInputType: TextInputType.name,
-          //   onChanged: (String value) {
-          //      model.userData.address = value;
-          //     model.addreessError =
-          //         !RegExp(CommonPattern.addressRegex).hasMatch(value);
-          //     model.notifyListeners();
-          //   },
-          //   errorText:
-          //       model.addreessError ? "Please Enter Valid Address" : null,
-          // ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // RegisterTextfield(
-          //   text: "Area*",
-          //   controller: model.areaController,
-          //   textInputType: TextInputType.name,
-          //   onChanged: (String value) {
-          //      model.userData.area = value;
-          //     model.areaError =
-          //         !RegExp(CommonPattern.name_regex).hasMatch(value);
-          //     model.notifyListeners();
-          //   },
-          //   errorText: model.areaError ? "Please Enter Valid Area" : null,
-          // ),
-          //     SizedBox(
-          //       height: 20,
-          //     ),
-          // Row(
-          //   children: [
-
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "City*",
-          //         controller: model.cityController,
-          //         textInputType: TextInputType.name,
-          //         onChanged: (String value) => (String value) {
-          //            model.userData.city = value;
-          //           model.cityError =
-          //               !RegExp(CommonPattern.name_regex).hasMatch(value);
-          //           model.notifyListeners();
-          //         },
-          //         errorText: model.cityError ? "Please Enter Valid City" : null,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: 20,
-          //     ),
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "Pincode*",
-          //         controller: model.pincodeController,
-          //         textInputType: TextInputType.number,
-          //         onChanged: (String value) {
-          //            model.userData.pincode = value;
-          //           model.pincodeError =
-          //               !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
-          //           model.notifyListeners();
-          //         },
-          //         errorText:
-          //             model.pincodeError ? "Please Enter Valid Pincode" : null,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // RegisterTextfield(
-          //   text: "Add work address*",
-          //   controller: model.workAddressController,
-          //   textInputType: TextInputType.text,
-          //   onChanged: (String value) {
-          //      model.userData.workAddress = value;
-          //     model.workAddressError =
-          //         !RegExp(CommonPattern.addressRegex).hasMatch(value);
-          //     model.notifyListeners();
-          //   },
-          //   errorText: model.workAddressError
-          //       ? "Please Enter Valid Work Address"
-          //       : null,
-          // ),
           SizedBox(
             height: 15,
           ),
@@ -402,21 +325,58 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                     SizedBox(
                       height: 20,
                     ),
-                    RegisterTextfield(
-                      text: "Email*",
-                      controller: model.contactEmailController,
-                      textInputType: TextInputType.emailAddress,
-                      showIcon: true,
-                      onChanged: (String value) {
-                        myPrint("emal is $value");
-                        model.contactPerson.contactPersonEmail = value;
-                        model.contactEmailError =
-                            !RegExp(CommonPattern.email_regex).hasMatch(value);
-                        model.notifyListeners();
-                      },
-                      errorText: model.contactEmailError
-                          ? "Please Enter Valid Email"
-                          : null,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Focus(
+                            onFocusChange: (hasFocus) {
+                              if (!hasFocus &&
+                                  !model.contactEmailError &&
+                                  !model.contactEmailVerified) {
+                                model.checkUser(context,
+                                    onSucess: (bool value) {
+                                  model.contactEmailVerified = value;
+                                  if (!value) {
+                                    model.contactEmailController.text = "";
+                                  }
+                                  model.notifyListeners();
+                                });
+                              }
+                            },
+                            child: RegisterTextfield(
+                              text: "Email*",
+                              controller: model.contactEmailController,
+                              textInputType: TextInputType.emailAddress,
+                              onChanged: (String value) {
+                                model.contactEmailVerified = false;
+                                model.contactPerson.contactPersonEmail = value;
+                                model.contactEmailError =
+                                    !RegExp(CommonPattern.email_regex)
+                                        .hasMatch(value);
+                                model.notifyListeners();
+                              },
+                              errorText: model.contactEmailError
+                                  ? "Please Enter Valid contact Email"
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        (model.contactEmailVerified)
+                            ? Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.verified_user_outlined,
+                                        color: Colors.green,
+                                      )),
+                                ],
+                              )
+                            : Container(),
+                      ],
                     ),
                   ],
                 ),
@@ -469,6 +429,43 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           SizedBox(
             height: 20,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              new Checkbox(
+                  value: model.consentValue,
+                  activeColor: Colors.blue,
+                  onChanged: (bool newValue) {
+                    model.setConsentValue(newValue);
+                  }),
+              Expanded(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'By clicking this I/We agree to the ',
+                    style: TextStyle(color: Colors.grey.shade800, fontSize: 12),
+                    children: [
+                      TextSpan(
+                        text: 'Terms and Conditions  ',
+                        recognizer: new TapGestureRecognizer()
+                          ..onTap = () => print('Tap Here onTap'),
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "of Diamond App",
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
           ButtonView(
             buttonText: "Submit",
             onPressed: () {
@@ -489,3 +486,5 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
     );
   }
 }
+
+

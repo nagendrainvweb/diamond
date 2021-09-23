@@ -15,6 +15,7 @@ import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/utility.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -55,12 +56,11 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final appRepo = Provider.of<AppRepo>(context,listen: false);
+    final appRepo = Provider.of<AppRepo>(context, listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model) => model.initData(
-        "agent",appRepo
-      ),
+      onModelReady: (RegistrationViewModel model) =>
+          model.initData("agent", appRepo),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(
@@ -110,7 +110,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
-                  Row(
+          Row(
             children: [
               Expanded(
                 child: Focus(
@@ -118,7 +118,13 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
                     if (!hasFocus &&
                         !model.emailError &&
                         !model.emailVerified) {
-                      model.checkUser(context);
+                      model.checkUser(context, onSucess: (bool value) {
+                        model.emailVerified = value;
+                        if (!value) {
+                          model.emailController.text = "";
+                        }
+                        model.notifyListeners();
+                      });
                     }
                   },
                   child: RegisterTextfield(
@@ -164,7 +170,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             textInputType: TextInputType.text,
             onIconClicked: model.onPasswordVisibleclicked,
             obsecure: model.obsecureText,
-             icon: model.obsecureText ? Icons.visibility : Icons.visibility_off,
+            icon: model.obsecureText ? Icons.visibility : Icons.visibility_off,
             onChanged: (String value) {
               model.userData.password = value;
               model.passwordError =
@@ -176,91 +182,6 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
           SizedBox(
             height: 20,
           ),
-          // RegisterTextfield(
-          //   text: "Address*",
-          //   textInputType: TextInputType.name,
-          //   controller: model.addressController,
-          //   onChanged: (String value) {
-          //     model.userData.address = value;
-          //     model.addreessError =
-          //         !RegExp(CommonPattern.addressRegex).hasMatch(value);
-          //     model.notifyListeners();
-          //   },
-          //   errorText:
-          //       model.addreessError ? "Please Enter Valid Address" : null,
-          // ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          //     RegisterTextfield(
-          //       text: "Area*",
-          //       textInputType: TextInputType.name,
-          //       controller: model.areaController,
-          //       onChanged: (String value) {
-          //         model.userData.area = value;
-          //         model.areaError =
-          //             !RegExp(CommonPattern.name_regex).hasMatch(value);
-          //         model.notifyListeners();
-          //       },
-          //       errorText: model.areaError ? "Please Enter Valid Area" : null,
-          //     ),
-          //     SizedBox(
-          //       height: 20,
-          //     ),
-          // Row(
-          //   children: [
-
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "City*",
-          //         textInputType: TextInputType.name,
-          //         controller: model.cityController,
-          //         onChanged: (String value) {
-          //           model.userData.city = value;
-          //           model.cityError =
-          //               !RegExp(CommonPattern.name_regex).hasMatch(value);
-          //           model.notifyListeners();
-          //         },
-          //         errorText: model.cityError ? "Please Enter Valid City" : null,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: 20,
-          //     ),
-          //     Expanded(
-          //       child: RegisterTextfield(
-          //         text: "Pincode*",
-          //         textInputType: TextInputType.number,
-          //         controller: model.pincodeController,
-          //         onChanged: (String value) {
-          //           model.userData.pincode = value;
-          //           model.pincodeError =
-          //               !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
-          //           model.notifyListeners();
-          //         },
-          //         errorText:
-          //             model.pincodeError ? "Please Enter Valid Pincode" : null,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // RegisterTextfield(
-          //   text: "Office Address",
-          //   textInputType: TextInputType.name,
-          //   controller: model.officeAddressController,
-          //   onChanged: (String value) {
-          //     model.userData.officeAddress =  value;
-          //     model.officeAddressError = (value.isEmpty)
-          //         ? false
-          //         : !RegExp(CommonPattern.addressRegex).hasMatch(value);
-          //     model.notifyListeners();
-          //   },
-          //   errorText:
-          //       model.officeAddressError ? "Please Enter Valid Address" : null,
-          // ),
           RegisterTextfield(
             text: "Commission Per assorter*",
             textInputType: TextInputType.number,
@@ -386,25 +307,62 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
                     ))
                 .toList(),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ButtonView(
-                  buttonText: "Add Assorter",
-                  color: AppColors.mainLightColor,
-                  onPressed: () {
-                    _showBottomDialog(context, model, null);
-                  },
-                ),
-              ],
-            ),
-          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(10.0),
+          //   child: Row(
+          //     children: [
+          //       ButtonView(
+          //         buttonText: "Add Assorter",
+          //         color: AppColors.mainLightColor,
+          //         onPressed: () {
+          //           _showBottomDialog(context, model, null);
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           SizedBox(
             height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              new Checkbox(
+                  value: model.consentValue,
+                  activeColor: Colors.blue,
+                  onChanged: (bool newValue) {
+                    model.setConsentValue(newValue);
+                  }),
+              Expanded(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'By clicking this I/We agree to the ',
+                    style: TextStyle(color: Colors.grey.shade800, fontSize: 12),
+                    children: [
+                      TextSpan(
+                        text: 'Terms and Conditions  ',
+                        recognizer: new TapGestureRecognizer()
+                          ..onTap = () => print('Tap Here onTap'),
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "of Diamond App",
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
           ),
           ButtonView(
             buttonText: "Submit",

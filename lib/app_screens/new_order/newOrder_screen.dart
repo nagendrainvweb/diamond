@@ -31,8 +31,8 @@ class _NewOrderPageState extends State<NewOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppAppBar(),
           SizedBox(
@@ -214,7 +214,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   text: "Note",
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Row(
                   children: [
@@ -236,6 +236,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     ))
                   ],
                 ),
+                SizedBox(height: 20,),
               ],
             ),
           ),

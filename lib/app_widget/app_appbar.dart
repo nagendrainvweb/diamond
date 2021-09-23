@@ -8,11 +8,14 @@ class AppAppBar extends StatelessWidget {
       {Key key,
       this.showLogout = false,
       this.onLogoutClicked,
-      this.showBackButton = false})
+      this.showMenuButton = false,
+      this.showBackButton = false, this.onMenuClicked})
       : super(key: key);
   final bool showLogout;
   final Function onLogoutClicked;
   final bool showBackButton;
+  final bool showMenuButton;
+  final Function onMenuClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +78,19 @@ class AppAppBar extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
+                          )),
+                    )
+                  : Container(),
+              (showMenuButton)
+                  ? Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 80,
+                          child: Container(
+                            child: IconButton(
+                                icon: Icon(Icons.menu,
+                                    color: AppColors.whiteColor),
+                                onPressed: onMenuClicked),
                           )),
                     )
                   : Container()

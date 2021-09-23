@@ -144,7 +144,7 @@ class AddressRow extends StatelessWidget {
           ),
           color: AppColors.whiteColor,
           child: Text(
-            "Address ${data.id}",
+            (data!=null)? "Address ${data.id}":"Address",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black54,

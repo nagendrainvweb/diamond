@@ -1,8 +1,13 @@
+import 'package:diamon_assorter/app/locator.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
+import 'package:diamon_assorter/services/api_services.dart';
 import 'package:diamon_assorter/util/app_color.dart';
+import 'package:diamon_assorter/util/app_helper.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
+import 'package:diamon_assorter/util/dialog_helper.dart';
+import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 
 class AddAssorterWidget extends StatefulWidget {
@@ -19,7 +24,7 @@ class AddAssorterWidget extends StatefulWidget {
   _AddAssorterWidgetState createState() => _AddAssorterWidgetState();
 }
 
-class _AddAssorterWidgetState extends State<AddAssorterWidget> {
+class _AddAssorterWidgetState extends State<AddAssorterWidget> with AppHelper {
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _mobileController = TextEditingController();
@@ -31,6 +36,8 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> {
   bool assMobileError = false;
 
   bool assEmailError = false;
+  bool emailVerified = false;
+  final _apiService = locator<ApiService>();
 
   @override
   void initState() {
@@ -38,6 +45,20 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> {
     _mobileController.text = widget.data != null ? widget.data.mobile : "";
     _emailController.text = widget.data != null ? widget.data.email : "";
     super.initState();
+  }
+
+  void checkUser(BuildContext context, {@required Function onSucess}) async {
+    try {
+      progressDialog("Please wait...", context);
+      final response = await _apiService.checkUser(_emailController.text);
+      hideProgressDialog(context);
+      onSucess(true);
+    } catch (e) {
+      hideProgressDialog(context);
+      onSucess(false);
+      myPrint(e.toString());
+      DialogHelper.showErrorDialog(context, "Error", "Email Already Exists");
+    }
   }
 
   @override
@@ -112,19 +133,69 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> {
                 SizedBox(
                   height: 20,
                 ),
-                RegisterTextfield(
-                  text: "Email",
-                  controller: _emailController,
-                  textInputType: TextInputType.emailAddress,
-                  onChanged: (String value) {
-                    setState(() {
-                      assEmailError = (value.isEmpty)
-                          ? false
-                          : !RegExp(CommonPattern.email_regex).hasMatch(value);
-                    });
-                  },
-                  errorText: assEmailError ? "Please Enter Valid Email" : null,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Focus(
+                        onFocusChange: (hasFocus) {
+                          if (!hasFocus && !assEmailError && !emailVerified) {
+                            checkUser(context, onSucess: (bool value) {
+                              setState(() {
+                                    emailVerified = value;
+                              if (!value) {
+                              _emailController.text = "";
+                              }
+                              });
+                          
+                             
+                            });
+                          }
+                        },
+                        child: RegisterTextfield(
+                          text: "Email*",
+                          controller: _emailController,
+                          textInputType: TextInputType.emailAddress,
+                          onChanged: (String value) {
+                            setState(() {
+                              emailVerified = false;
+                              assEmailError = !RegExp(CommonPattern.email_regex)
+                                  .hasMatch(value);
+                            });
+                          },
+                          errorText:
+                              assEmailError ? "Please Enter Valid Email" : null,
+                        ),
+                      ),
+                    ),
+                    (emailVerified)
+                        ? Row(
+                            children: [
+                              SizedBox(
+                                width: 5,
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.verified_user_outlined,
+                                    color: Colors.green,
+                                  )),
+                            ],
+                          )
+                        : Container(),
+                  ],
                 ),
+                // RegisterTextfield(
+                //   text: "Email*",
+                //   controller: _emailController,
+                //   textInputType: TextInputType.emailAddress,
+                //   onChanged: (String value) {
+                //     setState(() {
+                //       assEmailError =
+                //           !RegExp(CommonPattern.email_regex).hasMatch(value);
+                //     });
+                //   },
+                //   errorText: assEmailError ? "Please Enter Valid Email" : null,
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -132,9 +203,20 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> {
                   buttonText: "SUBMIT",
                   color: AppColors.mainLightColor,
                   onPressed: () {
-                    Navigator.pop(context);
-                    widget.onSubmitClicked(_nameController.text,
-                        _mobileController.text, _emailController.text);
+                    setState(() {
+                      assNameError = !RegExp(CommonPattern.name_regex)
+                          .hasMatch(_nameController.text);
+                      assMobileError = !RegExp(CommonPattern.mobile_regex)
+                          .hasMatch(_mobileController.text);
+                      assEmailError = !RegExp(CommonPattern.email_regex)
+                          .hasMatch(_emailController.text);
+                    });
+
+                    if (!assNameError && !assMobileError && !assEmailError) {
+                      Navigator.pop(context);
+                      widget.onSubmitClicked(_nameController.text,
+                          _mobileController.text, _emailController.text);
+                    }
                   },
                 ),
                 SizedBox(

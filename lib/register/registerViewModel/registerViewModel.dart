@@ -56,6 +56,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   bool commissionError = false;
 
   bool emailVerified = false;
+  bool contactEmailVerified = false;
 
   var _serviceValue = 1;
   var _speedValue = 1;
@@ -67,6 +68,8 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   AddressData _assorterAddressData;
   String selectedAgent;
   AppRepo repo;
+
+  bool _consentValue = false;
 
   UserData get userData => _userData;
   void setUserData(UserData data) {
@@ -88,6 +91,12 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   AddressData get agentAddressData => _agentAddressData;
   void setAgentAddressData(AddressData data) {
     _agentAddressData = data;
+    notifyListeners();
+  }
+
+  bool get consentValue => _consentValue;
+  void setConsentValue(bool value) {
+    _consentValue = value;
     notifyListeners();
   }
 
@@ -145,6 +154,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
         onError("Please Add at least 1 Address");
         return;
       }
+
       _userData.address = addressList;
       _userData.contactPerson = _contactPerson;
       _userData.fileList = (idCard != null) ? [idCard] : [];
@@ -244,6 +254,11 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   }
 
   _registerUser(BuildContext context) async {
+    if (!_consentValue) {
+      Utility.showSnackBar(context,
+          "Please select checkbox to give us your consent for save your data.");
+      return;
+    }
     progressDialog("Please wait...", context);
     try {
       if (_userData.fileList.isNotEmpty) {
@@ -383,16 +398,17 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     notifyListeners();
   }
 
-  void checkUser(BuildContext context) async {
+  void checkUser(BuildContext context, {@required Function onSucess}) async {
     try {
       progressDialog("Please wait...", context);
       final response = await _apiService.checkUser(emailController.text);
       hideProgressDialog(context);
-      emailVerified = true;
+      onSucess(true);
+
       notifyListeners();
     } catch (e) {
       hideProgressDialog(context);
-      emailVerified = false;
+      onSucess(false);
       notifyListeners();
       myPrint(e.toString());
       DialogHelper.showErrorDialog(context, "Error", "Email Already Exists");

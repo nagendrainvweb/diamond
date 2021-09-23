@@ -118,7 +118,7 @@ class ApiService {
       print(responseString);
 
       final responseJson = json.decode(responseString);
-      if (responseJson[Constants.SUCCESS] == true) {
+      if (responseJson[Constants.STATUS] == true) {
         final data = responseJson[Constants.DATA];
         List<String> list = [];
         for (var item in data) {
