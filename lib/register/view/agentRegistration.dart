@@ -179,134 +179,134 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
             },
             errorText: model.passwordError ? Constants.PASSWORD_MSG : null,
           ),
-          SizedBox(
-            height: 20,
-          ),
-          RegisterTextfield(
-            text: "Commission Per assorter*",
-            textInputType: TextInputType.number,
-            controller: model.commissionController,
-            onChanged: (String value) {
-              model.userData.commissionPerAssorter = value;
-              model.commissionError = value.isEmpty;
-              model.notifyListeners();
-            },
-            errorText:
-                model.commissionError ? "Please Enter Valid Commission" : null,
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // RegisterTextfield(
+          //   text: "Commission Per assorter*",
+          //   textInputType: TextInputType.number,
+          //   controller: model.commissionController,
+          //   onChanged: (String value) {
+          //     model.userData.commissionPerAssorter = value;
+          //     model.commissionError = value.isEmpty;
+          //     model.notifyListeners();
+          //   },
+          //   errorText:
+          //       model.commissionError ? "Please Enter Valid Commission" : null,
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
 
-          Stack(
-            children: [
-              Container(
-                  margin: EdgeInsets.only(top: 13, bottom: 8, right: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
-                  child: AddressFormWidget(
-                    showTopBar: false,
-                    data: model.agentAddressData,
-                  )),
-              Container(
-                margin: EdgeInsets.only(left: 15),
-                padding: EdgeInsets.all(
-                  5,
-                ),
-                color: AppColors.whiteColor,
-                child: Text(
-                  "Address",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          // Stack(
+          //   children: [
+          //     Container(
+          //         margin: EdgeInsets.only(top: 13, bottom: 8, right: 10),
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12),
+          //           border: Border.all(
+          //             color: Colors.grey,
+          //             width: 1,
+          //           ),
+          //         ),
+          //         child: AddressFormWidget(
+          //           showTopBar: false,
+          //           data: model.agentAddressData,
+          //         )),
+          //     Container(
+          //       margin: EdgeInsets.only(left: 15),
+          //       padding: EdgeInsets.all(
+          //         5,
+          //       ),
+          //       color: AppColors.whiteColor,
+          //       child: Text(
+          //         "Address",
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.black54,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
 
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: 15,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.grey.shade300,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: DocViewWidget(
-                        title: "Attch BOB id Card",
-                        height: (MediaQuery.of(context).size.width - 100) / 2,
-                        file: model.idCard,
-                        onSelectImage: () {
-                          model.selectImage(
-                            context,
-                            (source) {
-                              model.pickImage(source, Constants.BOB_ID);
-                            },
-                          );
-                        },
-                        onDeleteImage: () {
-                          model.removeImage(Constants.BOB_ID);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 15,
-                ),
-                padding: EdgeInsets.all(
-                  5,
-                ),
-                color: AppColors.whiteColor,
-                child: Text(
-                  "Attach Documents",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Column(
-            children: model.assorterList
-                .map((e) => AssorterRow(
-                      data: e,
-                      onDeleteClicked: () => model.onDeleteClicked(e),
-                      onEditClicked: () => _showBottomDialog(context, model, e),
-                    ))
-                .toList(),
-          ),
+          // Stack(
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         top: 15,
+          //       ),
+          //       padding: EdgeInsets.symmetric(
+          //         horizontal: 20,
+          //         vertical: 20,
+          //       ),
+          //       decoration: BoxDecoration(
+          //         border: Border.all(
+          //           width: 2,
+          //           color: Colors.grey.shade300,
+          //         ),
+          //         borderRadius: BorderRadius.circular(12),
+          //       ),
+          //       child: Row(
+          //         children: [
+          //           Expanded(
+          //             child: DocViewWidget(
+          //               title: "Attch BOB id Card",
+          //               height: (MediaQuery.of(context).size.width - 100) / 2,
+          //               file: model.idCard,
+          //               onSelectImage: () {
+          //                 model.selectImage(
+          //                   context,
+          //                   (source) {
+          //                     model.pickImage(source, Constants.BOB_ID);
+          //                   },
+          //                 );
+          //               },
+          //               onDeleteImage: () {
+          //                 model.removeImage(Constants.BOB_ID);
+          //               },
+          //             ),
+          //           ),
+          //           Expanded(
+          //             flex: 1,
+          //             child: Container(),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         left: 15,
+          //       ),
+          //       padding: EdgeInsets.all(
+          //         5,
+          //       ),
+          //       color: AppColors.whiteColor,
+          //       child: Text(
+          //         "Attach Documents",
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.black54,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // Column(
+          //   children: model.assorterList
+          //       .map((e) => AssorterRow(
+          //             data: e,
+          //             onDeleteClicked: () => model.onDeleteClicked(e),
+          //             onEditClicked: () => _showBottomDialog(context, model, e),
+          //           ))
+          //       .toList(),
+          // ),
           // SizedBox(
           //   height: 10,
           // ),

@@ -27,8 +27,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          Center(
             child: Text(
               "LOGIN",
               style: TextStyle(
@@ -41,71 +42,127 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 50,
           ),
-          AppTextfield(
-            controller: model.userNameController,
-            hint: "EMAIL ID",
-            icon: Icons.person_outline_outlined,
-            obsecure: false,
-            color: AppColors.mainColor,
-            onChanged: (String value) {},
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          AppTextfield(
-            controller: model.passwordController,
-            hint: "PASSWORD",
-            icon: Icons.lock_open_outlined,
-            obsecure: obsecure,
-            showIcon: true,
-            color: AppColors.mainColor,
-            suffixIcon: obsecure ? Icons.visibility : Icons.visibility_off,
-            onIconClicked: () {
-              setState(() {
-                obsecure = !obsecure;
-              });
-            },
-            onChanged: (String value) {},
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ButtonView(
-                  buttonText: "NEW USER",
-                  color: AppColors.buttonColor,
-                  onPressed: () {
-                    Utility.pushToNext(context, RegistrationPage());
-                  },
-                ),
-                ButtonView(
-                  buttonText: "LOGIN",
-                  color: AppColors.buttonColor,
-                  onPressed: () {
-                    model.loginClicked(context);
-                  },
-                ),
-              ],
-            ),
-          ),
+          Visibility(
+            visible: model.loginWithOTP,
+            child: mobileLoginView(model)),
+           Visibility(
+             visible: !model.loginWithOTP,
+             child: _passwordLoginView(model)),
           SizedBox(
             height: 20,
           ),
           ButtonView(
-            buttonText: "FORGOT PASSWORD",
+            buttonText: "Login",
             color: AppColors.buttonColor,
             onPressed: () {
-              Utility.pushToNext(context, ForgotPasswordPage());
+              if(model.loginWithOTP){
+                  model.loginOtpClicked(context);
+              }else{
+                  model.loginPasswordClicked(context);
+              }
+            
             },
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+              child: Text(
+            " ----------- OR ----------",
+            style: TextStyle(
+                color: AppColors.grey600, fontWeight: FontWeight.bold),
+          )),
+          SizedBox(
+            height: 20,
+          ),
+          ButtonView(
+            buttonText:(model.loginWithOTP)? "Login With Password":"Login With OTP",
+            color: AppColors.buttonColor,
+            onPressed: () {
+              model.setLoginWithOtp();
+            },
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          TextButton(
+              onPressed: () {
+                Utility.pushToNext(context, RegistrationPage());
+              },
+              child: Text(
+                "Don't have account? Sign up",
+              )),
         ],
       ),
+    );
+  }
+
+  mobileLoginView(LoginViewModel model) {
+    return Column(
+      children: [
+        AppTextfield(
+            controller: model.mobileController,
+            hint: "Enter Mobile No",
+            keyboardType: TextInputType.number,
+            icon: Icons.phone_android_outlined,
+            obsecure: false,
+            color: AppColors.mainColor,
+            onChanged: (String value) {},
+          ),
+      ],
+    );
+  }
+
+  _passwordLoginView(LoginViewModel model) {
+    return Column(
+      children: [
+        AppTextfield(
+          controller: model.userNameController,
+          hint: "EMAIL ID",
+          icon: Icons.person_outline_outlined,
+          obsecure: false,
+          color: AppColors.mainColor,
+          onChanged: (String value) {},
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        AppTextfield(
+          controller: model.passwordController,
+          hint: "PASSWORD",
+          icon: Icons.lock_open_outlined,
+          obsecure: obsecure,
+          showIcon: true,
+          color: AppColors.mainColor,
+          suffixIcon: obsecure ? Icons.visibility : Icons.visibility_off,
+          onIconClicked: () {
+            setState(() {
+              obsecure = !obsecure;
+            });
+          },
+          onChanged: (String value) {},
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+                onPressed: () {
+                  Utility.pushToNext(context, ForgotPasswordPage());
+                },
+                child: Text("Forgot password ?"))
+            // ButtonView(
+            //   buttonText: "FORGOT PASSWORD",
+            //   color: AppColors.buttonColor,
+            //   onPressed: () {
+            //     Utility.pushToNext(context, ForgotPasswordPage());
+            //   },
+            // ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -120,7 +177,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  AppAppBar(),
+                 AppAppBar(),
+                  // Image.asset(
+                  //     AppImages.logo,
+                  // height: 80,
+                  // // width: 150,
+                  // fit: BoxFit.contain,
+                  // ),
                   SizedBox(
                     height: 50,
                   ),

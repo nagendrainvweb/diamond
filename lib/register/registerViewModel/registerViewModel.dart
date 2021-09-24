@@ -23,6 +23,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   final mobileController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final agentController = TextEditingController();
   final experienceController = TextEditingController();
   final commissionController = TextEditingController();
@@ -45,6 +46,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   bool mobileError = false;
   bool emailError = false;
   bool passwordError = false;
+  bool confirmPasswordError = false;
   bool agentError = false;
   bool experienceError = false;
   //
@@ -68,6 +70,8 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   AddressData _assorterAddressData;
   String selectedAgent;
   AppRepo repo;
+  bool obsecureText = true;
+  bool confirmObsecureText = true;
 
   bool _consentValue = false;
 
@@ -118,8 +122,8 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
 
   void checkCompanyFeilds() {
     nameError = !RegExp(CommonPattern.name_regex).hasMatch(nameController.text);
-    companyNameError = !RegExp(CommonPattern.addressRegex)
-        .hasMatch(companyNameController.text);
+    // companyNameError = !RegExp(CommonPattern.addressRegex)
+    //     .hasMatch(companyNameController.text);
     mobileError =
         !RegExp(CommonPattern.mobile_regex).hasMatch(mobileController.text);
     emailError =
@@ -127,18 +131,21 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     passwordError =
         !RegExp(CommonPattern.passwordRegex).hasMatch(passwordController.text);
 
-    contactNameError =
-        !RegExp(CommonPattern.name_regex).hasMatch(contactNameController.text);
-    contactMobileError = !RegExp(CommonPattern.mobile_regex)
-        .hasMatch(contactMobileController.text);
-    contactEmailError = !RegExp(CommonPattern.email_regex)
-        .hasMatch(contactEmailController.text);
+    // contactNameError =
+    //     !RegExp(CommonPattern.name_regex).hasMatch(contactNameController.text);
+    // contactMobileError = !RegExp(CommonPattern.mobile_regex)
+    //     .hasMatch(contactMobileController.text);
+    // contactEmailError = !RegExp(CommonPattern.email_regex)
+    //     .hasMatch(contactEmailController.text);
     notifyListeners();
   }
 
-  bool obsecureText = true;
   onPasswordVisibleclicked() {
     obsecureText = !obsecureText;
+    notifyListeners();
+  }
+    onConfirmPasswordVisibleclicked() {
+    confirmObsecureText = !confirmObsecureText;
     notifyListeners();
   }
 
@@ -148,16 +155,19 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     if (!nameError &&
         !mobileError &&
         !emailError &&
-        !passwordError &&
-        !experienceError) {
-      if (addressList.isEmpty) {
-        onError("Please Add at least 1 Address");
+        !passwordError) {
+      if (passwordController.text != confirmPasswordController.text) {
+        onError("Password and confirm password must be same");
+        return;
+      }
+       if (!consentValue) {
+        onError("Please agree our terms and conditions");
         return;
       }
 
-      _userData.address = addressList;
-      _userData.contactPerson = _contactPerson;
-      _userData.fileList = (idCard != null) ? [idCard] : [];
+      // _userData.address = addressList;
+      // _userData.contactPerson = _contactPerson;
+      // _userData.fileList = (idCard != null) ? [idCard] : [];
 
       _registerUser(context);
     } else {
@@ -254,28 +264,24 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   }
 
   _registerUser(BuildContext context) async {
-    if (!_consentValue) {
-      Utility.showSnackBar(context,
-          "Please select checkbox to give us your consent for save your data.");
-      return;
-    }
+  
     progressDialog("Please wait...", context);
     try {
-      if (_userData.fileList.isNotEmpty) {
-        final imageResponse = await _apiService.fileUpload(_userData.fileList);
-        final list = imageResponse.data;
-        for (int i = 0; i < list.length; i++) {
-          if (i == 0) {
-            _userData.bdbIdCard = list[0];
-          }
-          if (i == 1) {
-            _userData.aadharCard = list[1];
-          }
-          if (i == 2) {
-            _userData.passport = list[2];
-          }
-        }
-      }
+      // if (_userData.fileList.isNotEmpty) {
+      //   final imageResponse = await _apiService.fileUpload(_userData.fileList);
+      //   final list = imageResponse.data;
+      //   for (int i = 0; i < list.length; i++) {
+      //     if (i == 0) {
+      //       _userData.bdbIdCard = list[0];
+      //     }
+      //     if (i == 1) {
+      //       _userData.aadharCard = list[1];
+      //     }
+      //     if (i == 2) {
+      //       _userData.passport = list[2];
+      //     }
+      //   }
+      // }
       final response = await _apiService.registerUser(_userData);
       Prefs.setLogin(true);
       Prefs.setUserId(response.data.id.toString());

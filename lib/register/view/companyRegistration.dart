@@ -74,23 +74,23 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           SizedBox(
             height: 20,
           ),
-          RegisterTextfield(
-            text: "Company Name*",
-            controller: model.companyNameController,
-            textInputType: TextInputType.name,
-            onChanged: (String value) {
-              model.userData.companyName = value;
-              model.companyNameError =
-                  !RegExp(CommonPattern.addressRegex).hasMatch(value);
-              model.notifyListeners();
-            },
-            errorText: model.companyNameError
-                ? "Please Enter Valid Company Name"
-                : null,
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          // RegisterTextfield(
+          //   text: "Company Name*",
+          //   controller: model.companyNameController,
+          //   textInputType: TextInputType.name,
+          //   onChanged: (String value) {
+          //     model.userData.companyName = value;
+          //     model.companyNameError =
+          //         !RegExp(CommonPattern.addressRegex).hasMatch(value);
+          //     model.notifyListeners();
+          //   },
+          //   errorText: model.companyNameError
+          //       ? "Please Enter Valid Company Name"
+          //       : null,
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
           Row(
             children: [
               Expanded(
@@ -109,26 +109,26 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                       : null,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: RegisterTextfield(
-                  text: "Intercom",
-                  controller: model.interComController,
-                  textInputType: TextInputType.text,
-                  onChanged: (String value) {
-                    model.userData.intercom = value;
-                    model.intercomError = (value.isNotEmpty)
-                        ? !RegExp(CommonPattern.addressRegex).hasMatch(value)
-                        : false;
-                    model.notifyListeners();
-                  },
-                  errorText: model.intercomError
-                      ? "Please Enter Valid Intercom"
-                      : null,
-                ),
-              ),
+              // SizedBox(
+              //   width: 20,
+              // ),
+              // Expanded(
+              //   child: RegisterTextfield(
+              //     text: "Intercom",
+              //     controller: model.interComController,
+              //     textInputType: TextInputType.text,
+              //     onChanged: (String value) {
+              //       model.userData.intercom = value;
+              //       model.intercomError = (value.isNotEmpty)
+              //           ? !RegExp(CommonPattern.addressRegex).hasMatch(value)
+              //           : false;
+              //       model.notifyListeners();
+              //     },
+              //     errorText: model.intercomError
+              //         ? "Please Enter Valid Intercom"
+              //         : null,
+              //   ),
+              // ),
             ],
           ),
           SizedBox(
@@ -206,229 +206,247 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
           SizedBox(
             height: 20,
           ),
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: 15,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.grey.shade300,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: DocViewWidget(
-                        title: "Attch BOB id Card",
-                        height: (MediaQuery.of(context).size.width - 100) / 2,
-                        file: model.idCard,
-                        onSelectImage: () {
-                          model.selectImage(
-                            context,
-                            (source) {
-                              model.pickImage(source, Constants.BOB_ID);
-                            },
-                          );
-                        },
-                        onDeleteImage: () {
-                          model.removeImage(Constants.BOB_ID);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 15,
-                ),
-                padding: EdgeInsets.all(
-                  5,
-                ),
-                color: AppColors.whiteColor,
-                child: Text(
-                  "Attach Documents",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ],
+          RegisterTextfield(
+            text: "Confirm Password*",
+            controller: model.confirmPasswordController,
+            showIcon: true,
+            textInputType: TextInputType.text,
+            onIconClicked: model.onConfirmPasswordVisibleclicked,
+            obsecure: model.confirmObsecureText,
+            icon: model.confirmObsecureText ? Icons.visibility : Icons.visibility_off,
+            onChanged: (String value) {
+              model.userData.password = value;
+              model.confirmPasswordError = model.passwordController.text != value;
+              model.notifyListeners();
+            },
+            errorText: model.confirmPasswordError ? Constants.CONFIRM_PASSWORD_MSG : null,
           ),
           SizedBox(
-            height: 15,
+            height: 30,
           ),
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: 15,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: AppColors.grey400,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    RegisterTextfield(
-                      text: "Name*",
-                      controller: model.contactNameController,
-                      textInputType: TextInputType.name,
-                      onChanged: (String value) {
-                        model.contactPerson.contactPersonName = value;
-                        model.contactNameError =
-                            !RegExp(CommonPattern.name_regex).hasMatch(value);
-                        model.notifyListeners();
-                      },
-                      errorText: model.contactNameError
-                          ? "Please Enter Valid Name"
-                          : null,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    RegisterTextfield(
-                      text: "Mobile*",
-                      controller: model.contactMobileController,
-                      textInputType: TextInputType.number,
-                      onChanged: (String value) {
-                        myPrint("mobile is $value");
-                        model.contactPerson.contactPersonMobile = value;
-                        model.contactMobileError =
-                            !RegExp(CommonPattern.mobile_regex).hasMatch(value);
-                        model.notifyListeners();
-                      },
-                      errorText: model.contactMobileError
-                          ? "Please Enter Valid Mobile"
-                          : null,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Focus(
-                            onFocusChange: (hasFocus) {
-                              if (!hasFocus &&
-                                  !model.contactEmailError &&
-                                  !model.contactEmailVerified) {
-                                model.checkUser(context,
-                                    onSucess: (bool value) {
-                                  model.contactEmailVerified = value;
-                                  if (!value) {
-                                    model.contactEmailController.text = "";
-                                  }
-                                  model.notifyListeners();
-                                });
-                              }
-                            },
-                            child: RegisterTextfield(
-                              text: "Email*",
-                              controller: model.contactEmailController,
-                              textInputType: TextInputType.emailAddress,
-                              onChanged: (String value) {
-                                model.contactEmailVerified = false;
-                                model.contactPerson.contactPersonEmail = value;
-                                model.contactEmailError =
-                                    !RegExp(CommonPattern.email_regex)
-                                        .hasMatch(value);
-                                model.notifyListeners();
-                              },
-                              errorText: model.contactEmailError
-                                  ? "Please Enter Valid contact Email"
-                                  : null,
-                            ),
-                          ),
-                        ),
-                        (model.contactEmailVerified)
-                            ? Row(
-                                children: [
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.verified_user_outlined,
-                                        color: Colors.green,
-                                      )),
-                                ],
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 15,
-                ),
-                padding: EdgeInsets.all(
-                  5,
-                ),
-                color: AppColors.whiteColor,
-                child: Text(
-                  "Contact Person Details",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: AppColors.grey600),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Column(
-            children: model.addressList
-                .map((e) => AddressRow(
-                      data: e,
-                      onDeleteClicked: () => model.onAddressDeleteClicked(e),
-                      onEditClicked: () => _showBottomDialog(context, model, e),
-                    ))
-                .toList(),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ButtonView(
-                  buttonText: "Add Address",
-                  color: AppColors.mainLightColor,
-                  onPressed: () {
-                    _showBottomDialog(context, model, null);
-                  },
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          // Stack(
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         top: 15,
+          //       ),
+          //       padding: EdgeInsets.symmetric(
+          //         horizontal: 20,
+          //         vertical: 20,
+          //       ),
+          //       decoration: BoxDecoration(
+          //         border: Border.all(
+          //           width: 2,
+          //           color: Colors.grey.shade300,
+          //         ),
+          //         borderRadius: BorderRadius.circular(12),
+          //       ),
+          //       child: Row(
+          //         children: [
+          //           Expanded(
+          //             child: DocViewWidget(
+          //               title: "Attch BOB id Card",
+          //               height: (MediaQuery.of(context).size.width - 100) / 2,
+          //               file: model.idCard,
+          //               onSelectImage: () {
+          //                 model.selectImage(
+          //                   context,
+          //                   (source) {
+          //                     model.pickImage(source, Constants.BOB_ID);
+          //                   },
+          //                 );
+          //               },
+          //               onDeleteImage: () {
+          //                 model.removeImage(Constants.BOB_ID);
+          //               },
+          //             ),
+          //           ),
+          //           Expanded(
+          //             flex: 1,
+          //             child: Container(),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         left: 15,
+          //       ),
+          //       padding: EdgeInsets.all(
+          //         5,
+          //       ),
+          //       color: AppColors.whiteColor,
+          //       child: Text(
+          //         "Attach Documents",
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.black54,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 15,
+          // ),
+          // Stack(
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         top: 15,
+          //       ),
+          //       padding: EdgeInsets.symmetric(
+          //         horizontal: 20,
+          //         vertical: 20,
+          //       ),
+          //       decoration: BoxDecoration(
+          //         border: Border.all(
+          //           width: 1,
+          //           color: AppColors.grey400,
+          //         ),
+          //         borderRadius: BorderRadius.circular(12),
+          //       ),
+          //       child: Column(
+          //         children: [
+          //           RegisterTextfield(
+          //             text: "Name*",
+          //             controller: model.contactNameController,
+          //             textInputType: TextInputType.name,
+          //             onChanged: (String value) {
+          //               model.contactPerson.contactPersonName = value;
+          //               model.contactNameError =
+          //                   !RegExp(CommonPattern.name_regex).hasMatch(value);
+          //               model.notifyListeners();
+          //             },
+          //             errorText: model.contactNameError
+          //                 ? "Please Enter Valid Name"
+          //                 : null,
+          //           ),
+          //           SizedBox(
+          //             height: 20,
+          //           ),
+          //           RegisterTextfield(
+          //             text: "Mobile*",
+          //             controller: model.contactMobileController,
+          //             textInputType: TextInputType.number,
+          //             onChanged: (String value) {
+          //               myPrint("mobile is $value");
+          //               model.contactPerson.contactPersonMobile = value;
+          //               model.contactMobileError =
+          //                   !RegExp(CommonPattern.mobile_regex).hasMatch(value);
+          //               model.notifyListeners();
+          //             },
+          //             errorText: model.contactMobileError
+          //                 ? "Please Enter Valid Mobile"
+          //                 : null,
+          //           ),
+          //           SizedBox(
+          //             height: 20,
+          //           ),
+          //           Row(
+          //             children: [
+          //               Expanded(
+          //                 child: Focus(
+          //                   onFocusChange: (hasFocus) {
+          //                     if (!hasFocus &&
+          //                         !model.contactEmailError &&
+          //                         !model.contactEmailVerified) {
+          //                       model.checkUser(context,
+          //                           onSucess: (bool value) {
+          //                         model.contactEmailVerified = value;
+          //                         if (!value) {
+          //                           model.contactEmailController.text = "";
+          //                         }
+          //                         model.notifyListeners();
+          //                       });
+          //                     }
+          //                   },
+          //                   child: RegisterTextfield(
+          //                     text: "Email*",
+          //                     controller: model.contactEmailController,
+          //                     textInputType: TextInputType.emailAddress,
+          //                     onChanged: (String value) {
+          //                       model.contactEmailVerified = false;
+          //                       model.contactPerson.contactPersonEmail = value;
+          //                       model.contactEmailError =
+          //                           !RegExp(CommonPattern.email_regex)
+          //                               .hasMatch(value);
+          //                       model.notifyListeners();
+          //                     },
+          //                     errorText: model.contactEmailError
+          //                         ? "Please Enter Valid contact Email"
+          //                         : null,
+          //                   ),
+          //                 ),
+          //               ),
+          //               (model.contactEmailVerified)
+          //                   ? Row(
+          //                       children: [
+          //                         SizedBox(
+          //                           width: 5,
+          //                         ),
+          //                         IconButton(
+          //                             onPressed: () {},
+          //                             icon: Icon(
+          //                               Icons.verified_user_outlined,
+          //                               color: Colors.green,
+          //                             )),
+          //                       ],
+          //                     )
+          //                   : Container(),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     Container(
+          //       margin: EdgeInsets.only(
+          //         left: 15,
+          //       ),
+          //       padding: EdgeInsets.all(
+          //         5,
+          //       ),
+          //       color: AppColors.whiteColor,
+          //       child: Text(
+          //         "Contact Person Details",
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.bold, color: AppColors.grey600),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // Column(
+          //   children: model.addressList
+          //       .map((e) => AddressRow(
+          //             data: e,
+          //             onDeleteClicked: () => model.onAddressDeleteClicked(e),
+          //             onEditClicked: () => _showBottomDialog(context, model, e),
+          //           ))
+          //       .toList(),
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(10.0),
+          //   child: Row(
+          //     children: [
+          //       ButtonView(
+          //         buttonText: "Add Address",
+          //         color: AppColors.mainLightColor,
+          //         onPressed: () {
+          //           _showBottomDialog(context, model, null);
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 20,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

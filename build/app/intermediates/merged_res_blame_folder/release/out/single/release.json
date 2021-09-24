@@ -44,8 +44,20 @@
         "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/layout/custom_dialog.xml"
     },
     {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-xhdpi_splash.jpg.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-xhdpi/splash.jpg"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-mdpi_splash.jpg.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-mdpi/splash.jpg"
+    },
+    {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/drawable-hdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/drawable_logo.png.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/drawable/logo.png"
     },
     {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/layout-v21_notification_action_tombstone.xml.flat",
@@ -58,6 +70,10 @@
     {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-xxxhdpi_splash.jpg.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-xxxhdpi/splash.jpg"
     },
     {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/drawable-v21_launch_background.xml.flat",
@@ -92,8 +108,16 @@
         "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },
     {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-hdpi_splash.jpg.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-hdpi/splash.jpg"
+    },
+    {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/mipmap-xxhdpi_splash.jpg.flat",
+        "source": "/opt/flutter_projects/diamond-main/android/app/src/main/res/mipmap-xxhdpi/splash.jpg"
     },
     {
         "merged": "/opt/flutter_projects/diamond-main/build/app/intermediates/res/merged/release/drawable_notification_tile_bg.xml.flat",

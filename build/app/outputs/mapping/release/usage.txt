@@ -628,8 +628,8 @@ com.google.common.collect.ImmutableMap$MapViewOfValuesAsSingletonSets$1$1
 androidx.annotation.Nullable
 com.google.common.collect.Collections2$TransformedCollection
 com.google.common.graph.BaseGraph
-androidx.core.content.res.ResourcesCompat$FontCallback
 com.google.common.collect.Synchronized$SynchronizedCollection
+androidx.core.content.res.ResourcesCompat$FontCallback
 com.google.common.math.LinearTransformation$1
 com.google.common.collect.ImmutableEnumSet
 com.google.common.collect.TreeRangeMap$SubRangeMap$SubRangeMapAsMap
@@ -837,11 +837,11 @@ androidx.core.app.JobIntentService$JobWorkEnqueuer
 android.support.v4.os.ResultReceiver
 androidx.arch.core.R
 androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-com.google.common.collect.AbstractMapBasedMultimap$WrappedList$WrappedListIterator
 androidx.lifecycle.LifecycleRegistry:
     public void markState(androidx.lifecycle.Lifecycle$State)
     public void setCurrentState(androidx.lifecycle.Lifecycle$State)
     public int getObserverCount()
+com.google.common.collect.AbstractMapBasedMultimap$WrappedList$WrappedListIterator
 com.google.common.collect.ImmutableBiMap
 com.google.common.util.concurrent.Uninterruptibles:
     public static void awaitUninterruptibly(java.util.concurrent.CountDownLatch)
@@ -2712,8 +2712,8 @@ com.google.common.collect.DenseImmutableTable$RowMap
 io.flutter.plugin.common.FlutterException:
     private static final java.lang.String TAG
 com.google.common.collect.TreeBasedTable
-com.google.common.base.Converter$ConverterComposition
 com.google.common.base.FinalizableReferenceQueue
+com.google.common.base.Converter$ConverterComposition
 com.google.common.cache.LocalCache$EntryFactory$2
 com.google.common.util.concurrent.AbstractTransformFuture$AsyncTransformFuture
 com.google.common.graph.ValueGraph
@@ -4603,5 +4603,5 @@ io.flutter.view.AccessibilityBridge$SemanticsNode:
     private float previousScrollExtentMin
 io.flutter.embedding.engine.loader.FlutterLoader$InitResult:
     final java.lang.String dataDirPath
-io.flutter.plugin.platform.PlatformView$-CC
 androidx.lifecycle.DefaultLifecycleObserver$-CC
+io.flutter.plugin.platform.PlatformView$-CC

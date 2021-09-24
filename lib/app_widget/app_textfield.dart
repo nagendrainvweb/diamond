@@ -10,6 +10,7 @@ class AppTextfield extends StatelessWidget {
       this.color,
       this.textColor = AppColors.blackColor,
       this.controller,
+      this.keyboardType = TextInputType.name,
       this.errorText, this.onChanged, this.showIcon = false, this.suffixIcon, this.onIconClicked})
       : super(key: key);
 
@@ -24,6 +25,7 @@ class AppTextfield extends StatelessWidget {
   final bool showIcon;
   final IconData suffixIcon;
   final Function onIconClicked;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class AppTextfield extends StatelessWidget {
             obscureText: obsecure,
             style: TextStyle(color: textColor, fontSize: 18),
             onChanged: onChanged,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
@@ -44,12 +47,12 @@ class AppTextfield extends StatelessWidget {
               contentPadding:
                   EdgeInsets.symmetric(vertical: 18, horizontal: 20),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(
                     color: color, width: 1.5, style: BorderStyle.solid),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(
                     color: color, width: 1.5, style: BorderStyle.solid),
               ),

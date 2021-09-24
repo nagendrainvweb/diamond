@@ -3,6 +3,7 @@ import 'package:diamon_assorter/app/locator.dart';
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/services/api_services.dart';
+import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,31 @@ import 'package:stacked/stacked.dart';
 class LoginViewModel extends BaseViewModel with AppHelper {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
+  final mobileController = TextEditingController();
 
   final _apiService = locator<ApiService>();
 
   bool userNameError = false;
   bool passwordError = false;
+  bool mobileError = false;
+  bool loginWithOTP = true;
 
-  void loginClicked(BuildContext context) async {
+  setLoginWithOtp() {
+    loginWithOTP = !loginWithOTP;
+    notifyListeners();
+  }
+
+  void loginOtpClicked(BuildContext context) async {
+    final valid =
+        !RegExp(CommonPattern.mobile_regex).hasMatch(mobileController.text);
+    if (!valid) {
+      showSnackBar(context, "Coming soon...");
+    }else{
+      showSnackBar(context, "Please Enter Valid Mobile Number");
+    }
+  }
+
+  void loginPasswordClicked(BuildContext context) async {
     myPrint("uersname " + userNameController.text);
     myPrint("password " + passwordController.text);
     if (userNameController.text.isEmpty) {
@@ -36,7 +55,7 @@ class LoginViewModel extends BaseViewModel with AppHelper {
       hideProgressDialog(context);
       await Prefs.setLogin(true);
       Prefs.setUserId(response.data.id.toString());
-     Utility.pushToDashBoard(context);
+      Utility.pushToDashBoard(context);
     } catch (e) {
       myPrint(e.toString());
       hideProgressDialog(context);

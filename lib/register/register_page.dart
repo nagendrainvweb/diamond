@@ -18,20 +18,20 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  String _chosenValue = Constants.COMPANY;
+  String _chosenValue ;
 
-  _getRegisterWidget() {
-    if (_chosenValue == Constants.COMPANY) {
-      return CompanyRegisterWidget();
-    }
-    if (_chosenValue == Constants.AGENT) {
-      return AgentRegistrationWidget();
-    }
-    if (_chosenValue == Constants.ASSERTER) {
-      return AssorterRegisterWidget();
-    }
-    return CompanyRegisterWidget();
-  }
+  // _getRegisterWidget() {
+  //   if (_chosenValue == Constants.COMPANY) {
+  //     return CompanyRegisterWidget();
+  //   }
+  //   if (_chosenValue == Constants.AGENT) {
+  //     return AgentRegistrationWidget();
+  //   }
+  //   if (_chosenValue == Constants.ASSERTER) {
+  //     return AssorterRegisterWidget();
+  //   }
+  //   return CompanyRegisterWidget();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,28 +49,29 @@ class _RegistrationPageState extends State<RegistrationPage> {
               horizontal: 20,
             ),
             child: Row(
-              children: [
-                Text(
-                  "Register as : ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
+               children: [
+              //   Text(
+              //     "Register as : ",
+              //     style: TextStyle(
+              //       fontSize: 18,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              //   SizedBox(
+              //     width: 10,
+              //   ),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.greyColor),
-                        borderRadius: BorderRadius.circular(12),
-                        color: AppColors.mainLightColor),
+                        border: Border.all(color: AppColors.grey500),
+                        borderRadius: BorderRadius.circular(10),
+                        ),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: DropdownButton<String>(
                       underline: Container(),
                       value: _chosenValue,
                       isExpanded: true,
+                      hint: Text("Please Select Type"),
                       //elevation: 5,
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       items: <String>[
@@ -93,11 +94,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-              ],
+            ]
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Expanded(
             child: Container(
@@ -108,8 +109,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 context: context,
                 removeTop: true,
                 //child: AgentRegistrationWidget(),
-                // child: CompanyRegisterWidget(),
-                child: _getRegisterWidget(),
+                 child: CompanyRegisterWidget(),
+               // child: _getRegisterWidget(),
               ),
             ),
           ),
