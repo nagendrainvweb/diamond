@@ -48,8 +48,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             padding: EdgeInsets.symmetric(
               horizontal: 20,
             ),
-            child: Row(
-               children: [
+            child: Row( children: [
               //   Text(
               //     "Register as : ",
               //     style: TextStyle(
@@ -70,8 +69,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: DropdownButton<String>(
                       underline: Container(),
                       value: _chosenValue,
-                      isExpanded: true,
                       hint: Text("Please Select Type"),
+                      isExpanded: true,
                       //elevation: 5,
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       items: <String>[
