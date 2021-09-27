@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         AppTextfield(
           controller: model.userNameController,
-          hint: "EMAIL ID",
+          hint: "Email Id",
           icon: Icons.person_outline_outlined,
           obsecure: false,
           color: AppColors.mainColor,
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         AppTextfield(
           controller: model.passwordController,
-          hint: "PASSWORD",
+          hint: "Password",
           icon: Icons.lock_open_outlined,
           obsecure: obsecure,
           showIcon: true,

@@ -19,13 +19,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ButtonView(
-            buttonText: "Update Profile",
-            color: AppColors.mainColor,
-            onPressed: () {
-              Utility.pushToNext(context, UpdateProfile());
-            },
-          ),
+          // ButtonView(
+          //   buttonText: "Update Profile",
+          //   color: AppColors.mainColor,
+          //   onPressed: () {
+          //     Utility.pushToNext(context, UpdateProfile());
+          //   },
+          // ),
         ],
       ),
     );

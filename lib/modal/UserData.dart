@@ -4,6 +4,8 @@ import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
 
 class UserData {
+  int id;
+  int userId;
   String registrationAs;
   String name;
   String companyName;
@@ -26,7 +28,9 @@ class UserData {
   List<File> fileList;
 
   UserData(
-      {this.registrationAs,
+      {this.id,
+      this.userId,
+      this.registrationAs,
       this.name,
       this.companyName,
       this.telephone,
@@ -48,6 +52,8 @@ class UserData {
       this.speed});
 
   UserData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
     registrationAs = json['registration_as'];
     name = json['name'];
     companyName = json['company_name'];
@@ -81,6 +87,24 @@ class UserData {
     speed = json['speed'];
   }
 
+  setAddressFromJson(Map<String,dynamic> json){
+    if (json['address'] != null) {
+      address = new List<AddressData>();
+      json['address'].forEach((v) {
+        address.add(new AddressData.fromJson(v));
+      });
+    }
+  }
+
+    setAssorterFromJson(Map<String,dynamic> json){
+    if (json['assorters'] != null) {
+      assorters = new List<AssorterModal>();
+      json['assorters'].forEach((v) {
+        assorters.add(new AssorterModal.fromJson(v));
+      });
+    }
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['registration_as'] = this.registrationAs;
@@ -111,7 +135,6 @@ class UserData {
     return data;
   }
 }
-
 
 class ContactPerson {
   String contactPersonName;

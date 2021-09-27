@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static final Color mainColor = Color(0xff3cb4c4);
-  static const Color mainDarkColor = Color(0xff46a8b5);
+  static const Color mainDarkColor = Color(0xff1D768C);
   static final Color buttonColor = Color(0xff1777ac);
   static final Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black87;
@@ -15,7 +15,7 @@ class AppColors {
   static final Color grey600 = Colors.grey.shade600;
   static final Color grey700 = Colors.grey.shade700;
   static final Color redAccent = Colors.red[400];
-  static const Color blackLight = Colors.black;
+  static const Color blackLight = Colors.black54;
   static const Color blackText = Colors.black87;
   static final Color grey400 = Colors.grey[400];
 }

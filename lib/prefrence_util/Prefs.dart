@@ -68,6 +68,12 @@ class Prefs {
   static Future<String> get city =>
       PreferencesHelper.getString(Constants.CITY);
 
+  static Future setRole(String value) =>
+      PreferencesHelper.setString(Constants.ROLE, value);
+
+  static Future<String> get role =>
+      PreferencesHelper.getString(Constants.ROLE);
+
   
   static Future setStateList(String value) =>
       PreferencesHelper.setString(Constants.STATE_LIST, value);

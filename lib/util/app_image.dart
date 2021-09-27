@@ -5,4 +5,5 @@ class AppImages {
   static final String ongoingOrder = "assets/Ongoing_Orders_Icon.png";
   static final String pendingOrder = "assets/Pending_Orders_Icon.png";
   static final String upcomingOrder = "assets/Upcoming_Orders_Icon.png";
+  static final String profile = "assets/avator_man.svg";
 }

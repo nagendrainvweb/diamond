@@ -16,6 +16,7 @@ import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class RegistrationViewModel extends BaseViewModel with AppHelper {
@@ -283,9 +284,14 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       //   }
       // }
       final response = await _apiService.registerUser(_userData);
-      Prefs.setLogin(true);
-      Prefs.setUserId(response.data.id.toString());
-      hideProgressDialog(context);
+      await Prefs.setLogin(true);
+      await Prefs.setUserId(response.data.userId.toString());
+      await Prefs.setName(response.data.name);
+      await Prefs.setEmailId(response.data.email);
+      await Prefs.setMobileNumber(response.data.mobile);
+      await Prefs.setRole(response.data.registrationAs);
+      Provider.of<AppRepo>(context, listen: false).setUserData(response.data);
+
       Utility.pushToDashBoard(context);
     } catch (e) {
       myPrint(e.toString());

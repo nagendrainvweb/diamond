@@ -56,4 +56,6 @@ class Constants {
 
   static var DATA = "data";
 
+  static String ROLE = "ROLE";
+
 }

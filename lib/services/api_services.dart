@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:diamon_assorter/modal/UserData.dart';
 import 'package:diamon_assorter/modal/agentData.dart';
 import 'package:diamon_assorter/modal/basic_response.dart';
-import 'package:diamon_assorter/modal/login_response_data.dart';
 import 'package:diamon_assorter/modal/register_response_data.dart';
+import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/services/api_error_exception.dart';
 import 'package:diamon_assorter/services/urlList.dart';
 import 'package:diamon_assorter/util/constants.dart';
@@ -15,8 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  Future<BasicResponse<RegisterResponseData>> registerUser(
-      UserData userData) async {
+  Future<BasicResponse<UserData>> registerUser(UserData userData) async {
     try {
       final header = {"Content-Type": "application/json"};
       final body = json.encode(userData.toJson());
@@ -26,9 +25,23 @@ class ApiService {
       myPrint("register response : ${request.body.toString()}");
       final jsonResponse = json.decode(request.body);
       if (jsonResponse[Constants.STATUS] == true) {
-        return BasicResponse<RegisterResponseData>.fromJson(
-            json: jsonResponse,
-            data: RegisterResponseData.fromJson(jsonResponse));
+        UserData userData = new UserData();
+        final data = jsonResponse[Constants.DATA];
+        if (data != null) {
+          final profileData = data['profile'];
+          final role = data['roles'][0];
+          userData.id = profileData['id'];
+          userData.userId = profileData['user_id'];
+          userData.name = data['name'];
+          userData.email = data['email'];
+          userData.mobile = profileData['mobile'];
+          userData.companyName = profileData['company_name'];
+          userData.registrationAs = role["name"];
+          userData.setAddressFromJson(data);
+          userData.setAssorterFromJson(data);
+          return BasicResponse<UserData>.fromJson(
+              json: jsonResponse, data: userData);
+        }
       }
       throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
     } on SocketException catch (e) {
@@ -138,15 +151,34 @@ class ApiService {
     }
   }
 
-  Future<BasicResponse<LoginResponseData>> loginUser(String username, String password) async {
+  Future<BasicResponse<UserData>> loginUser(
+      String username, String password) async {
     try {
       final body = {"email": username, "password": password};
       final request = await http.post(Uri.parse(UrlList.LOGIN), body: body);
       myPrint("login response : ${request.body.toString()}");
       final jsonResponse = json.decode(request.body);
       if (jsonResponse[Constants.STATUS] == true) {
-        return BasicResponse<LoginResponseData>.fromJson(
-            json: jsonResponse, data: LoginResponseData.fromJson(jsonResponse));
+        UserData userData = new UserData();
+
+        final data = jsonResponse[Constants.DATA];
+        if (data != null) {
+          final profileData = data['profile'];
+
+          final role = data['roles'][0];
+          userData.id = profileData['id'];
+          userData.userId = profileData['user_id'];
+          userData.name = data['name'];
+          userData.email = data['email'];
+          userData.mobile = profileData['mobile'];
+          //userData.companyName = profileData['company_name'];
+
+          userData.registrationAs = role["name"];
+          userData.setAddressFromJson(data);
+          userData.setAssorterFromJson(data);
+          return BasicResponse<UserData>.fromJson(
+              json: jsonResponse, data: userData);
+        }
       }
       throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
 
@@ -162,15 +194,14 @@ class ApiService {
   Future<BasicResponse<String>> forgortPassword(String email) async {
     try {
       final body = {"email": email};
-      final request = await http.post(Uri.parse(UrlList.FORGOT_PASSWORD), body: body);
+      final request =
+          await http.post(Uri.parse(UrlList.FORGOT_PASSWORD), body: body);
       myPrint("login response : ${request.body.toString()}");
-     final jsonResponse = json.decode(request.body);
+      final jsonResponse = json.decode(request.body);
       if (jsonResponse[Constants.STATUS] == true) {
         return BasicResponse.fromJson(json: jsonResponse, data: "");
       }
-     throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
-
-      
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
     } on SocketException catch (e) {
       throw ApiErrorException(NO_INTERNET_CONN);
     } on Exception catch (e) {
@@ -178,18 +209,44 @@ class ApiService {
       throw ApiErrorException(e.toString());
     }
   }
+
   Future<BasicResponse<String>> checkUser(String email) async {
     try {
       final body = {"email": email};
-      final request = await http.post(Uri.parse(UrlList.CHECK_USER), body: body);
+      final request =
+          await http.post(Uri.parse(UrlList.CHECK_USER), body: body);
       myPrint("login response : ${request.body.toString()}");
-     final jsonResponse = json.decode(request.body);
+      final jsonResponse = json.decode(request.body);
       if (jsonResponse[Constants.STATUS] == true) {
         return BasicResponse.fromJson(json: jsonResponse, data: "");
       }
-     throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
 
-      
+  Future<BasicResponse<String>> changePassword(
+      String oldPass, String newPass) async {
+    try {
+      final email = await Prefs.emailId;
+      final body = {
+        "email": email,
+        "old_password": oldPass,
+        "new_password": newPass
+      };
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.CHNAGE_PASSWORD), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        return BasicResponse.fromJson(json: jsonResponse, data: "");
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
     } on SocketException catch (e) {
       throw ApiErrorException(NO_INTERNET_CONN);
     } on Exception catch (e) {

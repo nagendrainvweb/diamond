@@ -1,4 +1,5 @@
 import 'package:diamon_assorter/app/app_helper.dart';
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app/locator.dart';
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/prefrence_util/Prefs.dart';
@@ -7,6 +8,7 @@ import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginViewModel extends BaseViewModel with AppHelper {
@@ -31,7 +33,7 @@ class LoginViewModel extends BaseViewModel with AppHelper {
         !RegExp(CommonPattern.mobile_regex).hasMatch(mobileController.text);
     if (!valid) {
       showSnackBar(context, "Coming soon...");
-    }else{
+    } else {
       showSnackBar(context, "Please Enter Valid Mobile Number");
     }
   }
@@ -54,7 +56,13 @@ class LoginViewModel extends BaseViewModel with AppHelper {
           userNameController.text, passwordController.text);
       hideProgressDialog(context);
       await Prefs.setLogin(true);
-      Prefs.setUserId(response.data.id.toString());
+      await Prefs.setUserId(response.data.userId.toString());
+      await Prefs.setName(response.data.name);
+      await Prefs.setEmailId(response.data.email);
+      await Prefs.setMobileNumber(response.data.mobile);
+      await Prefs.setRole(response.data.registrationAs);
+      Provider.of<AppRepo>(context, listen: false).setUserData(response.data);
+
       Utility.pushToDashBoard(context);
     } catch (e) {
       myPrint(e.toString());

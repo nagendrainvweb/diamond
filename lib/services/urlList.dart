@@ -9,4 +9,5 @@ class UrlList {
   static String LOGIN = BASE_URL + "login";
   static String FORGOT_PASSWORD = BASE_URL + "forgotPassword";
   static String CHECK_USER = BASE_URL + "checkUserEmail";
+  static String CHNAGE_PASSWORD = BASE_URL + "changePassword";
 }

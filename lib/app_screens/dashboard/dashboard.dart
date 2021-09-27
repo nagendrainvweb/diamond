@@ -2,6 +2,7 @@ import 'package:diamon_assorter/app_screens/dashboard/cart_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/contact_widget.dart';
 import 'package:diamon_assorter/app_screens/dashboard/profile_widget.dart';
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
+import 'package:diamon_assorter/app_widget/app_drawer.dart';
 import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
@@ -69,16 +70,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: _SetBottomNavigationBar(),
-      drawer: Drawer(
-        child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text("index $index"),
-              );
-            }),
-      ),
+     // bottomNavigationBar: _SetBottomNavigationBar(),
+      drawer: AppDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -97,10 +90,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
             },
           ),
           Expanded(
-            child: _children[_currentIndex],
+            child: HomeWidget(),
+            //child: _children[_currentIndex],
           ),
         ],
       ),
     );
   }
 }
+
+
