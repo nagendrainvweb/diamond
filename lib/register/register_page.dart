@@ -26,7 +26,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   //   }
   //   if (_chosenValue == Constants.AGENT) {
   //     return AgentRegistrationWidget();
-  //   }
+  //   
   //   if (_chosenValue == Constants.ASSERTER) {
   //     return AssorterRegisterWidget();
   //   }

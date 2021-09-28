@@ -31,7 +31,7 @@ class DocViewWidget extends StatelessWidget {
             margin: EdgeInsets.only(right: 5, top: 5),
             decoration: BoxDecoration(
               border: Border.all(
-                width: 2,
+                width: 1,
                 color: Colors.grey.shade300,
               ),
               borderRadius: BorderRadius.circular(12),
