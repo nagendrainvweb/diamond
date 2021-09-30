@@ -52,12 +52,42 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
     final appRepo = Provider.of<AppRepo>(context, listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model) =>
-          model.initData("company", appRepo),
+      onModelReady: (RegistrationViewModel model) => model.initData(appRepo),
       builder: (_, model, child) => ListView(
         children: [
           SizedBox(
             height: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.grey400),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: DropdownButton<String>(
+              underline: Container(),
+              value: model.registerValue,
+              hint: Text("Please Select Type"),
+              isExpanded: true,
+              //elevation: 5,
+              style: TextStyle(color: Colors.black, fontSize: 18),
+              items: <String>[
+                Constants.COMPANY,
+                Constants.AGENT,
+                Constants.ASSERTER,
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+
+              onChanged: model.setRegisterValue,
+            ),
+          ),
+
+          SizedBox(
+            height: 20,
           ),
           RegisterTextfield(
             text: "Name*",
@@ -213,13 +243,18 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
             textInputType: TextInputType.text,
             onIconClicked: model.onConfirmPasswordVisibleclicked,
             obsecure: model.confirmObsecureText,
-            icon: model.confirmObsecureText ? Icons.visibility : Icons.visibility_off,
+            icon: model.confirmObsecureText
+                ? Icons.visibility
+                : Icons.visibility_off,
             onChanged: (String value) {
               model.userData.password = value;
-              model.confirmPasswordError = model.passwordController.text != value;
+              model.confirmPasswordError =
+                  model.passwordController.text != value;
               model.notifyListeners();
             },
-            errorText: model.confirmPasswordError ? Constants.CONFIRM_PASSWORD_MSG : null,
+            errorText: model.confirmPasswordError
+                ? Constants.CONFIRM_PASSWORD_MSG
+                : null,
           ),
           SizedBox(
             height: 30,
@@ -504,5 +539,3 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
     );
   }
 }
-
-

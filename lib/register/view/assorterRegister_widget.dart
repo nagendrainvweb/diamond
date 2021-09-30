@@ -31,7 +31,7 @@ class _AssorterRegisterWidgetState extends State<AssorterRegisterWidget> {
 final appRepo = Provider.of<AppRepo>(context,listen: false);
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
-      onModelReady: (RegistrationViewModel model) => model.initData("assorter",appRepo),
+      onModelReady: (RegistrationViewModel model) => model.initData(appRepo),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(

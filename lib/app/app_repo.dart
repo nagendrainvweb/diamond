@@ -12,13 +12,14 @@ class AppRepo extends ChangeNotifier {
   final _apiService = locator<ApiService>();
   bool _login = false;
   String _name;
-  String _email, _number;
+  String _email, _number, _role;
   UserData _userData;
   init() async {
     _login = await Prefs.login;
     _name = await Prefs.name;
     _email = await Prefs.emailId;
     _number = await Prefs.mobileNumber;
+    _role = await Prefs.role;
     fetchAgentList();
   }
 
@@ -27,6 +28,7 @@ class AppRepo extends ChangeNotifier {
     _name = value;
   }
 
+  String get role => _role;
   String get email => _email;
   void setEmail(String value) {
     _email = value;

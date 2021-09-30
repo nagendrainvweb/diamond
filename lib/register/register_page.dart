@@ -44,61 +44,61 @@ class _RegistrationPageState extends State<RegistrationPage> {
           SizedBox(
             height: 20,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Row( children: [
-              //   Text(
-              //     "Register as : ",
-              //     style: TextStyle(
-              //       fontSize: 18,
-              //       fontWeight: FontWeight.bold,
-              //     ),
-              //   ),
-              //   SizedBox(
-              //     width: 10,
-              //   ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.grey500),
-                        borderRadius: BorderRadius.circular(10),
-                        ),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: DropdownButton<String>(
-                      underline: Container(),
-                      value: _chosenValue,
-                      hint: Text("Please Select Type"),
-                      isExpanded: true,
-                      //elevation: 5,
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                      items: <String>[
-                        Constants.COMPANY,
-                        Constants.AGENT,
-                        Constants.ASSERTER,
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: 20,
+          //   ),
+          //   child: Row( children: [
+          //     //   Text(
+          //     //     "Register as : ",
+          //     //     style: TextStyle(
+          //     //       fontSize: 18,
+          //     //       fontWeight: FontWeight.bold,
+          //     //     ),
+          //     //   ),
+          //     //   SizedBox(
+          //     //     width: 10,
+          //     //   ),
+          //       Expanded(
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //               border: Border.all(color: AppColors.grey500),
+          //               borderRadius: BorderRadius.circular(10),
+          //               ),
+          //           padding: const EdgeInsets.symmetric(horizontal: 10),
+          //           child: DropdownButton<String>(
+          //             underline: Container(),
+          //             value: _chosenValue,
+          //             hint: Text("Please Select Type"),
+          //             isExpanded: true,
+          //             //elevation: 5,
+          //             style: TextStyle(color: Colors.black, fontSize: 18),
+          //             items: <String>[
+          //               Constants.COMPANY,
+          //               Constants.AGENT,
+          //               Constants.ASSERTER,
+          //             ].map<DropdownMenuItem<String>>((String value) {
+          //               return DropdownMenuItem<String>(
+          //                 value: value,
+          //                 child: Text(value),
+          //               );
+          //             }).toList(),
 
-                      onChanged: (String value) {
+          //             onChanged: (String value) {
                         
-                        setState(() {
-                          _chosenValue = value;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-            ]
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
+          //               setState(() {
+          //                 _chosenValue = value;
+          //               });
+          //             },
+          //           ),
+          //         ),
+          //       ),
+          //   ]
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(

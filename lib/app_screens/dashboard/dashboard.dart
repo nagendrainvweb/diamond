@@ -76,7 +76,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppAppBar(
-            showLogout: true,
+           // showLogout: true,
             showMenuButton: true,
             onMenuClicked: () {
               _scaffoldKey.currentState.openDrawer();

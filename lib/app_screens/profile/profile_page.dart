@@ -3,15 +3,18 @@ import 'package:diamon_assorter/app_screens/update_profile/updateProfile_screen.
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
+import 'package:diamon_assorter/prefrence_util/Prefs.dart';
 import 'package:diamon_assorter/services/api_services.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/app_helper.dart';
+import 'package:diamon_assorter/util/app_image.dart';
 import 'package:diamon_assorter/util/common_pattern.dart';
 import 'package:diamon_assorter/util/constants.dart';
 import 'package:diamon_assorter/util/dialog_helper.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key key}) : super(key: key);
@@ -41,8 +44,12 @@ class _ProfilePageState extends State<ProfilePage> with AppHelper {
                   height: 140,
                   width: 140,
                   child: CircleAvatar(
-                      // child: SvgPicture.asset(AppImages.profile,height: 120,width: 120,),
-                      ),
+                    child: SvgPicture.asset(
+                      AppImages.profile,
+                      height: 140,
+                      width: 140,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 30,
@@ -90,6 +97,20 @@ class _ProfilePageState extends State<ProfilePage> with AppHelper {
                         iconData: Icons.lock_open_outlined,
                         onClick: () {
                           _showChangePasswordSheet();
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ProfileTile(
+                        text: "Log out",
+                        iconData: Icons.logout_outlined,
+                        onClick: () {
+                          DialogHelper.showLogoutDialog(context, () {
+                            Navigator.pop(context);
+                            Prefs.clear();
+                            Utility.pushToLogin(context);
+                          });
                         },
                       ),
                       SizedBox(

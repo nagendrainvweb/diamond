@@ -41,7 +41,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   List<AddressData> addressList = [];
 
   File idCard, aadharCard, passport;
-  String service, speed;
+  String service, speed, _regsiterAsValue;
 
   bool nameError = false;
   bool mobileError = false;
@@ -105,14 +105,20 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     notifyListeners();
   }
 
+  String get registerValue => _regsiterAsValue;
+  void setRegisterValue(String value) {
+    _regsiterAsValue = value;
+    notifyListeners();
+  }
+
   AddressData get assorterAddressData => _assorterAddressData;
   void setAssorterAddressData(AddressData data) {
     _assorterAddressData = data;
     notifyListeners();
   }
 
-  initData(String registerAs, AppRepo irepo) {
-    _userData = UserData(registrationAs: registerAs);
+  initData(AppRepo irepo) {
+    _userData = UserData();
     _contactPerson = ContactPerson();
     _agentAddressData = AddressData();
     _agentAddressData.addressType = Constants.OFFICE;
@@ -145,7 +151,8 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     obsecureText = !obsecureText;
     notifyListeners();
   }
-    onConfirmPasswordVisibleclicked() {
+
+  onConfirmPasswordVisibleclicked() {
     confirmObsecureText = !confirmObsecureText;
     notifyListeners();
   }
@@ -153,15 +160,16 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   void companySubmitClicked(BuildContext context, {Function onError}) async {
     checkCompanyFeilds();
 
-    if (!nameError &&
-        !mobileError &&
-        !emailError &&
-        !passwordError) {
+    if (!nameError && !mobileError && !emailError && !passwordError) {
       if (passwordController.text != confirmPasswordController.text) {
         onError("Password and confirm password must be same");
         return;
       }
-       if (!consentValue) {
+      if (_regsiterAsValue == null) {
+        onError("Please Select Type");
+        return;
+      }
+      if (!consentValue) {
         onError("Please agree our terms and conditions");
         return;
       }
@@ -265,7 +273,6 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   }
 
   _registerUser(BuildContext context) async {
-  
     progressDialog("Please wait...", context);
     try {
       // if (_userData.fileList.isNotEmpty) {
@@ -283,6 +290,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       //     }
       //   }
       // }
+      _userData.registrationAs = _regsiterAsValue.toLowerCase();
       final response = await _apiService.registerUser(_userData);
       await Prefs.setLogin(true);
       await Prefs.setUserId(response.data.userId.toString());

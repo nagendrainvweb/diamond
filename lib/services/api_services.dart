@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:diamon_assorter/modal/UserData.dart';
+import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/agentData.dart';
+import 'package:diamon_assorter/modal/assorter_modal.dart';
 import 'package:diamon_assorter/modal/basic_response.dart';
 import 'package:diamon_assorter/modal/register_response_data.dart';
 import 'package:diamon_assorter/prefrence_util/Prefs.dart';
@@ -245,6 +247,171 @@ class ApiService {
       final jsonResponse = json.decode(response.body);
       if (jsonResponse[Constants.STATUS] == true) {
         return BasicResponse.fromJson(json: jsonResponse, data: "");
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+  Future<BasicResponse<List<AddressData>>> userAddress() async {
+    try {
+      final user_id = await Prefs.userId;
+      final body = {
+        "user_id": user_id,
+      };
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.USER_ADDRESS), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        final data = jsonResponse[Constants.DATA];
+        final List<AddressData> addressList = [];
+        for (var e in data) {
+          addressList.add(AddressData.fromJson(e));
+        }
+        return BasicResponse.fromJson(json: jsonResponse, data: addressList);
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+  Future<BasicResponse<List<AssorterModal>>> userAssorter() async {
+    try {
+      final user_id = await Prefs.userId;
+      final body = {
+        "user_id": user_id,
+      };
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.USER_ASSORTER), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        final data = jsonResponse[Constants.DATA];
+        final List<AssorterModal> assorterList = [];
+        for (var e in data) {
+          assorterList.add(AssorterModal.fromJson(e));
+        }
+        return BasicResponse.fromJson(json: jsonResponse, data: assorterList);
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+  Future<BasicResponse<UserData>> updateUserProfile(UserData userData) async {
+    try {
+      final body = userData.toJson();
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.UPDATE_USER_PROFILE), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        // final data = jsonResponse[Constants.DATA];
+        // final List<AssorterModal> assorterList = [];
+        // for (var e in data) {
+        //   assorterList.add(AssorterModal.fromJson(e));
+        // }
+        return BasicResponse.fromJson(
+            json: jsonResponse,
+            data: UserData.fromJson(jsonResponse[Constants.DATA]));
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+  Future<BasicResponse<String>> updateUserAgent(
+      String userAgentId, String userId, String agentId) async {
+    try {
+      final body = {
+        "user_agent_id": userAgentId,
+        "user_id": userId,
+        "agent_id": agentId,
+      };
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.UPDATE_USER_AGENT), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        // final data = jsonResponse[Constants.DATA];
+        // final List<AssorterModal> assorterList = [];
+        // for (var e in data) {
+        //   assorterList.add(AssorterModal.fromJson(e));
+        // }
+        return BasicResponse.fromJson(json: jsonResponse, data: "");
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+  Future<BasicResponse<AssorterModal>> updateUserAssorter(
+      AssorterModal assorterModal) async {
+    try {
+      final body = assorterModal.toJson();
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.UPDATE_USER_ASSORTER), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        // final data = jsonResponse[Constants.DATA];
+        // final List<AssorterModal> assorterList = [];
+        // for (var e in data) {
+        //   assorterList.add(AssorterModal.fromJson(e));
+        // }
+        return BasicResponse.fromJson(json: jsonResponse, data: AssorterModal.fromJson(jsonResponse[Constants.DATA]));
+      }
+      throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
+    } on SocketException catch (e) {
+      throw ApiErrorException(NO_INTERNET_CONN);
+    } on Exception catch (e) {
+      // sendMail(UrlList.SEND_OTP, SOMETHING_WRONG_TEXT);
+      throw ApiErrorException(e.toString());
+    }
+  }
+
+    Future<BasicResponse<AddressData>> updateUserAddress(
+      AddressData addressData) async {
+    try {
+      final body = addressData.toJson();
+      myPrint(body.toString());
+      final response =
+          await http.post(Uri.parse(UrlList.UPDATE_USER_ASSORTER), body: body);
+      myPrint(response.body.toString());
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[Constants.STATUS] == true) {
+        // final data = jsonResponse[Constants.DATA];
+        // final List<AssorterModal> assorterList = [];
+        // for (var e in data) {
+        //   assorterList.add(AssorterModal.fromJson(e));
+        // }
+        return BasicResponse.fromJson(json: jsonResponse, data: AddressData .fromJson(jsonResponse[Constants.DATA]));
       }
       throw ApiErrorException(jsonResponse[Constants.MESSAGE]);
     } on SocketException catch (e) {

@@ -60,7 +60,7 @@ class _AgentRegistrationWidgetState extends State<AgentRegistrationWidget> {
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       viewModelBuilder: () => RegistrationViewModel(),
       onModelReady: (RegistrationViewModel model) =>
-          model.initData("agent", appRepo),
+          model.initData( appRepo),
       builder: (_, model, child) => ListView(
         children: [
           RegisterTextfield(

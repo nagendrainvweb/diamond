@@ -49,7 +49,7 @@ class Constants {
   static String OTHER = "OTHER";
   static String STATE = "state";
 
-  static String PASSWORD_MSG = "Password must contain at least 1 alphabet, 1 number, and 1 special character";
+  static String PASSWORD_MSG = "Password must be Alphanumeric, min 4 characters";
   static String CONFIRM_PASSWORD_MSG = "Password and confirm Password should be same";
 
   static String SUCCESS = "success";
