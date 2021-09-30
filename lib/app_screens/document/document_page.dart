@@ -26,92 +26,87 @@ class _DocumentPageState extends State<DocumentPage> {
           ),
           SizedBox(height: 20,),
          Container(
-           margin: EdgeInsets.only(
-            //  top: 15,
+           padding: EdgeInsets.symmetric(
+             horizontal: 20,
+             vertical: 20,
            ),
            child: Stack(
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 5,
+                CircularBorder(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: DocViewWidget(
+                            title: "Attch BOB id Card",
+                            height: attachHeight,
+                            // file: model.idCard,
+                            onSelectImage: () {
+                              // model.selectImage(
+                              //   context,
+                              //   (source) {
+                              //     model.pickImage(source, Constants.BOB_ID);
+                              //   },
+                              // );
+                            },
+                            onDeleteImage: () {
+                              // model.removeImage(Constants.BOB_ID);
+                            },
+                          )),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                              child: DocViewWidget(
+                            title: "Attch Aadhar card",
+                            height: attachHeight,
+                            // file: model.aadharCard,
+                            onSelectImage: () {
+                              // model.selectImage(
+                              //   context,
+                              //   (source) {
+                              //     model.pickImage(source, Constants.AADHAR_CARD);
+                              //   },
+                              // );
+                            },
+                            onDeleteImage: () {
+                              // model.removeImage(Constants.AADHAR_CARD);
+                            },
+                          )),
+                          
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: DocViewWidget(
+                            title: "Attch Passport",
+                            height: attachHeight,
+                            // file: model.passport,
+                            onSelectImage: () {
+                              // model.selectImage(
+                              //   context,
+                              //   (source) {
+                              //     model.pickImage(source, Constants.PASSPORT);
+                              //   },
+                              // );
+                            },
+                            onDeleteImage: () {
+                              // model.removeImage(Constants.PASSPORT);
+                            },
+                          )),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: Text(
+                              "",
+                            ),  ),
+                        ],
+                      ),
+                    ],
                   ),
-                  child: CircularBorder(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                                child: DocViewWidget(
-                              title: "Attch BOB id Card",
-                              height: attachHeight,
-                              // file: model.idCard,
-                              onSelectImage: () {
-                                // model.selectImage(
-                                //   context,
-                                //   (source) {
-                                //     model.pickImage(source, Constants.BOB_ID);
-                                //   },
-                                // );
-                              },
-                              onDeleteImage: () {
-                                // model.removeImage(Constants.BOB_ID);
-                              },
-                            )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: DocViewWidget(
-                              title: "Attch Aadhar card",
-                              height: attachHeight,
-                              // file: model.aadharCard,
-                              onSelectImage: () {
-                                // model.selectImage(
-                                //   context,
-                                //   (source) {
-                                //     model.pickImage(source, Constants.AADHAR_CARD);
-                                //   },
-                                // );
-                              },
-                              onDeleteImage: () {
-                                // model.removeImage(Constants.AADHAR_CARD);
-                              },
-                            )),
-                            
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: DocViewWidget(
-                              title: "Attch Passport",
-                              height: attachHeight,
-                              // file: model.passport,
-                              onSelectImage: () {
-                                // model.selectImage(
-                                //   context,
-                                //   (source) {
-                                //     model.pickImage(source, Constants.PASSPORT);
-                                //   },
-                                // );
-                              },
-                              onDeleteImage: () {
-                                // model.removeImage(Constants.PASSPORT);
-                              },
-                            )),
-                            SizedBox(width: 10,),
-                            Expanded(
-                              child: Text(
-                                "",
-                              ),  ),
-                          ],
-                        ),
-                      ],
-                    ),
 
-                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(

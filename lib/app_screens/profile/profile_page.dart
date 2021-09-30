@@ -1,6 +1,7 @@
 import 'package:diamon_assorter/app/locator.dart';
 import 'package:diamon_assorter/app_screens/address/address_page.dart';
 import 'package:diamon_assorter/app_screens/document/document_page.dart';
+import 'package:diamon_assorter/app_screens/other_details/other_details.dart';
 import 'package:diamon_assorter/app_screens/update_profile/updateProfile_screen.dart';
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
@@ -86,7 +87,9 @@ class _ProfilePageState extends State<ProfilePage> with AppHelper {
                       ProfileTile(
                         text: "Other Details",
                         iconData: Icons.checklist_outlined,
-                        onClick: () {},
+                        onClick: () {
+                          Utility.pushToNext(context, OtherDetails());
+                        },
                       ),
                       SizedBox(
                         height: 15,
