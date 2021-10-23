@@ -18,10 +18,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     return InkWell(
       onTap: onClick,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 5
-        ),
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
         margin: EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
@@ -81,21 +78,57 @@ class _HomeWidgetState extends State<HomeWidget> {
         context: context,
         child: ListView(
           children: [
-             SizedBox(
-              height: 20,
-            ),
-            Consumer<AppRepo>(builder: (_,AppRepo repo,child)=>
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text("Welcome, "+repo.name,textScaleFactor: 1.2,),
-                ],
-              ),
-            )
-            ),
             SizedBox(
-              height: 50,
+              height: 30,
+            ),
+            Consumer<AppRepo>(
+                builder: (_, AppRepo repo, child) => Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: AppColors.grey400),
+                          color: AppColors.whiteColor),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 12),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            child: Icon(Icons.person_outline_outlined),
+                          ),
+                          SizedBox(
+                            width: 14,
+                          ),
+                          // Container(
+                          //   decoration:BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     border: Border.all(color: AppColors.grey600)
+                          //   ),
+                          //   padding: const EdgeInsets.all(5),
+                          //   child: Icon(Icons.person_outline_outlined,color: AppColors.grey600,)),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Welcome, " + repo.name,
+                                  textScaleFactor: 1,
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "Registered As : " + repo.role.toUpperCase(),
+                                  textScaleFactor: 0.9,
+                                  
+                                ),
+                                //  SizedBox(height: 8,),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+            SizedBox(
+              height: 40,
             ),
             Row(
               children: [
@@ -103,7 +136,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: _buttonTiles(
                     "Pending\nOrders",
                     AppImages.pendingOrder,
-                    (){},
+                    () {},
                   ),
                 ),
                 // SizedBox(
@@ -113,7 +146,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: _buttonTiles(
                     "Ongoing\nOrders",
                     AppImages.ongoingOrder,
-                    (){},
+                    () {},
                   ),
                 ),
               ],
@@ -127,8 +160,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: _buttonTiles(
                     "New\nOrders",
                     AppImages.newOrder,
-                    (){
-                       Utility.pushToNext(context, NewOrderPage());
+                    () {
+                      Utility.pushToNext(context, NewOrderPage());
                     },
                   ),
                 ),
@@ -140,7 +173,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     "Completed\nOrders",
                     AppImages.completeOrder,
                     () {
-                     // Utility.pushToNext(context, NewOrderPage());
+                      // Utility.pushToNext(context, NewOrderPage());
                     },
                   ),
                 ),

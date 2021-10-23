@@ -1,6 +1,6 @@
 [
     {
-        "merged": "C:\\Users\\Sharma\\Documents\\flutter_projects\\diamond\\build\\shared_preferences\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
-        "source": "C:\\Users\\Sharma\\.gradle\\caches\\transforms-2\\files-2.1\\d67cd79abd1ca209502f51c69d23182b\\core-1.1.0\\res\\drawable-v21\\notification_action_background.xml"
+        "merged": "/opt/flutter_projects/diamond-main/build/shared_preferences/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/drawable-v21/notification_action_background.xml"
     }
 ]

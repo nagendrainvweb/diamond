@@ -11,3 +11,4 @@ shared_preferences_linux=/home/avenues/snap/flutter/common/flutter/.pub-cache/ho
 shared_preferences_macos=/home/avenues/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.2/
 shared_preferences_web=/home/avenues/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.2/
 shared_preferences_windows=/home/avenues/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.2/
+sqflite=/home/avenues/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+4/

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Sharma\\Documents\\flutter_projects\\diamond\\build\\image_picker\\intermediates\\res\\merged\\debug\\values-hr\\values-hr.xml",
+            "outputFile": "/opt/flutter_projects/diamond-main/build/image_picker/intermediates/incremental/mergeDebugResources/merged.dir/values-hr/values-hr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Sharma\\.gradle\\caches\\transforms-2\\files-2.1\\d67cd79abd1ca209502f51c69d23182b\\core-1.1.0\\res\\values-hr\\values-hr.xml",
+                    "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/values-hr/values-hr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Sharma\\Documents\\flutter_projects\\diamond\\build\\image_picker\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hr\\values-hr.xml",
+            "outputFile": "/opt/flutter_projects/diamond-main/build/image_picker/intermediates/res/merged/debug/values-hr/values-hr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Sharma\\.gradle\\caches\\transforms-2\\files-2.1\\d67cd79abd1ca209502f51c69d23182b\\core-1.1.0\\res\\values-hr\\values-hr.xml",
+                    "source": "/home/avenues/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/res/values-hr/values-hr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -935,7 +935,7 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                         ),
                       ),
                       TextSpan(
-                        text: "of Diamond App",
+                        text: "of Diamond App. All Experienced Assorter are Personally known & trusted.",
                       ),
                     ],
                   ),
