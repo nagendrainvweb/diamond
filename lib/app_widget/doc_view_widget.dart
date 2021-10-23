@@ -1,30 +1,34 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:flutter/material.dart';
 
 class DocViewWidget extends StatelessWidget {
-  const DocViewWidget({
-    Key key,
-    this.height,
-    this.onSelectImage,
-    this.onDeleteImage,
-    this.title,
-    this.file,
-  }) : super(key: key);
+  const DocViewWidget(
+      {Key key,
+      this.height,
+      this.onSelectImage,
+      this.onEditImage,
+      this.title,
+      this.image,
+      this.isFile, this.onViewImage})
+      : super(key: key);
 
   final double height;
   final Function onSelectImage;
-  final Function onDeleteImage;
+  final Function onEditImage;
   final String title;
-  final File file;
+  final String image;
+  final bool isFile;
+  final Function onViewImage;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         InkWell(
-          onTap: onSelectImage,
+          onTap: (image == null) ? onSelectImage : onViewImage,
           child: Container(
             // height: (MediaQuery.of(context).size.width - 100) / 2,
             height: height,
@@ -36,7 +40,7 @@ class DocViewWidget extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: (file == null)
+            child: (image == null)
                 ? Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -53,27 +57,46 @@ class DocViewWidget extends StatelessWidget {
                 : Container(
                     width: double.maxFinite,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.file(
-                          file,
-                          fit: BoxFit.cover,
-                        )),
+                      borderRadius: BorderRadius.circular(12),
+                      child: (isFile)
+                          ? Image.file(
+                              File(image),
+                              fit: BoxFit.cover,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: image,
+                              fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: CircularProgressIndicator(
+                                  value: downloadProgress.progress,
+                                  strokeWidth: 3,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                    ),
                   ),
           ),
         ),
-        (file != null)
+        (image != null)
             ? Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
-                  onTap: onDeleteImage,
+                  onTap: onEditImage,
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: AppColors.redAccent),
+                        border: Border.all(color: AppColors.grey500),
+                        shape: BoxShape.circle,
+                        color: AppColors.whiteColor),
                     child: Icon(
-                      Icons.close,
-                      color: AppColors.whiteColor,
-                      size: 15,
+                      Icons.edit_outlined,
+                      color: AppColors.grey600,
+                      size: 20,
                     ),
                   ),
                 ),

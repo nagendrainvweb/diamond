@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * 0.6,
       height: double.maxFinite,
-      margin: EdgeInsets.symmetric(vertical: 25),
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       decoration: BoxDecoration(
         //r  border: Border.all(color: AppColors.mainColor),
         borderRadius: BorderRadius.only(

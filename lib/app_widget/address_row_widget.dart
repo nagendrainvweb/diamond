@@ -42,7 +42,7 @@ class AddressRow extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 13, bottom: 8, right: 10),
+          margin: EdgeInsets.only(top: 15, bottom: 8, right: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
@@ -58,19 +58,19 @@ class AddressRow extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 20),
-                RegisterTextfield(
-                  text: "Address Type*",
-                  controller: _typeController,
-                  enable: enableFeild,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                // RegisterTextfield(
+                //   text: "Address Type*",
+                //   controller: _typeController,
+                //   enable: enableFeild,
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
                 Row(
                   children: [
                     Expanded(
                         child: RegisterTextfield(
-                      text: "Gala/Flat No*",
+                      text: "Flat/Office No*",
                       controller: _flatGalaNoController,
                       enable: enableFeild,
                     )),
@@ -96,18 +96,26 @@ class AddressRow extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                RegisterTextfield(
-                  text: "Area",
-                  controller: _areaController,
-                  enable: enableFeild,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RegisterTextfield(
-                  text: "Pincode*",
-                  controller: _pincodeController,
-                  enable: enableFeild,
+                Row(
+                  children: [
+                    Expanded(
+                      child: RegisterTextfield(
+                        text: "Area",
+                        controller: _areaController,
+                        enable: enableFeild,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: RegisterTextfield(
+                        text: "Pincode*",
+                        controller: _pincodeController,
+                        enable: enableFeild,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,
@@ -144,57 +152,86 @@ class AddressRow extends StatelessWidget {
           ),
           color: AppColors.whiteColor,
           child: Text(
-            (data!=null)? "Address ${data.id}":"Address",
+           // (data != null) ? "Address ${data.id}" : "Address",
+           "TYPE - "+_typeController.text.toUpperCase(),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black54,
+              fontSize: 18
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              InkWell(
-                onTap: () {
-                  onEditClicked();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(left: 15),
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.grey400),
-                      color: AppColors.whiteColor,
-                    ),
-                    child: Icon(
-                      Icons.edit_outlined,
-                      color: AppColors.grey600,
-                    )),
-              ),
-              InkWell(
-                onTap: () {
-                  onDeleteClicked();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(left: 15),
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.grey400),
-                      color: AppColors.whiteColor,
-                    ),
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.grey600,
-                    )),
-              ),
-            ],
-          ),
-        ),
+        EditDeleteOptionWidget(
+            onEditClicked: onEditClicked, onDeleteClicked: onDeleteClicked),
       ],
+    );
+  }
+}
+
+class EditDeleteOptionWidget extends StatelessWidget {
+  const EditDeleteOptionWidget({
+    Key key,
+    @required this.onEditClicked,
+    @required this.onDeleteClicked,
+    this.showEdit = true,
+    this.showDelete = true,
+  }) : super(key: key);
+
+  final Function onEditClicked;
+  final Function onDeleteClicked;
+  final bool showEdit;
+  final bool showDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          (showEdit)
+              ? InkWell(
+                  onTap: () {
+                    onEditClicked();
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.grey400),
+                        color: AppColors.whiteColor,
+                      ),
+                      child: Icon(
+                        Icons.edit_outlined,
+                        color: AppColors.grey600,
+                        size: 20,
+                      )),
+                )
+              : Container(),
+          (showDelete)
+              ? InkWell(
+                  onTap: () {
+                    onDeleteClicked();
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.grey400),
+                        color: AppColors.whiteColor,
+                      ),
+                      child: Icon(
+                        Icons.close,
+                        color: AppColors.grey600,
+                        size: 20,
+                      )),
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 }

@@ -59,7 +59,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
   bool commissionError = false;
 
   bool emailVerified = false;
-  bool contactEmailVerified = false;
+  bool mobileVerified = false;
 
   var _serviceValue = 1;
   var _speedValue = 1;
@@ -138,6 +138,13 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
     passwordError =
         !RegExp(CommonPattern.passwordRegex).hasMatch(passwordController.text);
 
+    if (registerValue == Constants.AGENT) {
+      commissionError = commissionController.text.isEmpty;
+    }
+    if (registerValue == Constants.ASSERTER) {
+      experienceError = experienceController.text.isEmpty;
+    }
+
     // contactNameError =
     //     !RegExp(CommonPattern.name_regex).hasMatch(contactNameController.text);
     // contactMobileError = !RegExp(CommonPattern.mobile_regex)
@@ -173,12 +180,63 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
         onError("Please agree our terms and conditions");
         return;
       }
+      if (!emailVerified) {
+        onError("Email Already exists, Please use different Email Id");
+        return;
+      }
+
+      if (!mobileVerified) {
+        onError("Mobile Already exists, Please use different Mobile No");
+        return;
+      }
 
       // _userData.address = addressList;
       // _userData.contactPerson = _contactPerson;
       // _userData.fileList = (idCard != null) ? [idCard] : [];
-
-      _registerUser(context);
+      if (registerValue == Constants.COMPANY) {
+        _registerUser(context);
+      } else if (registerValue == Constants.AGENT) {
+        if (!commissionError) {
+          _registerUser(context);
+        }
+      } else if (registerValue == Constants.ASSERTER) {
+        if (!experienceError) {
+          String service;
+          if (_serviceValue == 1) {
+            service = "Numbering";
+          } else if (_serviceValue == 2) {
+            service = "Ghodhi";
+          } else {
+            service = "Numbering/Ghodhi";
+          }
+          String speed;
+          if (_speedValue == 1) {
+            speed = "Slow";
+          } else if (_speedValue == 2) {
+            speed = "Medium";
+          } else  if (_speedValue == 3) {
+            speed = "Fast";
+          }else  if (_speedValue == 4) {
+            speed = "8";
+          }else  if (_speedValue == 5) {
+            speed = "10";
+          }else  if (_speedValue == 6) {
+            speed = "12";
+          }else  if (_speedValue == 7) {
+            speed = "14";
+          }else  if (_speedValue == 8) {
+            speed = "16";
+          }
+          // _userData.bdbIdCard = idCard.path;
+          // _userData.aadharCard = aadharCard.path;
+          // _userData.passport = passport.path;
+          _userData.service = service;
+          _userData.speed = speed;
+          _registerUser(context);
+        }
+      } else {
+        onError("Please Enter Require Details");
+      }
     } else {
       onError("Please Enter Require Details");
     }
@@ -210,8 +268,8 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
         !passwordError &&
         !experienceError) {
       //_userData.bdbIdCard = idCard.path;
-      _userData.address = [_agentAddressData];
-      _userData.assorters = assorterList;
+      // _userData.address = [_agentAddressData];
+      // _userData.assorters = assorterList;
 
       _registerUser(context);
     } else {
@@ -263,10 +321,10 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       // _userData.passport = passport.path;
       _userData.service = service;
       _userData.speed = speed;
-      _userData.address = [_assorterAddressData];
+      //  _userData.address = [_assorterAddressData];
       final index = repo.agentList
           .indexWhere((element) => element.agentName == selectedAgent);
-      _userData.agent = index;
+      //  _userData.agent = index;
     } else {
       onError("Please Enter Require Details");
     }
@@ -299,6 +357,7 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       await Prefs.setMobileNumber(response.data.mobile);
       await Prefs.setRole(response.data.registrationAs);
       Provider.of<AppRepo>(context, listen: false).setUserData(response.data);
+      Provider.of<AppRepo>(context, listen: false).init();
 
       Utility.pushToDashBoard(context);
     } catch (e) {
@@ -432,6 +491,25 @@ class RegistrationViewModel extends BaseViewModel with AppHelper {
       notifyListeners();
       myPrint(e.toString());
       DialogHelper.showErrorDialog(context, "Error", "Email Already Exists");
+    }
+  }
+
+  void checkUserMobile(BuildContext context,
+      {@required Function onSucess}) async {
+    try {
+      progressDialog("Please wait...", context);
+      final response = await _apiService.checkUserMobile(mobileController.text);
+      hideProgressDialog(context);
+      onSucess(true);
+
+      notifyListeners();
+    } catch (e) {
+      hideProgressDialog(context);
+      onSucess(false);
+      notifyListeners();
+      myPrint(e.toString());
+      DialogHelper.showErrorDialog(
+          context, "Error", "Mobile No Already Exists");
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:diamon_assorter/util/common_pattern.dart';
 
 class AddressData {
+  String userId;
   int id;
   String flatGalaNumber = "";
   String buildingNumber = "";
@@ -13,6 +14,7 @@ class AddressData {
 
   AddressData(
       {this.id,
+      this.userId,
       this.flatGalaNumber,
       this.buildingNumber,
       this.address,
@@ -24,6 +26,7 @@ class AddressData {
 
   AddressData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    userId = json['user_id'].toString();
     flatGalaNumber = json['flat_gala_number'];
     buildingNumber = json['building_number'];
     address = json['address'];
@@ -31,12 +34,13 @@ class AddressData {
     area = json['area'];
     city = json['city'];
     state = json['state'];
-    pincode = json['pincode'];
+    pincode = json['pincode'].toString();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['address_id'] = this.id;
+    data['user_id'] = this.userId;
     data['flat_gala_number'] = this.flatGalaNumber;
     data['building_number'] = this.buildingNumber;
     data['address'] = this.address;
@@ -49,15 +53,16 @@ class AddressData {
   }
 
   bool validateAddress({Function onError}) {
-    if ( flatGalaNumber ==null || flatGalaNumber.isEmpty){
+    if (flatGalaNumber == null || flatGalaNumber.isEmpty) {
       onError("Please Enter valid flat/Gala No field.");
       return false;
     }
-    if ( buildingNumber ==null || buildingNumber.isEmpty){
+    if (buildingNumber == null || buildingNumber.isEmpty) {
       onError("Please Enter valid Building name field.");
       return false;
     }
-    if ( address==null || !RegExp(CommonPattern.addressRegex).hasMatch(address)) {
+    if (address == null ||
+        !RegExp(CommonPattern.addressRegex).hasMatch(address)) {
       onError("Please Enter valid Address field.");
       return false;
     }
@@ -65,7 +70,8 @@ class AddressData {
       onError("Please Enter valid Area field.");
       return false;
     }
-    if (pincode == null || !RegExp(CommonPattern.pincodeRegex).hasMatch(pincode)) {
+    if (pincode == null ||
+        !RegExp(CommonPattern.pincodeRegex).hasMatch(pincode)) {
       onError("Please Enter valid Pincode field.");
       return false;
     }

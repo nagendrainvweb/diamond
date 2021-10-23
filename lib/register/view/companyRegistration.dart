@@ -129,9 +129,20 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                   controller: model.mobileController,
                   textInputType: TextInputType.number,
                   onChanged: (String value) {
+                    model.mobileVerified = false;
                     model.userData.mobile = value;
                     model.mobileError =
                         !RegExp(CommonPattern.mobile_regex).hasMatch(value);
+                    if (!model.mobileError &&
+                        !model.mobileVerified &&
+                        value.length == 10) {
+                      model.checkUserMobile(context, onSucess: (bool value) {
+                        model.mobileVerified = value;
+                        if (!value) {
+                          model.mobileController.text = "";
+                        }
+                      });
+                    }
                     model.notifyListeners();
                   },
                   errorText: model.mobileError
@@ -139,6 +150,21 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                       : null,
                 ),
               ),
+              (model.mobileVerified)
+                  ? Row(
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.verified_user_outlined,
+                              color: Colors.green,
+                            )),
+                      ],
+                    )
+                  : Container(),
               // SizedBox(
               //   width: 20,
               // ),
@@ -214,6 +240,405 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                   : Container(),
             ],
           ),
+          Visibility(
+            visible: model.registerValue == Constants.AGENT,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                RegisterTextfield(
+                  text: "Commission Per assorter (in Rs)*",
+                  textInputType: TextInputType.number,
+                  controller: model.commissionController,
+                  onChanged: (String value) {
+                    model.userData.commission_per_assorter = value;
+                    model.commissionError = value.isEmpty;
+                    model.notifyListeners();
+                  },
+                  errorText: model.commissionError
+                      ? "Please Enter Valid Commission"
+                      : null,
+                ),
+              ],
+            ),
+          ),
+          Visibility(
+            visible: model.registerValue == Constants.ASSERTER,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: RegisterTextfield(
+                        text: "Experience* (in Years)",
+                        textInputType: TextInputType.number,
+                        controller: model.experienceController,
+                        onChanged: (String value) {
+                          model.userData.experience = value;
+                          model.experienceError = value.isEmpty;
+                          model.notifyListeners();
+                        },
+                        errorText: model.experienceError
+                            ? "Please Enter Valid Experience"
+                            : null,
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 20,
+                    // ),
+                    // Expanded(
+                    //   child: Text(
+                    //     "In Years",
+                    //   ),
+                    // ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 15,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Text(
+                                      "Service :",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      model.setServiceValue(1);
+                                      model.setSpeedValue(1);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Radio(
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                          value: 1,
+                                          groupValue: model.serviceValue,
+                                          onChanged: (value) {
+                                            model.setServiceValue(value);
+                                          },
+                                          activeColor: Colors.blue,
+                                        ),
+                                        Expanded(child: Text("Numbering"))
+                                      ],
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      model.setServiceValue(2);
+                                      model.setSpeedValue(4);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Radio(
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                          value: 2,
+                                          groupValue: model.serviceValue,
+                                          onChanged: (value) {
+                                            model.setServiceValue(value);
+                                          },
+                                          activeColor: Colors.blue,
+                                        ),
+                                        Expanded(child: Text("Ghodhi"))
+                                      ],
+                                    ),
+                                  ),
+                                  // InkWell(
+                                  //   onTap: () {
+                                  //     model.setServiceValue(3);
+                                  //   },
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Radio(
+                                  //         materialTapTargetSize:
+                                  //             MaterialTapTargetSize.shrinkWrap,
+                                  //         value: 3,
+                                  //         groupValue: model.serviceValue,
+                                  //         onChanged: (value) {
+                                  //           model.setServiceValue(value);
+                                  //         },
+                                  //         activeColor: Colors.blue,
+                                  //       ),
+                                  //       Expanded(child: Text("Numbering/Ghodhi"))
+                                  //     ],
+                                  //   ),
+                                  // )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          (model.serviceValue == 1)
+                              ? Expanded(
+                                  child: Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Text(
+                                            "Speed :",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(1);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 1,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("Slow"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(2);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 2,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("Medium"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(3);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 3,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("Fast"))
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Text(
+                                            "Speed :",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(4);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 4,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("8"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(5);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 5,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("10"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(6);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 6,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("12"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(7);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 7,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("14"))
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            model.setSpeedValue(3);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Radio(
+                                                materialTapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                value: 8,
+                                                groupValue: model.speedValue,
+                                                onChanged: (value) {
+                                                  model.setSpeedValue(value);
+                                                },
+                                                activeColor: Colors.blue,
+                                              ),
+                                              Expanded(child: Text("16"))
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: 15,
+                      ),
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                      color: AppColors.whiteColor,
+                      child: Text(
+                        "Others",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
@@ -256,9 +681,11 @@ class _CompanyRegisterWidgetState extends State<CompanyRegisterWidget> {
                 ? Constants.CONFIRM_PASSWORD_MSG
                 : null,
           ),
+
           SizedBox(
             height: 30,
           ),
+
           // Stack(
           //   children: [
           //     Container(

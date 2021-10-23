@@ -43,14 +43,20 @@ class _ProfilePageState extends State<ProfilePage> with AppHelper {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 140,
-                  width: 140,
-                  child: CircleAvatar(
-                    child: SvgPicture.asset(
-                      AppImages.profile,
-                      height: 140,
-                      width: 140,
+                InkWell(
+                  onTap:()async{
+                     final email = await Prefs.emailId;
+      myPrint("email is $email");
+                  },
+                  child: Container(
+                    height: 140,
+                    width: 140,
+                    child: CircleAvatar(
+                      child: SvgPicture.asset(
+                        AppImages.profile,
+                        height: 140,
+                        width: 140,
+                      ),
                     ),
                   ),
                 ),
@@ -91,16 +97,16 @@ class _ProfilePageState extends State<ProfilePage> with AppHelper {
                       SizedBox(
                         height: 15,
                       ),
-                      ProfileTile(
-                        text: "Other Details",
-                        iconData: Icons.checklist_outlined,
-                        onClick: () {
-                          Utility.pushToNext(context, OtherDetails());
-                        },
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      // ProfileTile(
+                      //   text: "Other Details",
+                      //   iconData: Icons.checklist_outlined,
+                      //   onClick: () {
+                      //     Utility.pushToNext(context, OtherDetails());
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   height: 15,
+                      // ),
                       ProfileTile(
                         text: "Change Password",
                         iconData: Icons.lock_open_outlined,

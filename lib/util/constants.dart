@@ -5,9 +5,10 @@ class Constants {
   static final AGENT = "Agent";
   static final ASSERTER = "Assorter";
 
+  static final SOMETHING_WRONG = "Something Went Wrong, Please try Again";
   static final BOB_ID = "bod_id";
-  static final AADHAR_CARD = 'Aadhar Card';
-  static final PASSPORT = "Passport";
+  static final AADHAR_CARD = 'aadhar_card';
+  static final PASSPORT = "passport";
 
   static final TIMESTAMP = "timestamp";
 
@@ -49,8 +50,10 @@ class Constants {
   static String OTHER = "OTHER";
   static String STATE = "state";
 
-  static String PASSWORD_MSG = "Password must be Alphanumeric, min 4 characters";
-  static String CONFIRM_PASSWORD_MSG = "Password and confirm Password should be same";
+  static String PASSWORD_MSG =
+      "Password must be Alphanumeric, min 4 characters";
+  static String CONFIRM_PASSWORD_MSG =
+      "Password and confirm Password should be same";
 
   static String SUCCESS = "success";
 
@@ -58,4 +61,10 @@ class Constants {
 
   static String ROLE = "ROLE";
 
+  static String SLOW = "Slow";
+  static String MEDIUM = "Medium";
+  static String FAST = "Fast";
+  static String NUMBERING = "Numbering";
+  static String GHODHI = "Ghodhi";
+  static String NUMBER_GHODHI = "Numbering/Ghodhi";
 }

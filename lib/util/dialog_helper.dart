@@ -24,12 +24,12 @@ class DialogHelper{
               SizedBox(height: 20,),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Text(title,style: TextStyle(color: Colors.grey.shade800,fontSize: 15,fontWeight: FontWeight.w700,letterSpacing: 0.3,),overflow: TextOverflow.ellipsis,),
+                child: Text(title,style: TextStyle(color: Colors.grey.shade800,fontSize: 18,fontWeight: FontWeight.w700,letterSpacing: 0.3,),overflow: TextOverflow.ellipsis,),
               ),
               SizedBox(height: 10,),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24,vertical: 5),
-                child: Text(desc,style:TextStyle(fontSize: 13,color: Colors.grey.shade600)),
+                child: Text(desc,style:TextStyle(fontSize: 14,color: Colors.grey.shade600)),
               ),
                SizedBox(height: 10,),
                Container(
@@ -44,7 +44,7 @@ class DialogHelper{
                        } ,
                      ),
                      FlatButton(
-                       child: Text(positiveBtnText,style: TextStyle(fontSize: 12,color: AppColors.mainColor,fontWeight: FontWeight.w700,),),
+                       child: Text(positiveBtnText,style: TextStyle(fontSize: 12,color: AppColors.mainColor,),),
                        onPressed:positiveClick ,
                      ),
                      SizedBox(width: 5,),

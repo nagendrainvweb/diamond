@@ -71,7 +71,7 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> with AppHelper {
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 20,
-              // vertical: 5,
+               vertical: 5,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,7 +212,7 @@ class _AddAssorterWidgetState extends State<AddAssorterWidget> with AppHelper {
                           .hasMatch(_emailController.text);
                     });
 
-                    if (!assNameError && !assMobileError && !assEmailError && emailVerified) {
+                    if (!assNameError && !assMobileError && !assEmailError) {
                       Navigator.pop(context);
                     
                       widget.onSubmitClicked(_nameController.text,

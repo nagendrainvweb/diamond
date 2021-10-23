@@ -15,13 +15,14 @@ class AddressFormWidget extends StatefulWidget {
     Key key,
     this.data,
     this.onSubmitClicked,
-    this.showTopBar = true, this.showPadding=true,
+    this.showTopBar = true,
+    this.showPadding = true,
   }) : super(key: key);
 
   final AddressData data;
   final Function onSubmitClicked;
   final bool showTopBar;
-    final bool showPadding;
+  final bool showPadding;
 
   @override
   _AddressFormWidgetState createState() => _AddressFormWidgetState();
@@ -47,17 +48,19 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
   bool cityError = false;
   bool stateError = false;
 
-  String _selectedType = Constants.WORK;
-
+  String _selectedType = Constants.OFFICE;
 
   AddressData _addressData;
   final ApiService _apiService = locator<ApiService>();
 
   @override
   void initState() {
+    if (widget.data != null) {
+     // myPrint("address is " + widget.data.toJson().toString());
+    }
     _addressData = widget.data == null ? AddressData() : widget.data;
     _selectedType =
-        widget.data == null ? Constants.WORK : widget.data.addressType;
+        widget.data == null ? Constants.WORK : widget.data.addressType.toUpperCase();
     _flatGalaNoController.text =
         widget.data != null ? widget.data.flatGalaNumber : "";
     _buildingNoController.text =
@@ -93,295 +96,303 @@ class _AddressFormWidgetState extends State<AddressFormWidget> with AppHelper {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        // physics: ClampingScrollPhysics(),
-        // shrinkWrap: true,
-        children: <Widget>[
-          (widget.showTopBar)
-              ? Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        // vertical: 5,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Add Address",
-                            style: TextStyle(
-                              fontSize: 18,
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: SingleChildScrollView(
+        child: Column(
+          // physics: ClampingScrollPhysics(),
+          // shrinkWrap: true,
+          children: <Widget>[
+            (widget.showTopBar)
+                ? Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                           vertical: 5,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Add Address",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            color: Colors.grey,
-                          ),
-                        ],
+                            IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Divider(),
-                  ],
-                )
-              : Container(),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal:(widget.showPadding)? 20:0,
+                      Divider(),
+                    ],
+                  )
+                : Container(),
+            SizedBox(
+              height: 20,
             ),
-            child: Column(
-              children: [
-                Container(
-                  child: Row(
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: (widget.showPadding) ? 20 : 0,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: AddressTypeWidget(
+                          text: "WORK",
+                          onClick: () {
+                            setState(() {
+                              _selectedType = Constants.WORK;
+                            });
+                          },
+                          color: _selectedType.toLowerCase() == Constants.WORK.toLowerCase()
+                              ? AppColors.mainLightColor
+                              : AppColors.whiteColor,
+                        )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: AddressTypeWidget(
+                          text: "OFFICE",
+                          onClick: () {
+                            setState(() {
+                              _selectedType = Constants.OFFICE;
+                            });
+                          },
+                          color: _selectedType == Constants.OFFICE
+                              ? AppColors.mainLightColor
+                              : AppColors.whiteColor,
+                        )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: AddressTypeWidget(
+                          text: "HOME",
+                          onClick: () {
+                            setState(() {
+                              _selectedType = Constants.HOME;
+                            });
+                          },
+                          color: _selectedType == Constants.HOME
+                              ? AppColors.mainLightColor
+                              : AppColors.whiteColor,
+                        )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: AddressTypeWidget(
+                          text: "OTHER",
+                          onClick: () {
+                            setState(() {
+                              _selectedType = Constants.OTHER;
+                            });
+                          },
+                          color: _selectedType == Constants.OTHER
+                              ? AppColors.mainLightColor
+                              : AppColors.whiteColor,
+                        )),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
                     children: [
                       Expanded(
-                          child: AddressTypeWidget(
-                        text: "WORK",
-                        onClick: () {
-                          setState(() {
-                            _selectedType = Constants.WORK;
-                          });
-                        },
-                        color: _selectedType == Constants.WORK
-                            ? AppColors.mainLightColor
-                            : AppColors.whiteColor,
-                      )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                          child: AddressTypeWidget(
-                        text: "OFFICE",
-                        onClick: () {
-                          setState(() {
-                            _selectedType = Constants.OFFICE;
-                          });
-                        },
-                        color: _selectedType == Constants.OFFICE
-                            ? AppColors.mainLightColor
-                            : AppColors.whiteColor,
-                      )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                          child: AddressTypeWidget(
-                        text: "HOME",
-                        onClick: () {
-                          setState(() {
-                            _selectedType = Constants.HOME;
-                          });
-                        },
-                        color: _selectedType == Constants.HOME
-                            ? AppColors.mainLightColor
-                            : AppColors.whiteColor,
-                      )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                          child: AddressTypeWidget(
-                        text: "OTHER",
-                        onClick: () {
-                          setState(() {
-                            _selectedType = Constants.OTHER;
-                          });
-                        },
-                        color: _selectedType == Constants.OTHER
-                            ? AppColors.mainLightColor
-                            : AppColors.whiteColor,
-                      )),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: RegisterTextfield(
-                      text: "Gala/Flat No*",
-                      controller: _flatGalaNoController,
-                      textInputType: TextInputType.name,
-                      onChanged: (String value) {
-                        _addressData.flatGalaNumber = value;
-                        setState(() {
-                          flatGalaErro = value.isEmpty;
-                        });
-                      },
-                      errorText:
-                          flatGalaErro ? "Please Enter Valid Details" : null,
-                    )),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                        child: RegisterTextfield(
-                      text: "Building Name*",
-                      controller: _buildingNoController,
-                      textInputType: TextInputType.name,
-                      onChanged: (String value) {
-                        _addressData.buildingNumber = value;
-                        setState(() {
-                          buildingError = value.isEmpty;
-                        });
-                      },
-                      errorText: buildingError
-                          ? "Please Enter Valid Building Name"
-                          : null,
-                    ))
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RegisterTextfield(
-                  text: "Address*",
-                  controller: _addressController,
-                  textInputType: TextInputType.name,
-                  onChanged: (String value) {
-                    _addressData.address = value;
-                    setState(() {
-                      addressError =
-                          !RegExp(CommonPattern.addressRegex).hasMatch(value);
-                    });
-                  },
-                  errorText: addressError ? "Please Enter Valid Address" : null,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RegisterTextfield(
-                  text: "Area",
-                  controller: _areaController,
-                  textInputType: TextInputType.name,
-                  onChanged: (String value) {
-                    _addressData.area = value;
-                    setState(() {
-                      areaError = (value.isEmpty)
-                          ? false
-                          : !RegExp(CommonPattern.name_regex).hasMatch(value);
-                    });
-                  },
-                  errorText: areaError ? "Please Enter Valid Area" : null,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RegisterTextfield(
-                  text: "Pincode*",
-                  controller: _pincodeController,
-                  textInputType: TextInputType.number,
-                  onChanged: (String value) {
-                    _addressData.pincode = value;
-                    setState(() {
-                      pincodeError =
-                          !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
-                    });
-                    if (!pincodeError && value.length == 6) {
-                      _fetchCityState(value);
-                    }
-                  },
-                  errorText:
-                      pincodeError ? "Please Enter Valid Pincodde" : null,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RegisterTextfield(
-                        text: "City",
-                        controller: _cityController,
-                        enable: false,
+                          child: RegisterTextfield(
+                        text: "Office/Flat No*",
+                        controller: _flatGalaNoController,
                         textInputType: TextInputType.name,
                         onChanged: (String value) {
-                          _addressData.city = value;
+                          _addressData.flatGalaNumber = value;
                           setState(() {
-                            cityError = (value.isEmpty)
-                                ? false
-                                : !RegExp(CommonPattern.name_regex)
-                                    .hasMatch(value);
-                          });
-                        },
-                        errorText: cityError ? "Please Enter Valid City" : null,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: RegisterTextfield(
-                        text: "State",
-                        enable: false,
-                        controller: _stateController,
-                        textInputType: TextInputType.name,
-                        onChanged: (String value) {
-                          _addressData.state = value;
-                          setState(() {
-                            stateError = (value.isEmpty)
-                                ? false
-                                : !RegExp(CommonPattern.name_regex)
-                                    .hasMatch(value);
+                            flatGalaErro = value.isEmpty;
                           });
                         },
                         errorText:
-                            stateError ? "Please Enter Valid State" : null,
+                            flatGalaErro ? "Please Enter Valid Details" : null,
+                      )),
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
-                  ],
-                ),
-                (widget.showTopBar)
-                    ? Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ButtonView(
-                            buttonText: "SUBMIT",
-                            color: AppColors.mainLightColor,
-                            onPressed: () {
-                              _addressData.addressType = _selectedType;
-                              flatGalaErro = _flatGalaNoController.text.isEmpty;
-                              buildingError =
-                                  _buildingNoController.text.isEmpty;
-                              addressError = !RegExp(CommonPattern.addressRegex)
-                                  .hasMatch(_addressController.text);
-                              pincodeError = !RegExp(CommonPattern.pincodeRegex)
-                                  .hasMatch(_pincodeController.text);
-                              stateError = _stateController.text.isEmpty;
-                              cityError = _cityController.text.isEmpty;
-                              setState(() {});
-                              if (!flatGalaErro &&
-                                  !buildingError &&
-                                  !addressError &&
-                                  !pincodeError &&
-                                  !stateError &&
-                                  !cityError) {
-                                Navigator.pop(context);
-                                widget.onSubmitClicked(_addressData);
-                              }
-                            },
-                          ),
-                        ],
-                      )
-                    : Container(),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
+                      Expanded(
+                          child: RegisterTextfield(
+                        text: "Building Name*",
+                        controller: _buildingNoController,
+                        textInputType: TextInputType.name,
+                        onChanged: (String value) {
+                          _addressData.buildingNumber = value;
+                          setState(() {
+                            buildingError = value.isEmpty;
+                          });
+                        },
+                        errorText: buildingError
+                            ? "Please Enter Valid Building Name"
+                            : null,
+                      ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RegisterTextfield(
+                    text: "Address*",
+                    controller: _addressController,
+                    textInputType: TextInputType.name,
+                    onChanged: (String value) {
+                      _addressData.address = value;
+                      setState(() {
+                        addressError =
+                            !RegExp(CommonPattern.addressRegex).hasMatch(value);
+                      });
+                    },
+                    errorText:
+                        addressError ? "Please Enter Valid Address" : null,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RegisterTextfield(
+                    text: "Area",
+                    controller: _areaController,
+                    textInputType: TextInputType.name,
+                    onChanged: (String value) {
+                      _addressData.area = value;
+                      setState(() {
+                        areaError = (value.isEmpty)
+                            ? false
+                            : !RegExp(CommonPattern.name_regex).hasMatch(value);
+                      });
+                    },
+                    errorText: areaError ? "Please Enter Valid Area" : null,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RegisterTextfield(
+                    text: "Pincode*",
+                    controller: _pincodeController,
+                    textInputType: TextInputType.number,
+                    onChanged: (String value) {
+                      _addressData.pincode = value;
+                      setState(() {
+                        pincodeError =
+                            !RegExp(CommonPattern.pincodeRegex).hasMatch(value);
+                      });
+                      if (!pincodeError && value.length == 6) {
+                        _fetchCityState(value);
+                      }
+                    },
+                    errorText:
+                        pincodeError ? "Please Enter Valid Pincodde" : null,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: RegisterTextfield(
+                          text: "City",
+                          controller: _cityController,
+                          enable: false,
+                          textInputType: TextInputType.name,
+                          onChanged: (String value) {
+                            _addressData.city = value;
+                            setState(() {
+                              cityError = (value.isEmpty)
+                                  ? false
+                                  : !RegExp(CommonPattern.name_regex)
+                                      .hasMatch(value);
+                            });
+                          },
+                          errorText:
+                              cityError ? "Please Enter Valid City" : null,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: RegisterTextfield(
+                          text: "State",
+                          enable: false,
+                          controller: _stateController,
+                          textInputType: TextInputType.name,
+                          onChanged: (String value) {
+                            _addressData.state = value;
+                            setState(() {
+                              stateError = (value.isEmpty)
+                                  ? false
+                                  : !RegExp(CommonPattern.name_regex)
+                                      .hasMatch(value);
+                            });
+                          },
+                          errorText:
+                              stateError ? "Please Enter Valid State" : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                  (widget.showTopBar)
+                      ? Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            ButtonView(
+                              buttonText: "SUBMIT",
+                              color: AppColors.mainLightColor,
+                              onPressed: () {
+                                _addressData.addressType = _selectedType;
+                                flatGalaErro =
+                                    _flatGalaNoController.text.isEmpty;
+                                buildingError =
+                                    _buildingNoController.text.isEmpty;
+                                addressError =
+                                    !RegExp(CommonPattern.addressRegex)
+                                        .hasMatch(_addressController.text);
+                                pincodeError =
+                                    !RegExp(CommonPattern.pincodeRegex)
+                                        .hasMatch(_pincodeController.text);
+                                stateError = _stateController.text.isEmpty;
+                                cityError = _cityController.text.isEmpty;
+                                setState(() {});
+                                if (!flatGalaErro &&
+                                    !buildingError &&
+                                    !addressError &&
+                                    !pincodeError &&
+                                    !stateError &&
+                                    !cityError) {
+                                  Navigator.pop(context);
+                                  widget.onSubmitClicked(_addressData);
+                                }
+                              },
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

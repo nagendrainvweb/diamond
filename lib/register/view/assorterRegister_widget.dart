@@ -183,7 +183,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                   textInputType: TextInputType.number,
                   controller: model.experienceController,
                   onChanged: (String value) {
-                    model.userData.experiance = value;
+                    model.userData.experience = value;
                     model.experienceError = value.isEmpty;
                     model.notifyListeners();
                   },
@@ -262,7 +262,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                         child: DocViewWidget(
                       title: "Attch BOB id Card",
                       height: attachHeight,
-                      file: model.idCard,
+                      //file: model.idCard,
                       onSelectImage: () {
                         model.selectImage(
                           context,
@@ -271,7 +271,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                           },
                         );
                       },
-                      onDeleteImage: () {
+                      onEditImage: () {
                         model.removeImage(Constants.BOB_ID);
                       },
                     )),
@@ -282,7 +282,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                         child: DocViewWidget(
                       title: "Attch Aadhar card",
                       height: attachHeight,
-                      file: model.aadharCard,
+                      //file: model.aadharCard,
                       onSelectImage: () {
                         model.selectImage(
                           context,
@@ -291,7 +291,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                           },
                         );
                       },
-                      onDeleteImage: () {
+                      onEditImage: () {
                         model.removeImage(Constants.AADHAR_CARD);
                       },
                     )),
@@ -302,7 +302,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                         child: DocViewWidget(
                       title: "Attch Passport",
                       height: attachHeight,
-                      file: model.passport,
+                      //file: model.passport,
                       onSelectImage: () {
                         model.selectImage(
                           context,
@@ -311,7 +311,7 @@ final appRepo = Provider.of<AppRepo>(context,listen: false);
                           },
                         );
                       },
-                      onDeleteImage: () {
+                      onEditImage: () {
                         model.removeImage(Constants.PASSPORT);
                       },
                     )),

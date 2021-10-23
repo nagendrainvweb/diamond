@@ -11,6 +11,7 @@ class CircularBorder extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(
           top: 15,
+          right: 5
         ),
         padding: EdgeInsets.symmetric(
           horizontal: 20,

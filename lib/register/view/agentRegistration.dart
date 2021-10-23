@@ -8,6 +8,7 @@ import 'package:diamon_assorter/app_widget/address_row_widget.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
 import 'package:diamon_assorter/app_widget/doc_view_widget.dart';
 import 'package:diamon_assorter/app_widget/register_textfield.dart';
+import 'package:diamon_assorter/app_widget/top_left_header_widget.dart';
 import 'package:diamon_assorter/modal/address_data.dart';
 import 'package:diamon_assorter/modal/assorter_modal.dart';
 import 'package:diamon_assorter/register/registerViewModel/registerViewModel.dart';
@@ -464,49 +465,50 @@ class AssorterRow extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              InkWell(
-                onTap: () {
-                  onEditClicked();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(left: 15),
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.grey400),
-                      color: AppColors.whiteColor,
-                    ),
-                    child: Icon(
-                      Icons.edit_outlined,
-                      color: AppColors.grey600,
-                    )),
-              ),
-              InkWell(
-                onTap: () {
-                  onDeleteClicked();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(left: 15),
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.grey400),
-                      color: AppColors.whiteColor,
-                    ),
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.grey600,
-                    )),
-              ),
-            ],
-          ),
-        ),
+        EditDeleteOptionWidget(onEditClicked: onEditClicked, onDeleteClicked: onDeleteClicked,showEdit: false,)
+        // Align(
+        //   alignment: Alignment.topRight,
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.end,
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: [
+        //       InkWell(
+        //         onTap: () {
+        //           onEditClicked();
+        //         },
+        //         child: Container(
+        //             margin: EdgeInsets.only(left: 15),
+        //             padding: const EdgeInsets.all(6),
+        //             decoration: BoxDecoration(
+        //               shape: BoxShape.circle,
+        //               border: Border.all(color: AppColors.grey400),
+        //               color: AppColors.whiteColor,
+        //             ),
+        //             child: Icon(
+        //               Icons.edit_outlined,
+        //               color: AppColors.grey600,
+        //             )),
+        //       ),
+        //       InkWell(
+        //         onTap: () {
+        //           onDeleteClicked();
+        //         },
+        //         child: Container(
+        //             margin: EdgeInsets.only(left: 15),
+        //             padding: const EdgeInsets.all(6),
+        //             decoration: BoxDecoration(
+        //               shape: BoxShape.circle,
+        //               border: Border.all(color: AppColors.grey400),
+        //               color: AppColors.whiteColor,
+        //             ),
+        //             child: Icon(
+        //               Icons.close,
+        //               color: AppColors.grey600,
+        //             )),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

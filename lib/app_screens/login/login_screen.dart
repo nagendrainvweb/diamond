@@ -1,5 +1,6 @@
 import 'package:diamon_assorter/app_screens/dashboard/dashboard.dart';
 import 'package:diamon_assorter/app_screens/login/login_viewModel.dart';
+import 'package:diamon_assorter/app_screens/login/otp_page.dart';
 import 'package:diamon_assorter/app_widget/app_appbar.dart';
 import 'package:diamon_assorter/app_widget/app_textfield.dart';
 import 'package:diamon_assorter/app_widget/button_widget.dart';
@@ -19,6 +20,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool obsecure = true;
+
 
   _loginView(LoginViewModel model) {
     return Container(
@@ -43,11 +45,9 @@ class _LoginPageState extends State<LoginPage> {
             height: 50,
           ),
           Visibility(
-            visible: model.loginWithOTP,
-            child: mobileLoginView(model)),
-           Visibility(
-             visible: !model.loginWithOTP,
-             child: _passwordLoginView(model)),
+              visible: model.loginWithOTP, child: mobileLoginView(model)),
+          Visibility(
+              visible: !model.loginWithOTP, child: _passwordLoginView(model)),
           SizedBox(
             height: 20,
           ),
@@ -55,12 +55,12 @@ class _LoginPageState extends State<LoginPage> {
             buttonText: "Login",
             color: AppColors.buttonColor,
             onPressed: () {
+              
               if(model.loginWithOTP){
                   model.loginOtpClicked(context);
               }else{
                   model.loginPasswordClicked(context);
               }
-            
             },
           ),
           SizedBox(
@@ -76,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
             height: 20,
           ),
           ButtonView(
-            buttonText:(model.loginWithOTP)? "Login With Password":"Login With OTP",
+            buttonText:
+                (model.loginWithOTP) ? "Login With Password" : "Login With OTP",
             color: AppColors.buttonColor,
             onPressed: () {
               model.setLoginWithOtp();
@@ -101,14 +102,29 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         AppTextfield(
-            controller: model.mobileController,
-            hint: "Enter Mobile No",
-            keyboardType: TextInputType.number,
-            icon: Icons.phone_android_outlined,
-            obsecure: false,
-            color: AppColors.mainColor,
-            onChanged: (String value) {},
-          ),
+          controller: model.mobileController,
+          hint: "Enter Mobile No",
+          keyboardType: TextInputType.number,
+          icon: Icons.phone_android_outlined,
+          obsecure: false,
+          color: AppColors.mainColor,
+          onChanged: (String value) {},
+        ),
+        // (model.haveOtp)?  Column(
+        //     children: [
+        //       SizedBox(height: 20,),
+        //       AppTextfield(
+        //     controller: model.otpController,
+        //     hint: "Enter OTP",
+        //     keyboardType: TextInputType.number,
+        //     icon: Icons.lock_outline_rounded,
+        //     obsecure: false,
+        //     color: AppColors.mainColor,
+        //     errorText: model.otpError ? "Please Enter Valid OTP":null,
+        //     onChanged: (String value) {},
+        //   ),
+        //     ],
+        //   ):Container()
       ],
     );
   }
@@ -177,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                 AppAppBar(),
+                  AppAppBar(),
                   // Image.asset(
                   //     AppImages.logo,
                   // height: 80,

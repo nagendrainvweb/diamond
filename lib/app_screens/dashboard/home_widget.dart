@@ -1,8 +1,10 @@
+import 'package:diamon_assorter/app/app_repo.dart';
 import 'package:diamon_assorter/app_screens/new_order/newOrder_screen.dart';
 import 'package:diamon_assorter/util/app_color.dart';
 import 'package:diamon_assorter/util/app_image.dart';
 import 'package:diamon_assorter/util/utility.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key key}) : super(key: key);
@@ -17,7 +19,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       onTap: onClick,
       child: Container(
         padding: EdgeInsets.symmetric(
-          vertical: 30,
+          vertical: 20,
           horizontal: 5
         ),
         margin: EdgeInsets.symmetric(horizontal: 8),
@@ -43,7 +45,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               children: [
                 Image.asset(
                   image,
-                  height: 50,
+                  height: 80,
                   fit: BoxFit.cover,
                 ),
                 // Icon(
@@ -79,15 +81,28 @@ class _HomeWidgetState extends State<HomeWidget> {
         context: context,
         child: ListView(
           children: [
+             SizedBox(
+              height: 20,
+            ),
+            Consumer<AppRepo>(builder: (_,AppRepo repo,child)=>
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text("Welcome, "+repo.name,textScaleFactor: 1.2,),
+                ],
+              ),
+            )
+            ),
             SizedBox(
-              height: 30,
+              height: 50,
             ),
             Row(
               children: [
                 Expanded(
                   child: _buttonTiles(
-                    "Upcoming\nOrders",
-                    AppImages.upcomingOrder,
+                    "Pending\nOrders",
+                    AppImages.pendingOrder,
                     (){},
                   ),
                 ),
@@ -96,37 +111,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                 // ),
                 Expanded(
                   child: _buttonTiles(
-                    "Pending\nOrders",
-                    AppImages.pendingOrder,
-                    (){},
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buttonTiles(
                     "Ongoing\nOrders",
                     AppImages.ongoingOrder,
                     (){},
                   ),
                 ),
-                // SizedBox(
-                //   width: 20,
-                // ),
-                Expanded(
-                  child: _buttonTiles(
-                    "New\nOrders",
-                    AppImages.newOrder,
-                    () {
-                      Utility.pushToNext(context, NewOrderPage());
-                    },
-                  ),
-                ),
               ],
             ),
             SizedBox(
@@ -136,19 +125,47 @@ class _HomeWidgetState extends State<HomeWidget> {
               children: [
                 Expanded(
                   child: _buttonTiles(
-                    "Completed\nOrders",
-                    AppImages.completeOrder,
-                    (){},
+                    "New\nOrders",
+                    AppImages.newOrder,
+                    (){
+                       Utility.pushToNext(context, NewOrderPage());
+                    },
                   ),
                 ),
                 // SizedBox(
                 //   width: 20,
                 // ),
                 Expanded(
-                  child: Container(),
+                  child: _buttonTiles(
+                    "Completed\nOrders",
+                    AppImages.completeOrder,
+                    () {
+                     // Utility.pushToNext(context, NewOrderPage());
+                    },
+                  ),
                 ),
               ],
             ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: _buttonTiles(
+            //         "Completed\nOrders",
+            //         AppImages.completeOrder,
+            //         (){},
+            //       ),
+            //     ),
+            //     // SizedBox(
+            //     //   width: 20,
+            //     // ),
+            //     Expanded(
+            //       child: Container(),
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: 20,
             ),

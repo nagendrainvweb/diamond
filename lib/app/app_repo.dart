@@ -20,7 +20,19 @@ class AppRepo extends ChangeNotifier {
     _email = await Prefs.emailId;
     _number = await Prefs.mobileNumber;
     _role = await Prefs.role;
+    if(_login)
+    fetchUserDetails();
+    
     fetchAgentList();
+  }
+
+  fetchUserDetails() async {
+    try {
+      final response = await _apiService.fetchUserDetails();
+      _userData = response.data;
+    } catch (e) {
+      myPrint(e.toString());
+    }
   }
 
   String get name => _name;
